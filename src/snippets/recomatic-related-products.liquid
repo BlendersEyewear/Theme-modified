@@ -1,0 +1,748 @@
+{% if widget == "product" %}
+  <div id="recomatic" data-widget="{{widget}}" data-shop="{{shop.permanent_domain}}" data-product-id="{{product.id}}" data-product-subtitle="{{product.metafields.custom_fields['product_subtitle']}}"></div>
+{% elsif widget == "cart" %}
+  <div id="recomatic" data-widget="{{widget}}" data-shop="{{shop.permanent_domain}}" data-product-ids="[{{cart.items|map:'product'|map:'id'|join:','}}]"></div>
+{% endif %}
+
+<style type="text/css">
+.recomatic-wrap a:hover .recomatic-add-to-cart {
+  visibility: visible;}
+.recomatic-wrap .recomatic-add-to-cart {
+  visibility: hidden;
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+  width: 100%; }
+.recomatic-wrap div, .recomatic-wrap a, .recomatic-wrap img {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+.recomatic-wrap .recomatic-responsive-image {
+  text-align: center; }
+
+.recomatic-wrap .recomatic-product-wrap:hover {
+  cursor: pointer; }
+.recomatic-wrap .recomatic-content-wrap {
+  padding: 5px; }
+.recomatic-wrap .recomatic-title-wrap {
+  min-height: 34px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold; }
+.recomatic-wrap .recomatic-compare-at-price-wrap {
+  margin-left: 5px;
+  text-align: center;
+  text-decoration: line-through; }
+.recomatic-wrap .recomatic-price-wrap {
+  text-align: center; }
+.recomatic-wrap .recomatic-type-wrap {
+  display: none; }
+.recomatic-wrap .recomatic-variant-title-wrap {
+  display: none; }
+.recomatic-wrap .brand {
+  margin-right: 5px; }
+.recomatic-wrap .recomatic-vendor-wrap {
+  display: none; }
+.recomatic-wrap .recomatic-compare {
+  display: inline-block; }
+.recomatic-wrap *,
+.recomatic-wrap *:before,
+.recomatic-wrap *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+.recomatic-wrap img {
+  max-width: 100%;
+  height: auto; }
+.recomatic-wrap img {
+  -ms-interpolation-mode: bicubic; }
+.recomatic-wrap img {
+  display: inline-block;
+  vertical-align: middle; }
+.recomatic-wrap [class*="block-grid-"] {
+  display: block;
+  padding: 0;
+  margin: 0 -0.625rem; }
+.recomatic-wrap [class*="block-grid-"]:before, .recomatic-wrap [class*="block-grid-"]:after {
+  content: " ";
+  display: table; }
+.recomatic-wrap [class*="block-grid-"]:after {
+  clear: both; }
+.recomatic-wrap [class*="block-grid-"] > li {
+  display: block;
+  height: auto;
+  float: left;
+  padding: 0 0.625rem 1.25rem; }
+@media only screen {
+  .recomatic-wrap .small-block-grid-1 > li {
+    width: 100%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-1 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-1 > li:nth-of-type(1n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-2 > li {
+    width: 50%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-2 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-2 > li:nth-of-type(2n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-3 > li {
+    width: 33.33333%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-3 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-3 > li:nth-of-type(3n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-4 > li {
+    width: 25%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-4 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-4 > li:nth-of-type(4n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-5 > li {
+    width: 20%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-5 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-5 > li:nth-of-type(5n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-6 > li {
+    width: 16.66667%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-6 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-6 > li:nth-of-type(6n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-7 > li {
+    width: 14.28571%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-7 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-7 > li:nth-of-type(7n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-8 > li {
+    width: 12.5%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-8 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-8 > li:nth-of-type(8n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-9 > li {
+    width: 11.11111%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-9 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-9 > li:nth-of-type(9n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-10 > li {
+    width: 10%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-10 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-10 > li:nth-of-type(10n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-11 > li {
+    width: 9.09091%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-11 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-11 > li:nth-of-type(11n+1) {
+    clear: both; }
+  .recomatic-wrap .small-block-grid-12 > li {
+    width: 8.33333%;
+    list-style: none; }
+  .recomatic-wrap .small-block-grid-12 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .small-block-grid-12 > li:nth-of-type(12n+1) {
+    clear: both; } }
+@media only screen and (min-width: 40.063em) {
+  .recomatic-wrap .medium-block-grid-1 > li {
+    width: 100%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-1 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-1 > li:nth-of-type(1n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-2 > li {
+    width: 50%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-2 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-2 > li:nth-of-type(2n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-3 > li {
+    width: 33.33333%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-3 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-3 > li:nth-of-type(3n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-4 > li {
+    width: 25%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-4 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-4 > li:nth-of-type(4n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-5 > li {
+    width: 20%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-5 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-5 > li:nth-of-type(5n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-6 > li {
+    width: 16.66667%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-6 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-6 > li:nth-of-type(6n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-7 > li {
+    width: 14.28571%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-7 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-7 > li:nth-of-type(7n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-8 > li {
+    width: 12.5%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-8 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-8 > li:nth-of-type(8n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-9 > li {
+    width: 11.11111%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-9 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-9 > li:nth-of-type(9n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-10 > li {
+    width: 10%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-10 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-10 > li:nth-of-type(10n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-11 > li {
+    width: 9.09091%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-11 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-11 > li:nth-of-type(11n+1) {
+    clear: both; }
+  .recomatic-wrap .medium-block-grid-12 > li {
+    width: 8.33333%;
+    list-style: none; }
+  .recomatic-wrap .medium-block-grid-12 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .medium-block-grid-12 > li:nth-of-type(12n+1) {
+    clear: both; } }
+@media only screen and (min-width: 64.063em) {
+  .recomatic-wrap .large-block-grid-1 > li {
+    width: 100%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-1 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-1 > li:nth-of-type(1n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-2 > li {
+    width: 50%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-2 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-2 > li:nth-of-type(2n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-3 > li {
+    width: 33.33333%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-3 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-3 > li:nth-of-type(3n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-4 > li {
+    width: 25%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-4 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-4 > li:nth-of-type(4n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-5 > li {
+    width: 20%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-5 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-5 > li:nth-of-type(5n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-6 > li {
+    width: 16.66667%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-6 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-6 > li:nth-of-type(6n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-7 > li {
+    width: 14.28571%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-7 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-7 > li:nth-of-type(7n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-8 > li {
+    width: 12.5%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-8 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-8 > li:nth-of-type(8n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-9 > li {
+    width: 11.11111%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-9 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-9 > li:nth-of-type(9n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-10 > li {
+    width: 10%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-10 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-10 > li:nth-of-type(10n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-11 > li {
+    width: 9.09091%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-11 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-11 > li:nth-of-type(11n+1) {
+    clear: both; }
+  .recomatic-wrap .large-block-grid-12 > li {
+    width: 8.33333%;
+    list-style: none; }
+  .recomatic-wrap .large-block-grid-12 > li:nth-of-type(1n) {
+    clear: none; }
+  .recomatic-wrap .large-block-grid-12 > li:nth-of-type(12n+1) {
+    clear: both; } }
+.recomatic-wrap .recomatic-products-wrap {
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 40px; }
+.recomatic-wrap .recomatic-product-wrap {
+  text-align: center; }
+.recomatic-wrap .recomatic-content-wrap {
+  text-align: center;
+  padding: 0; }
+.recomatic-wrap .recomatic-title-wrap {
+  color: #333333;
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 30.4px;
+  font-weight: normal;
+  -webkit-transition: color .2s linear;
+  -moz-transition: color .2s linear;
+  transition: color .2s linear; }
+.recomatic-wrap .recomatic-subtitle-wrap {
+  color: #7d7d7d;
+  font-size: 14px;
+  letter-spacing: 1px; 
+  line-height: 10px; 
+  margin-bottom: 5px; }
+.recomatic-wrap .recomatic-price-wrap {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 5px 0; }
+.recomatic-wrap .recomatic-price-wrap.recomatic-compare {
+  color: red; }
+.recomatic-wrap .recomatic-compare-at-price-wrap {
+  color: #8c8b8b;
+  font-size: 15px;
+  margin-left: 8px; }
+.recomatic-wrap a:hover .recomatic-title-wrap {
+  color: #00a3f0; }
+.recomatic-wrap .brand {
+  display: none; }
+.recomatic-wrap .swiper-button-next {
+  right: 0; }
+.recomatic-wrap .swiper-button-prev {
+  left: 0; }
+.recomatic-wrap .swiper-button-disabled {
+  visibility: hidden !important; }
+.recomatic-wrap .swiper-button-next, .recomatic-wrap .swiper-button-prev {
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-background-size: 15px 30px;
+  background-size: 15px 30px;
+  width: 60px;
+  visibility: hidden;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transition: all .2s linear;
+  -moz-transition: all .2s linear;
+  transition: all .2s linear;
+  height: 100%;
+  top: 0; }
+.recomatic-wrap .swiper-pagination.swiper-pagination-bullets {
+  bottom: 0; }
+.recomatic-wrap .swiper-pagination-bullet-active {
+  background: #00a3f0; }
+ @media (min-width: 769px) { .recomatic-wrap .swiper-pagination {
+   display: none; } }
+.recomatic-wrap .recomatic-sale-wrap {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #c57e7e;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #fff;
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased; }
+.recomatic-wrap .recomatic-image-wrap {
+  position: relative;
+  overflow: hidden; }
+.recomatic-wrap .alternate-recomatic-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity .2s linear;
+  -moz-transition: opacity .2s linear;
+  transition: opacity .2s linear; }
+.recomatic-wrap .main-recomatic-image {
+  -webkit-transition: opacity .2s linear;
+  -moz-transition: opacity .2s linear;
+  transition: opacity .2s linear; }
+.recomatic-wrap a:hover .alternate-recomatic-image {
+  opacity: 1; }
+.recomatic-wrap a:hover .main-recomatic-image {
+  opacity: 0; }
+.recomatic-wrap .recomatic-reviews-wrap .yotpo.bottomLine {
+  width: auto !important; }
+.recomatic-wrap .recomatic-reviews-wrap .yotpo-bottomline {
+  text-align: center; }
+.recomatic-wrap .recomatic-reviews-wrap .yotpo-bottomline .text-m {
+  display: inline-block;
+  font-size: 13px; 
+  color: rgb(48, 133, 199); }  
+.recomatic-wrap .recomatic-reviews-wrap .yotpo-icon.yotpo-icon-star {
+  margin-left: -1.5px;
+  margin-right: -1.5px; }
+</style>
+
+<script id="recomaticTemplate" type="text/x-jsrender">
+  <div class="container" style="padding-bottom: 0; padding-top: 0;">
+    <div class="related-products__title">
+      <h4 class="title center" style="font-size: 24px;">You Might Also Dig</h4>
+      <div class="feature_divider"></div>
+    </div>
+    <div class="recomatic-wrap recomatic-{{widget}}" style="visibility: hidden;">
+    {% raw %}
+      <ul class="recomatic-products-wrap" data-products-per-line-large="3" data-products-per-line-medium="2" data-products-per-line-small="2">
+        {{for products}}
+          <li class="recomatic-product-wrap" data-handle="{{:handle}}" data-product-id="{{:id}}" data-variant-id="{{:main_variant_id}}">
+            <div class="recomatic-product">
+              <a href="{{:target_url}}">
+                <div class="recomatic-image-wrap">
+                  <div class="recomatic-responsive-image">
+                    <img alt="{{:vendor}} - {{:title}}" src="{{:main_image_src}}">
+                  </div>
+                </div>
+                <div class="recomatic-type-wrap">
+                  <div class="recomatic-type">{{:product_type}}</div>
+                </div>
+                <div class="recomatic-vendor-wrap">
+                  <div class="recomatic-vendor">{{:vendor}}</div>
+                </div>
+                <div class="recomatic-content-wrap">
+                  <div class="recomatic-title-wrap">
+                    <div class="recomatic-title">{{:title}}</div>
+                  </div>
+                  {{if comparative_price && price < comparative_price}}
+                    <div class="recomatic-price-wrap recomatic-compare">
+                      <div class="recomatic-price" data-stripped="stripped">
+                        <span class="money">{{number_with_currency:price}}</span>
+                      </div>
+                    </div>
+                    <div class="recomatic-compare-at-price-wrap recomatic-compare">
+                      <div class="recomatic-compare-at-price" data-stripped="stripped">
+                        <span class="money">{{number_with_currency:comparative_price}}</span>
+                      </div>
+                    </div>
+                  {{else}}
+                    <div class="recomatic-price-wrap">
+                      <div class="recomatic-price" data-stripped="stripped">
+                        <span class="money">{{number_with_currency:price}}</span>
+                      </div>
+                    </div>
+                  {{/if}}
+                </div>
+              </a>
+            </div>
+          </li>
+        {{/for}}
+      </ul>
+    {% endraw %}
+    </div>
+  </div>
+</script>
+
+
+<style type="text/css"> 
+  @media screen and (min-width: 769px) {
+    .swiper-container:hover .swiper-button-next, .swiper-container:hover .swiper-button-prev { visibility: visible; opacity: 0.7; filter: alpha(opacity=70); }
+    .swiper-container .swiper-button-next:hover, .swiper-container .swiper-button-prev:hover { visibility: visible; opacity: 1.0; filter: alpha(opacity=100); }
+  }
+</style>
+
+<script type="text/javascript">
+  function synchronizeRecomaticProducts() {
+    function synchronizeRecommendedProduct(productId) {
+      var recomaticAccessToken = "6NUtdbvRi9uKSkYBJYMlXA";
+      var url = "https://async.recomaticapp.com/api_v2/" + productId + "/synchronize";
+      window.jQuery.ajax({
+        headers: { "X-Recomatic-Access-Token": recomaticAccessToken },
+        type: "POST",
+        dataType: "json",
+        url: url,
+        error: function() {
+          console.error("Failed to synchronize Recomatic resource");
+        }
+      });
+    };
+
+    window.jQuery(".recomatic-product-wrap").each(function() {
+      var node = window.jQuery(this);
+      var productId = node.data("product-id");
+      var productHandle = node.data("handle");
+      var productVendor = node.find(".recomatic-vendor").text();
+      window.jQuery.getJSON("/products/" + productHandle + ".js", function(product) {
+        if (!product.available || product.vendor != productVendor) {
+          node.remove();
+          synchronizeRecommendedProduct(productId);
+        }
+      }).fail(function(jqXHR) { 
+        if(jqXHR.status == 404) {
+          node.remove();
+          synchronizeRecommendedProduct(productId);
+        }
+      });
+    });
+  };
+
+  function loadRecomaticPostProcess() {
+    synchronizeRecomaticProducts();
+    window.jQuery("head").append("<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css'>");
+
+    window.jQuery(".recomatic-product-wrap").each(function() {
+      var node = window.jQuery(this);
+      var productHandle = node.data("handle");
+      window.jQuery.getJSON("/products/" + productHandle + ".js", function(product) {
+        var alternateImageUrl = product.images[1];
+        if (alternateImageUrl != undefined) {
+          alternateImageUrl = alternateImageUrl.replace(/(\.(jpg|png|gif|bmp|jpeg)\?(v=)?\d+)/i, "_600x600$1");
+          node.find(".recomatic-responsive-image img").addClass("main-recomatic-image");
+          var alternateImageHtml = "<img class='alternate-recomatic-image' src='" + alternateImageUrl + "'>";
+          node.find(".recomatic-responsive-image img").after(alternateImageHtml);
+        }
+      });
+      window.jQuery.ajax({
+        url: "/products/" + productHandle,
+        success: function(data) {
+          var productSubtitle = window.jQuery(data).find("#recomatic").data("product-subtitle");
+          if (productSubtitle.length > 0) {
+            node.find(".recomatic-title-wrap").after("<div class='recomatic-subtitle-wrap'><div class='recomatic-subtitle'>" + productSubtitle + "</div></div>");
+          }
+        }
+      })
+    });
+    
+    window.jQuery(".recomatic-product-wrap").each(function() {
+      var addToCartHTML = "<button class='btn recomatic-add-to-cart'>Add to Cart</button>";
+      window.jQuery(this).find(".recomatic-image-wrap").append(addToCartHTML);
+    });
+    window.jQuery(".recomatic-add-to-cart").on("click", function(event) {
+      event.preventDefault();
+      var shopDomain = window.location.hostname;
+      var variantId = window.jQuery(this).closest(".recomatic-product-wrap").data("variantId");
+      var productId = window.jQuery(this).closest(".recomatic-product-wrap").data("productId");
+      var productHandle = window.jQuery(this).closest(".recomatic-product-wrap").data("handle");
+      var widget = window.jQuery(this).closest(".recomatic-wrap").hasClass("recomatic-product") ? "product" : "cart";
+      window.jQuery.post("/cart/add.js", { quantity: 1, id: variantId }, function() {       
+        window.jQuery.post("https://async.recomaticapp.com/api_v2/click.json", 
+               { shop_domain: shopDomain , referrer: widget, product_handle: productHandle }).done(function(data) {
+        window.location.reload();
+      });
+      }, "json");
+    });
+
+
+    
+    window.jQuery(".recomatic-product-wrap").each(function() {
+      var recomaticProduct = window.jQuery(this);
+      var yotpoApiKey = "7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK";
+      var productId = recomaticProduct.data("product-id");
+      window.jQuery.ajax({
+        url: "https://api.yotpo.com/products/" + yotpoApiKey + "/" + productId + "/bottomline",
+        success: function(data) {
+          if (data.response.bottomline.total_reviews > 0) {
+            var remainingScore = data.response.bottomline.average_score;
+            var totalReviews = data.response.bottomline.total_reviews;
+            var reviewsWrap = "<div class='recomatic-reviews-wrap'><div class='yotpo bottomLine'><span class='yotpo-display-wrapper'><div class='standalone-bottomline'><div class='yotpo-bottomline'> <span class='yotpo-stars'>";
+            for (i = 0; i < 5; i++) {
+              var iconClass = "yotpo-icon-star";
+              if (remainingScore < 0.25) {
+                iconClass = "yotpo-icon-empty-star";
+              } else if (remainingScore < 0.75) {
+                iconClass = "yotpo-icon-half-star";
+              }
+              reviewsWrap += "<span class='yotpo-icon " + iconClass + "'></span>";
+              remainingScore -= 1;
+            }
+            reviewsWrap += "</span><span class='text-m'>" + totalReviews + " Review";
+            if (totalReviews > 1) {
+              reviewsWrap += "s";
+            }
+            reviewsWrap += "</span><div class='yotpo-clr'></div></div><div class='yotpo-clr'></div></div><div class='yotpo-clr'></div></span></div></div>";
+            recomaticProduct.find(".recomatic-content-wrap").append(reviewsWrap);
+          }
+        }
+      });
+    });
+
+    window.jQuery.getScript("https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/js/swiper.min.js", function() {
+      var spaceBetweenRatio = 10;
+      var slidesPerViewLarge = window.jQuery(".recomatic-products-wrap").data("products-per-line-large");
+      var slidesPerViewMedium = window.jQuery(".recomatic-products-wrap").data("products-per-line-medium");
+      var slidesPerViewSmall = window.jQuery(".recomatic-products-wrap").data("products-per-line-small");
+      var slidesPerViewExtraLarge = slidesPerViewLarge + 1;
+      window.jQuery(".recomatic-wrap").first().addClass("swiper-container");
+      window.jQuery(".recomatic-products-wrap").attr("class", "recomatic-products-wrap swiper-wrapper");
+      window.jQuery(".recomatic-product-wrap").addClass("swiper-slide");
+      window.jQuery(".recomatic-product-wrap").css("display", "block");
+      window.jQuery(".recomatic-wrap .swiper-wrapper").after("<div class='swiper-pagination'></div><div class='swiper-button-prev swiper-button-black'></div><div class='swiper-button-next swiper-button-black'></div>");
+      var recomaticSwiper = new Swiper(".swiper-container.recomatic-wrap", {
+        speed: 800,
+        slidesPerView: slidesPerViewExtraLarge,
+        slidesPerGroup: slidesPerViewExtraLarge,
+        spaceBetween: spaceBetweenRatio,
+        grabCursor: true,
+        breakpoints: {
+          1170: {
+            slidesPerView: slidesPerViewLarge,
+            slidesPerGroup: slidesPerViewLarge,
+            spaceBetween: spaceBetweenRatio
+          },
+          768: {
+            slidesPerView: slidesPerViewMedium,
+            slidesPerGroup: slidesPerViewMedium,
+            spaceBetween: spaceBetweenRatio
+          },
+          640: {
+            slidesPerView: slidesPerViewSmall,
+            slidesPerGroup: slidesPerViewSmall,
+            spaceBetween: spaceBetweenRatio
+          }
+        },
+        prevButton: ".swiper-button-prev",
+        nextButton: ".swiper-button-next",
+        pagination: ".swiper-pagination",
+      });
+      
+      var err;
+      try {
+        if ((typeof shopCurrency !== "undefined" && shopCurrency !== null) && (typeof Currency !== "undefined" && Currency !== null) && (Currency.currentCurrency != null)) {
+          Currency.convertAll(shopCurrency, Currency.currentCurrency, ".recomatic-product span.money");
+        }
+      } catch (_error) {
+        err = _error;
+        // console.log("Currency Convertor Not Complete");
+      }
+      
+      window.jQuery(".recomatic-wrap").css("visibility", "visible");
+    });
+  };
+</script>
+
+<script type="text/javascript">
+  Number.prototype.formatMoney = function(c, d, t){
+  var n = this, 
+      c = isNaN(c = Math.abs(c)) ? 2 : c, 
+      d = d == undefined ? "." : d, 
+      t = t == undefined ? "," : t, 
+      s = n < 0 ? "-" : "", 
+      i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", 
+      j = (j = i.length) > 3 ? j % 3 : 0;
+     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+  };
+  
+  function loadRecomatic(shopDomain, widget, url, data) {
+    window.jQuery.ajax({
+      headers: { "X-Recomatic-Access-Token": "6NUtdbvRi9uKSkYBJYMlXA" },
+      dataType: "json",
+      data: data,
+      url: url,
+      success: function(data) {
+        window.jQuery.views.converters("number_with_currency", function(number) { return "$" + number.formatMoney(0, ".", ","); });
+        recomaticContent = window.jQuery.templates("#recomaticTemplate").render({ products: data });
+        window.jQuery("#recomatic").replaceWith(recomaticContent);
+        loadRecomaticPostProcess();
+      },
+      error: function() {
+        console.error("Failed to load the recomatic resource");
+      }
+    });
+  };
+
+  function jqueryThemeIsDefined() {
+    if (window.jQuery != undefined) {
+      window.jQuery.ajax({
+        url: "https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.74/jsrender.min.js",
+        dataType: "script",
+        success: function() {
+          var url = "https://async.recomaticapp.com/api_v2/";
+          var shopDomain = window.jQuery("#recomatic").data("shop");
+          var widget = window.jQuery("#recomatic").data("widget");
+          if (widget == "product") {
+            var productId = window.jQuery("#recomatic").data("productId");
+            if (shopDomain !== undefined && productId !== undefined) {
+              loadRecomatic(shopDomain, widget, url + productId + "/related_products.json", {});
+            }
+          } else if (widget == "cart") {
+            var productIds = window.jQuery("#recomatic").data("product-ids");
+            if (shopDomain !== undefined && productIds !== undefined && productIds.length > 0) {
+              loadRecomatic(shopDomain, widget, url + "cart_related_products.json", { product_ids: productIds });
+            }
+          }
+        },
+        error: function() {
+          console.error("Failed to load the jsrender resource");
+        }
+      });
+    } else {
+      setTimeout(function(){ jqueryThemeIsDefined(); }, 50);
+    }
+  };
+  
+  (function() {
+    jqueryThemeIsDefined();
+  })();
+</script>

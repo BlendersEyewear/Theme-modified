@@ -1,0 +1,13 @@
+{% comment %}
+  DO NOT MODIFY THIS FILE DIRECTLY. YOU CAN COPY AND PASTE INTO A NEW SNIPPET.
+  THIS FILE WILL BE OVERWRITTEN.
+{% endcomment %}
+<div class="custom-fields-wrapper">
+
+            {% if product.metafields.custom_fields["product_subtitle"] != blank %}
+            <div class="custom-field custom-field__product-subtitle custom-field__type--text">
+                <h3 class="custom-field--title">Product Subtitle</h3>
+                <div class="custom-field--value">{{ product.metafields.custom_fields["product_subtitle"] }}</div>
+              </div>
+            {% endif %}
+</div>

@@ -1,0 +1,82 @@
+<div class="collection_banner">
+  <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
+  <img src="{{ section.settings.marquee | img_url: '2600x' }}" />
+</div>
+
+
+<div class="container main join join-the-team">
+  <div class="sixteen columns featured_links">
+    <div class="section clearfix">
+
+      {% for block in section.blocks %}
+
+        <!--GRID ITEM -->
+
+        <div class="one-third column">
+          <a  id="choose{{ forloop.index }}" href="#">
+            <div class="fs-entry-container bll">
+              <div class="fs-timeline-entry blsrel">
+                <img class="first" src="{{ block.settings.background | img_url: '500x'}}" alt="{{ block.settings.title }}" />
+                <div class="fs-text-container bl">
+                  <div class="fs-timeline-text tt">
+                    <div class="fs-entry-title">{{ block.settings.title }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+
+        <!-- POPUP -->
+        <div id="home{{ forloop.index }}" class="middle form-embed-wrap"  style="display:none">
+          {{ block.settings.form_code }}
+        </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+
+
+  {% schema %}
+
+  {
+    "name": "Join The Team",
+    "class": "join-the-team",
+    "max_blocks": 9,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "marquee",
+        "label": "Marquee Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "grid-item",
+        "name": "Grid Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "image_picker",
+            "id": "background",
+            "label": "Background Image"
+          },
+          {
+            "type": "textarea",
+            "id": "form_code",
+            "label": "Form Code"
+          }
+        ]
+      }
+    ]
+  }
+
+  {% endschema %}

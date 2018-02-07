@@ -1,0 +1,35 @@
+<a name="pagecontent" id="pagecontent"></a>
+
+<a class="collection_banner" href="/collections/{{ section.settings.collection }}">
+  <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
+  <img src="{{ section.settings.marquee | img_url: '1900x'}}" />
+</a>
+
+<div class="sixteen columns page clearfix">
+  <h1>
+    STORE LOCATOR
+  </h1>
+
+  </div></div>{% include 'hypervisual' %}<div class="container"><div class="sixteen columns page clearfix">
+
+  <div>
+    {% include 'page-multi-column', content: page.content %}
+  </div>
+</div>
+
+
+{% schema %}
+
+{
+  "name": "Dealers",
+  "class": "dealers",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "marquee",
+      "label": "Marquee Image"
+    }
+  ]
+}
+
+{% endschema %}

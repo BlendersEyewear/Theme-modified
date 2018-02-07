@@ -1,0 +1,33 @@
+<p class="pouch-upsell">Want a NEW Holiday Soft Pouch with that? </p>
+
+{% for product in collections.pouch-upsell.products limit:4 %}
+
+<div itemtype="http://schema.org/ItemList" class="product-list collection-matrix clearfix">
+
+{% include 'product-thumbnail-2', sidebar: sidebar %}
+</div>
+
+{% endfor %}
+
+<style>
+  .yotpo.bottomLine.yotpo-small {
+    display: none!important;
+}
+  
+  .custom-field.custom-field__product-subtitle.custom-field__type--text {
+    display: none;
+}
+  
+  p.pouch-upsell {
+    text-align: center;
+    font-size: 18px;
+    padding-top: 11px!important;
+}
+  
+  .product-list.collection-matrix.clearfix {
+    display: inline-grid;
+    width: 48%;
+    float: left;
+    margin-right: 6px;
+}
+</style>

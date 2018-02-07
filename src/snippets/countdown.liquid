@@ -1,0 +1,80 @@
+{% assign page = pages.countdown %}
+
+{% include 'page-multi-column', content: page.content %}
+
+<style>
+.shogun-countdown > div > span {
+    font-weight: 500;
+    line-height: 23px;
+    font-size: 25px;
+}
+  
+  .shogun-countdown > span {
+    padding: 5px;
+    line-height: 20px;
+    font-size: 25px;
+}
+  
+  #s-0be242de-116c-4200-b731-7d0503ec5bc7 {
+    margin-top: 6px;
+}
+  
+div#s-3c0204b2-7735-4f46-9d0e-d0b86e6893db {
+    margin-top: 2px;
+    margin-bottom: -6px;
+}
+  
+  .shogun-countdown {
+    display: flex;
+    text-align: center;
+    font-size: 42px;
+    justify-content: left;
+}
+  
+  label {
+    font-weight: 400!important;
+}
+  
+  .shogun-countdown > div > span {
+    font-weight: 600;
+    line-height: 22px;
+    font-size: 18px;
+}
+  
+  .shogun-countdown > span {
+    padding: 5px;
+    line-height: 22px;
+    font-size: 18px;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+  
+  .shogun-countdown > div {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+  
+  @media only screen 
+and (max-width : 768px)  {
+  div#s-e18f972d-3454-4fd7-973e-5bf58baaec17 {
+    text-align: center!important;
+}
+}
+  
+    @media only screen 
+and (max-width : 768px)  {
+  .shogun-countdown {
+    display: flex;
+    text-align: center;
+    font-size: 42px;
+    justify-content: center;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+}
+  
+</style>

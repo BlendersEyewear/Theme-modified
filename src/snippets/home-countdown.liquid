@@ -1,0 +1,41 @@
+{% assign page = pages.home-count %}
+
+{% include 'page-multi-column', content: page.content %}
+
+<style>
+  
+  .shogun-countdown > div > span {
+    font-weight: 600;
+    line-height: 27px;
+    font-size: 23px;
+}
+  
+  .shogun-countdown > span {
+    padding: 5px;
+    line-height: 27px;
+    font-size: 23px;
+}
+  
+.shogun-countdown {
+    display: flex;
+    text-align: center;
+    font-size: 45px;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+  
+  p {
+    margin: 0 0 0px;
+    font-style: normal;
+    line-height: 1.6em;
+}
+  
+      @media only screen 
+and (max-width : 768px)  {
+  #s-36644cab-227c-45a2-ae32-86b082b8e298 {
+    padding-top: 10px;
+    font-size: 13px;
+}
+}
+  
+</style>

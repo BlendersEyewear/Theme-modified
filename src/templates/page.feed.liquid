@@ -1,0 +1,23 @@
+{% layout none %}<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss>
+  <channel>
+    {% paginate collections.all.products by 10000 %}
+    {% for product in collections.all.products %}
+    <!-- Item #{{ forloop.index }} -->
+    <item>
+    	<title>{{ product.title | strip_html | strip_newlines }}</title>
+    	<id>{{product.id}}</id>
+    	<description>{{ product.description | strip_html | strip_newlines }}</description>
+    	<image_link>https:{{product.featured_image | product_img_url: 'master'}}</image_link>
+    	<link>{{shop.url}}{{product.url}}</link>
+    	<price>{{product.price | money_without_currency}} USD</price>
+    	<brand>Blenders Eyewear</brand>
+    	<availability>{% if product.available == true %}in stock{% else %}out of stock{% endif %}</availability>
+    	<condition>new</condition>
+    	<product_type>{{ product.type }}</product_type>
+    </item>
+	{% endfor %}
+	{% endpaginate %}
+  </channel>
+</rss>

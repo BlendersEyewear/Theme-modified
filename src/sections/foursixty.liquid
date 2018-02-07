@@ -1,0 +1,56 @@
+{% if section.settings.enabled %}
+  <div class="logo-bar-section container {% if section.settings.hide_on_mobile %}hide-section-on-mobile{% endif %}">
+    <h2 class="title center">{{ section.settings.title }}<br>
+      <a style="font-size: 75%; color: #777" href="//instagram.com/blenderseyewear">@blenderseyewear</a></h2>
+
+  </div>
+  <div id="foursixty-homepage-container">
+  	<script data-track-conversion="true" src="//foursixty.com/media/scripts/fs.embed.v2.5.js" data-feed-id="blenderseyewear" data-theme="showcase_v2" data-page-size="8"></script>
+  </div>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Foursixty",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enabled",
+        "label": "Section Enabled",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_on_mobile",
+        "label": "Hide Only On Mobile?",
+        "default": false
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "default": "Shop Our Instagram",
+        "label": "Title"
+      }
+    ],
+	"presets": [
+		{ "name": "Foursixty Minifeed",
+		  "category": "Social"
+		}
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.fs-shopify-add-cart.fs-shopify-add-cart-container {background: rgb(0,163,240); color:#ffffff;} .fs-detail-product-image { width:100%; max-height: none; } div.fs-has-links { text-indent: -9999px; position: static; font-weight: 500; } .fs-has-links::after {  padding:  16px 24px; border: 1px solid rgb(255, 255, 255); color:rgb(255, 255, 255); content: "SHOP THE LOOK"; text-indent: 0; display: block; font-size: 10pt; margin: 10px; }
+  .fs-entry-container { width: 25% !important; padding-top: 25% !important; }.fs-desktop .fs-timeline-entry div.fs-text-container { display: flex; flex-direction: column;align-items: center; justify-content: center; display: -webkit-flex;  -webkit-flex-direction: column;  -webkit-align-items: center;  -webkit-justify-content: center;  display: -ms-flexbox;  -ms-flex-direction: column;  -ms-flex-align: center;  -ms-flex-pack: center; transition: opacity .25s; } .fs-desktop .fs-timeline-entry .fs-text-container:hover { opacity: 1; } .fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title{font-family:Roboto; font-size: 14px;;font-style:normal;font-weight:normal;}div.fs-text-container .fs-entry-date, div.fs-detail-container .fs-post-info, div.fs-wrapper div.fs-has-links::after, .fs-text-product, .fs-overlink-text{font-family:Roboto; font-size: 12px;;font-style:normal;font-weight:bold;}.fs-wrapper div.fs-text-container * {color:rgb(255, 255, 255)}.fs-wrapper div.fs-text-container {background-color:rgba(0, 163, 240, 0.81); margin: 0px}div.fs-entry-date{display:none}div.fs-entry-title{display:none}.fs-wrapper div.fs-timeline-entry{ margin: 0px } div.fs-timeline-detail {background-color: rgba(0, 0, 0, 0.8);}
+  @media only screen and (max-width: 767px) {
+    .fs-entry-container { width: 50% !important; padding-top: 50% !important; }
+    #foursixty-homepage-container { display: none; }
+  } .fs-detail-title { display: none }
+
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

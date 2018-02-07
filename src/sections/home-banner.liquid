@@ -1,0 +1,50 @@
+{% comment %}
+{% include 'home-countdown' %}
+{% endcomment %}
+
+{% if section.settings.enabled %}
+
+  <a class="collection_banner {% if section.settings.hide_on_mobile %}hide-section-on-mobile{% endif %}" href="/collections/{{ section.settings.collection }}">
+    <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
+    <img src="{{ section.settings.banner_image | img_url: '1900x'}}" />
+  </a>
+
+{% endif %}
+
+{% schema %}
+
+{
+  "name": "Home Banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Section Enabled",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide Only On Mobile?",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "The Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Banner",
+      "category": "Collection"
+    }
+  ]
+}
+
+{% endschema %}

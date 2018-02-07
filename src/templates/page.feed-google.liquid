@@ -1,0 +1,30 @@
+{% layout none %}<?xml version="1.0"?>
+<rss version="2.0"
+xmlns:g="http://base.google.com/ns/1.0">
+<rss>
+  <channel>
+    {% paginate collections.all.products by 10000 %}
+    {% for product in collections.all.products %}
+    <!-- Item #{{ forloop.index }} -->
+    <item>
+    	<g:title>{{ product.title | strip_html | strip_newlines }}</g:title>
+    	<g:id>{{product.id}}</g:id>
+    	<g:description>{{ product.description | strip_html | strip_newlines }}</g:description>
+    	<g:image_link>https:{{product.featured_image | product_img_url: 'large'}}</g:image_link>
+      	<g:link>{{shop.url}}{{product.url}}?curr=off</g:link>
+    	<g:price>{{product.price | money_without_currency}} USD</g:price>
+    	<g:brand>Blenders Eyewear</g:brand>
+        <g:mpn>{{product.id}}</g:mpn>
+    	<g:availability>{% if product.available == true %}in stock{% else %}out of stock{% endif %}</g:availability>
+    	<g:condition>new</g:condition>
+        <g:gender>unisex</g:gender>
+        <g:size>regular</g:size>
+        <g:color>multicolor</g:color>
+        <g:age_group>adult</g:age_group>
+        <g:product_type>apparel &amp; accessories &gt; clothing accessories &gt; sunglasses</g:product_type>
+    	<g:google_product_category>apparel &amp; accessories &gt; clothing accessories &gt; sunglasses</g:google_product_category>
+    </item>
+	{% endfor %}
+	{% endpaginate %}
+  </channel>
+</rss>
