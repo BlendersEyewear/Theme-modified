@@ -46,7 +46,14 @@
         class="collection_banner"
         style="background-image: url('{{ block.settings.banner_image | img_url: '1900x'}}');"
       >
-        <h1 class="collection_banner_title">{{collection.title}}</h1>
+      {% if collection.handle == 'top-selects-blenders-eyewear' %}
+        <h1 class="collection_banner_title">Best Sellers</h1>
+      {% elsif collection.handle == 'womens-top-selects' %}
+        <h1 class="collection_banner_title">Women’s</h1>
+      {% else %}
+        <h1 class="collection_banner_title">{{ collection.title }}</h1>
+      {% endif %}
+        
         {% if collection.description %}
           <h4 class="collection_banner_description">{{ collection.description }}</h4>
         {% else %}

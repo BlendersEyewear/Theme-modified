@@ -181,15 +181,15 @@ div.fs-text-container .fs-entry-title {
 }
 
 .collection_banner_title {
-  font-size: 6.25rem;
+  font-size: 4.25rem;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.2;
   margin: 0;
   padding: 0;
 }
 
 .collection_banner_description{
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
   font-style: italic;
   margin: 0;
@@ -206,10 +206,10 @@ div.fs-text-container .fs-entry-title {
 
 @media(max-width: 860px){
   .collection_banner_title{
-    font-size: 4.5rem;
+    font-size: 3.5rem;
   }
   .collection_banner_description{
-    font-size: 1.25rem;
+    font-size: 1.125rem;
   }
 }
 
