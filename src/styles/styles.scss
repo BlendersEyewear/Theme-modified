@@ -3529,6 +3529,19 @@ a.tag {
   color: #ff0000;
 }
 
+//  Sale Savings Styles
+// Added by Adam - 2/8/18
+.sale.savings {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cart_savings{
+  font-size: 1rem;
+  margin: 0 0 25px;
+}
+
 .banner_holder {
   position: absolute;
   top: 0;

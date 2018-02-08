@@ -173,6 +173,7 @@ div.fs-text-container .fs-entry-title {
 .collection_banner_title, .collection_banner_description{
   font-family: "proxima-nova";
   font-weight: bold;
+  line-height: 1;
   letter-spacing: .05em;
   color: white;
   text-align: center;
@@ -183,7 +184,6 @@ div.fs-text-container .fs-entry-title {
 .collection_banner_title {
   font-size: 4.25rem;
   font-weight: 800;
-  line-height: 1.2;
   margin: 0;
   padding: 0;
 }

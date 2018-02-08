@@ -62,8 +62,15 @@
 
   <form action="/cart" method="post" id="cart_form">
     <div class="section clearfix">
+
+    {% comment %} Create Savings Variable - Added by Adam - 2/8/18 {% endcomment %}
       <div class="ten columns">
+        {% assign total_saving = 0 %}
         {% for item in cart.items %}
+        {% if item.variant.compare_at_price > item.variant.price %}
+          {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
+            {% assign total_saving = saving | plus: total_saving %}
+          {% endif %}
           <div class="section clearfix">
             <div class="three columns alpha">
               <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">
@@ -113,6 +120,8 @@
                 </p>
               {% endif %}
 
+
+              {% comment %}
               <p class="modal_price">
                 {% if item.price > 0 %}
                   <span class="money">
@@ -120,6 +129,20 @@
 </span>
                 {% else %}
                   {{ settings.free_price_text }}
+                {% endif %}
+              </p>
+              {% endcomment %}
+
+              {% comment %} Show new price and old price - Added by Adam - 2/8/18 {% endcomment %}
+              <p class="modal_price">
+                {% if item.price > 0 %}
+                  <span class="money">{{ item.price | money }}</span>
+                {% else %}
+                  {{ settings.free_price_text }}
+                {% endif %}
+
+                {% if item.price < item.variant.compare_at_price %}
+                  <span class="money was_price">{{ item.variant.compare_at_price | money }}</span>
                 {% endif %}
               </p>
 
@@ -143,9 +166,8 @@
             <p>
               <span class="subtotal_amount">
                 <span class="money">
-<span class="saso-cart-original-total">{{ cart.total_price | money }}</span>
-<span class="saso-cart-total"></span>
-</span>
+                  <span class="saso-cart-original-total">{{ cart.total_price | money }}</span>
+                </span>
               </span>
               {% comment %}
               <small id="estimated-shipping" style="display:none">
@@ -154,6 +176,13 @@
               </em></small>
               {% endcomment %}
             </p>
+
+            <p class="cart_savings sale">
+                {% if total_saving > 0 %}
+                  <span>Total Savings: </span>
+                  <span class="money">{{ total_saving | money }}</span>
+                {% endif %}
+              </p>
 
             {% if settings.show_multiple_currencies %}
               <p>
