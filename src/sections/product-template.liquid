@@ -144,7 +144,7 @@
               {% comment %} Added by Adam - 2/8/18 {% endcomment %}
               <span class="sale savings">
                 {% if variant.price < variant.compare_at_price and variant.available %}
-                 You saved: {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}% (<span class="money">{{ variant.compare_at_price | minus: variant.price | money }}</span>)
+                 {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}% Off
                 {% endif %}
               </span>
             </p>

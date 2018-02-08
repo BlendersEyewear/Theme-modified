@@ -3532,9 +3532,10 @@ a.tag {
 //  Sale Savings Styles
 // Added by Adam - 2/8/18
 .sale.savings {
-    display: block;
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
 }
 
 .cart_savings{
@@ -3639,9 +3640,12 @@ a.secondary_button, input.secondary_button {
    font-size: 1.1em;
   }
 }
+
+// Remove Padding
+// Edited by Adam - 2/8
 .subtotal {
-  border-left: 1px solid #cccccc;
-  padding-left: 40px;
+  // border-left: 1px solid #cccccc;
+  // padding-left: 40px;
   @include respond-to('medium') {
     border-left: none;
     border-top: 1px solid #cccccc;
@@ -3653,6 +3657,21 @@ a.secondary_button, input.secondary_button {
   font-size: 1.4em;
   font-weight: bold;
 }
+
+.subtotal_amount_p{
+  margin-bottom: 25px;
+}
+
+@include respond-to('small') {
+  .subtotal h2 {
+    font-variant-caps: all-small-caps;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+}
+
+
 button.update {
   width:30%;
   float: right;
@@ -7509,11 +7528,19 @@ input[type="button"].highlight-false--dark {
       left: 0;
       right: 0;
       pointer-events: none;
+
+      @include respond-to('medium') {
+        position: static;
+        width: 100%;
+        padding: 0 1rem;
+        
+      }
     }
     .feature-details {
       display: none;
       opacity: 0;
       transition: opacity 0.3s linear;
+
       @include respond-to('medium'){
         opacity: 1;
         display: block !important;
@@ -7522,7 +7549,16 @@ input[type="button"].highlight-false--dark {
         opacity: 1;
       }
       .button {
-        margin-top: 15px;
+        // margin-top: 15px;
+        height: auto;
+        line-height: 1.25;
+        padding: 10px 20px;
+        font-variant-caps: all-small-caps;
+        font-size: 1.25rem;
+
+        @include respond-to('medium') {
+          width: 100%;
+        }
       }
     }
     .description {
@@ -7574,6 +7610,15 @@ input[type="button"].highlight-false--dark {
   }
 }
 
+//  Move Feature Overlay Buttons down and remove transition on mobile
+// Added by Adam - 2/8/18 
+@media (max-width: 768px) {
+  .feature-wrap{
+    position: static;
+    height: auto;
+  }
+}
+
 $i: 1;
 $delay: 0;
 @while $i < 13 {
@@ -7601,6 +7646,7 @@ $delay: 0;
 .featured-promotions.promo-per-row-3 {
   .feature-section {
     width: calc(33.3333% - 20px);
+
     @include respond-to('medium'){
       width: calc(100% - 40px);
       margin: 10px 20px;
@@ -7914,6 +7960,14 @@ h1.cart-title {
 p.modal_price {
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+// Fix cart item price on mobile
+// added by adam 2/8/18
+@media (max-width: 768px) {
+  p.modal_price{
+    padding-bottom: 20px;
+  }
 }
 
 .product_section .product_form {
@@ -8248,9 +8302,13 @@ p.modal_price {
 }
   
   @media (max-width: 768px) {
-.featured-promotions .feature-section .feature-overlay {
-    background: rgba(241,241,241,0)!important;
-}
+    .featured-promotions .feature-section .feature-overlay {
+        background: rgba(241,241,241,0)!important;
+        //  Added by Adam
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
   }
   
   .container.promotions-grid-full_width {
@@ -8261,6 +8319,12 @@ p.modal_price {
   figure.feature-section.section-2.promo-2.title-overlay-true.animated, .container.promotions-grid-full_width .featured-promotions.promo-per-row-3 .feature-section {
     padding-right: 10px;
     padding-left: 10px;
+
+    // edited by Adam
+    @include respond-to('small'){
+          padding-right: 25px;
+    padding-left: 25px;
+    }
 }
   
   label.yotpo-attribution-indicator {

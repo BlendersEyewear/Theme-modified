@@ -20,29 +20,27 @@
     </form>
          <div class="feature_divider"></div>
 
-<!-- Start Cart Mobile Upsell -->
-{% comment %}
+{% comment %} <!-- Start Cart Mobile Upsell -->
     <div class="mobile-upsell">  
       
-      {% for item in cart.items %}
-	  {% if item.product.type == "Sunglasses" %}
-      {% assign sunglasses_in_cart = true %}
+    {% for item in cart.items %}
+	    {% if item.product.type == "Sunglasses" %}
+        {% assign sunglasses_in_cart = true %}
   	  {% endif %}
-      {% endfor %}
+    {% endfor %}
       
-      {% for item in cart.items %}
-	  {% if item.product.type == "Soft Pouches" %}
-      {% assign sunglasses_in_cart = false %}
+    {% for item in cart.items %}
+	    {% if item.product.type == "Soft Pouches" %}
+        {% assign sunglasses_in_cart = false %}
   	  {% endif %}
-      {% endfor %}
+    {% endfor %}
 
 		{% if sunglasses_in_cart %}
-		{% include 'mobile-upsell' %}
-     	{% endif %}
+		  {% include 'mobile-upsell' %}
+    {% endif %}
 
-      </div>
-        {% endcomment %}
-<!-- End Cart Mobile Upsell -->
+    </div>
+<!-- End Cart Mobile Upsell --> {% endcomment %}
        
     </div>
 </div>
@@ -136,13 +134,18 @@
               {% comment %} Show new price and old price - Added by Adam - 2/8/18 {% endcomment %}
               <p class="modal_price">
                 {% if item.price > 0 %}
-                  <span class="money">{{ item.price | money }}</span>
+
+                  <span class="money {% if item.price < item.variant.compare_at_price %}sale{% endif %}">{{ item.price | money }}</span>
+                
                 {% else %}
+
                   {{ settings.free_price_text }}
+
                 {% endif %}
 
                 {% if item.price < item.variant.compare_at_price %}
                   <span class="money was_price">{{ item.variant.compare_at_price | money }}</span>
+                  <span class="sale savings">{{ item.variant.compare_at_price | minus: item.price | times: 100 | divided_by: item.variant.compare_at_price }}% Off</span>
                 {% endif %}
               </p>
 
@@ -163,7 +166,7 @@
               {{ 'cart.general.subtotal' | t }}
             </h2>
 
-            <p>
+            <p class="subtotal_amount_p">
               <span class="subtotal_amount">
                 <span class="money">
                   <span class="saso-cart-original-total">{{ cart.total_price | money }}</span>
@@ -177,12 +180,14 @@
               {% endcomment %}
             </p>
 
+            {% comment %}
             <p class="cart_savings sale">
-                {% if total_saving > 0 %}
-                  <span>Total Savings: </span>
-                  <span class="money">{{ total_saving | money }}</span>
-                {% endif %}
-              </p>
+              {% if total_saving > 0 %}
+                <span>Total Savings: </span>
+                <span class="money">{{ total_saving | money }}</span>
+              {% endif %}
+            </p>
+            {% endcomment %}
 
             {% if settings.show_multiple_currencies %}
               <p>
