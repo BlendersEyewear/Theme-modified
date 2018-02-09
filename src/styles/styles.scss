@@ -7555,9 +7555,16 @@ input[type="button"].highlight-false--dark {
         padding: 10px 20px;
         font-variant-caps: all-small-caps;
         font-size: 1.25rem;
+        border: 1px solid white;
+        background: none;
 
         @include respond-to('medium') {
           width: 100%;
+          background: linear-gradient(to right, #ff5f6d, #ffc371);
+          border: none;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+          font-weight: 400;
+          
         }
       }
     }

@@ -145,8 +145,16 @@
                           <img src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" />
                         </div>
                       {% endif %}
+
+                      {% comment %} Add Sale / Before Price - Edited by Adam - 2/9/18 {% endcomment %}
+                      <!-- TESTT -->
                       <strong class="right price">
-                        <span class="money">{{ item.price | money }}</span>
+                        <span class="money">{{ item.variant.price | money }}</span>
+                        <span class="was_price">
+                          {% if variant.price < variant.compare_at_price and variant.available %}
+                            <span class="money">{{ variant.compare_at_price | money }}</span>
+                          {% endif %}
+                        </span>
                       </strong>
                       <div class="item_title">
                         {{ item.product.title }}
