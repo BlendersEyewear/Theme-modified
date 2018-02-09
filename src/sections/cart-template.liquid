@@ -132,7 +132,7 @@
               {% endcomment %}
 
               {% comment %} Show new price and old price - Added by Adam - 2/8/18 {% endcomment %}
-              <p class="modal_price">
+              <p class="modal_price modal_price_cart">
                 {% if item.price > 0 %}
 
                   <span class="money {% if item.price < item.variant.compare_at_price %}sale{% endif %}">{{ item.price | money }}</span>
