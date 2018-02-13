@@ -3,7 +3,7 @@
     <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
     <img  src="{{ section.settings.image | img_url: '100x' }}"
           alt="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt }}{% else %}{{ blog.title | escape }}{% endif %}"
-          class="lazyload {{ settings.image_loading_style }}"
+          class="lazyload {{ settings.image_loading_style }} collection_banner_img"
           data-src="{{ section.settings.image | img_url: '1400x' }}"
           sizes="100vw"
           srcset="{{ section.settings.image | img_url: '480x' }} 480w,

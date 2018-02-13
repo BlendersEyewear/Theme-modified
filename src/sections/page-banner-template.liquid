@@ -3,7 +3,7 @@
     <img  src="{{ section.settings.image | img_url: '100x' }}"
           alt="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt }}{% else %}{{ page.title | escape }}{% endif %}"
           data-src="{{ section.settings.image | img_url: '1400x', format: 'pjpg' }}"
-          class="lazyload {{ settings.image_loading_style }}"
+          class="lazyload {{ settings.image_loading_style }} "
           sizes="100vw"
           srcset="{{ section.settings.image | img_url: '480x', format: 'pjpg' }} 480w,
                   {{ section.settings.image | img_url: '765x', format: 'pjpg' }} 765w,

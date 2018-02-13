@@ -25,6 +25,7 @@
   margin-top: 10px;
 }
 
+// Edited  by Adam - 2/13/18
 div.container.main.join {
   padding: 0;
 }
@@ -160,7 +161,7 @@ div.fs-text-container .fs-entry-title {
 
 .collection_banner {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   display: block;
     
@@ -168,6 +169,12 @@ div.fs-text-container .fs-entry-title {
   background-repeat: no-repeat;
 
   padding: 4rem 1rem;
+
+  @media screen and (max-width: 768px){
+    overflow: visible;
+    margin-bottom: 40px;
+  }
+
 }
 
 .collection_banner_title, .collection_banner_description{
@@ -200,8 +207,8 @@ div.fs-text-container .fs-entry-title {
   display: none;
 }
 .collection_banner img {
-  width: 100%;
-  height: auto;
+  // width: 100%;
+  // height: auto;
 }
 
 @media(max-width: 860px){
@@ -230,18 +237,18 @@ div.fs-text-container .fs-entry-title {
     font-size: 1rem;
   }
 
-  .collection_banner img {
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translate(-50%, 0);
-    -moz-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    -o-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    height: 100%;
-    width: auto;
-    top: 0;
-  }
+  // .collection_banner img {
+  //   position: absolute;
+  //   left: 50%;
+  //   -webkit-transform: translate(-50%, 0);
+  //   -moz-transform: translate(-50%, 0);
+  //   -ms-transform: translate(-50%, 0);
+  //   -o-transform: translate(-50%, 0);
+  //   transform: translate(-50%, 0);
+  //   height: 100%;
+  //   width: auto;
+  //   top: 0;
+  // }
 }
 
 @media(screen and max-width: 560px){
@@ -433,8 +440,10 @@ html.touch-device .homepage-product-slider .quick_shops {
   display: block;
 }
 
+// Edited by Adam - 2/13/2018
 .join-the-team .featured_links {
-  margin: 30px 0;
+  // margin: 30px 0;
+  margin: 0 0 30px;
 }
 .join-the-team .one-third.column {
   text-transform: uppercase;

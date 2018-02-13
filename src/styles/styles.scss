@@ -206,6 +206,7 @@ abbr {
 
 // HELPERS
 //  Added by Adam
+.pt-25{padding-top: 25px}
 .pb-25{padding-bottom: 25px;}
 .mb-25{margin-bottom: 25px}
 
@@ -1265,6 +1266,7 @@ input[type="submit"].guest_button:hover {
   width: 100%;
   display: none;
 }
+
 .dropdown {
   position: absolute;
   width: 100%;
@@ -1317,6 +1319,19 @@ input[type="submit"].guest_button:hover {
 .dropdown_row {
   display:table-row;
 }
+
+// TURN DROPDOWN INTO SINGLE COLUMNS --> Edited by Adam 2/9
+// .dropdown_container_new{
+//     position: absolute;
+//     top: 150px;
+//     max-width: 275px;
+//   .dropdown_content, .dropdown_column{display: block}
+
+//   .dropdown_column{
+//     padding: 20px 0;
+//   }
+
+// }
 
 select.currencies {
   border: 0 !important;
@@ -7555,22 +7570,31 @@ input[type="button"].highlight-false--dark {
         opacity: 1;
       }
       .button {
-        // margin-top: 15px;
+        margin-top: 15px;
         height: auto;
         line-height: 1.25;
         padding: 10px 20px;
-        font-variant-caps: all-small-caps;
-        font-size: 1rem;
+        // font-variant-caps: all-small-caps;
+        // letter-spacing: .05em;
+        font-size: 16px;
+        font-weight: bold;
         border: 1px solid white;
         background: none;
 
         @include respond-to('medium') {
+          margin-top: 0;
           width: 100%;
-          background: linear-gradient(to right, #ff5f6d, #ffc371);
+          // background: linear-gradient(to right, #ff5f6d, #ffc371);
+          // color: green;
+          background: linear-gradient(to left, #ff5f6d, #ffc371);
           border: none;
           box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-          // font-weight: 400;
           display: block;
+          font-size: 1.125rem;
+          line-height: 1;
+          padding: 10px;
+          min-width: initial;
+          -webkit-appearance: none;
           
         }
       }
@@ -7622,6 +7646,11 @@ input[type="button"].highlight-false--dark {
       display: block;
     }
   }
+}
+
+.feature-details__button{
+  font-size: 20px;
+
 }
 
 //  Move Feature Overlay Buttons down and remove transition on mobile
@@ -8010,6 +8039,19 @@ p.modal_price {
 .collection_banner {
     margin-bottom: -10px;
 }
+
+// Collection Banner --> Edited by Adam 2/9
+@include respond-to('small'){
+  img.collection_banner_img {
+    display: block;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    left: 0;
+  }
+}
   
   @media (max-width: 960px) {
 .saso-notification {
@@ -8319,8 +8361,15 @@ p.modal_price {
     .featured-promotions .feature-section .feature-overlay {
         background: rgba(241,241,241,0)!important;
         //  Added by Adam
+        display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+        display: -ms-flexbox;  /* TWEENER - IE 10 */
+        display: -webkit-flex; 
         display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: end;
+        -ms-flex-align: end;
         align-items: flex-end;
     }
   }

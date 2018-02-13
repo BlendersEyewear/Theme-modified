@@ -39,8 +39,10 @@
                             <div class="description">{{ block.settings.text }}</div>
                           {% endif %}
 
+                          {% comment %} Edited by Adam - 2/13/18 {% endcomment %}
                           {% if block.settings.button_label != blank %}
-                            <div class="button">{{ block.settings.button_label }}</div>
+                            <button class="button feature-details__button">{{block.settings.button_label}}</button>
+                            {% comment %} <div class="button">{{ block.settings.button_label }}</div> {% endcomment %}
                           {% endif %}
                         </div>
                       </div>

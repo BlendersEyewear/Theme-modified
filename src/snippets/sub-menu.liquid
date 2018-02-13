@@ -1,7 +1,7 @@
 {% for link in linklists[sub-menu].links %}
   {% if linklists[link.handle] != empty %}
     {% assign link_count = linklists[link.handle].links | size %}
-    <div class="dropdown_container" data-dropdown="{{ link.handle }}">
+    <div class="dropdown_container dropdown_container_new" data-dropdown="{{ link.handle }}">
       <div class="dropdown menu">
         <div class="dropdown_content {% if link_count < 4 %}dropdown_narrow{% endif %}">
           {% for sublink in linklists[link.handle].links %}
