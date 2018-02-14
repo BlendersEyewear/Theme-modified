@@ -5,7 +5,7 @@
 
 // Edited by Adam - 2/13/18
 .saso-notification {
-  z-index: 2147483647;  
+  z-index: 2;  
   display: none;
   left: 0px;
   width: 100%;
@@ -16,7 +16,7 @@
   text-align: center;
   text-transform: none;
   font-weight: bold;
-  letter-spacing: .1em;
+  letter-spacing: .05em;
 
   position: relative;
   
@@ -296,6 +296,11 @@
 /* mobile */
 @media (max-width: 960px) {
 
+  .saso-notification{
+    // z-index: 1;
+    // margin-top: 2.5rem;
+  }
+
   .saso-notification-x {
     // margin: -16px 4px 0px 0px;
   }
@@ -351,6 +356,10 @@
 
 @media (max-width: 768px){
   #saso-notifications{
+    // margin-top: 2.5rem;
+  }
+
+  .saso-notifications--below-header{
     margin-top: -40px;
   }
 }
