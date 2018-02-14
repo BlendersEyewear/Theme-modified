@@ -1070,6 +1070,16 @@ a.tos_icon,
   }
 }
 
+// CART --> SASO
+// Edited by Adam - 2/13/2018
+.cart-item-saso{
+  margin: -23px 0 10px;
+
+  @include respond-to('small'){
+    margin: -15px 0 10px;
+  }
+}
+
 .cart_content__continue-shopping {
   display: none;
 }
@@ -1945,6 +1955,10 @@ a.button,
     .fadeInDown.text {
       -webkit-animation-duration: 0.8s;
       animation-duration: 0.8s;
+    }
+    .disabled{
+      background: lightgray;
+      border: lightgray;
     }
   }
 
@@ -3547,7 +3561,7 @@ a.tag {
 }
 
 .thumbnail .sale, .sale {
-  color: #ff0000;
+  color: #d54f4c;
 }
 
 //  Sale Savings Styles
@@ -3674,7 +3688,7 @@ a.secondary_button, input.secondary_button {
     padding-top:20px;
   }
 }
-.subtotal_amount {
+.subtotal_amount, .saso-cart-total{
   font-size: 1.4em;
   font-weight: bold;
 }
@@ -7593,7 +7607,7 @@ input[type="button"].highlight-false--dark {
           font-size: 1.125rem;
           line-height: 1;
           padding: 10px;
-          min-width: initial;
+          min-height: auto;
           -webkit-appearance: none;
           
         }
@@ -8009,7 +8023,7 @@ p.modal_price {
 // added by adam 2/8/18
 @media (max-width: 768px) {
   p.modal_price_cart{
-    padding-bottom: 20px;
+    padding-bottom: 15px;
   }
 }
 
@@ -8030,7 +8044,7 @@ p.modal_price {
   
 	@media (max-width: 960px) {
 		.saso-notification-x {
-    	margin: -8px 8px 0px 0px!important;
+    	// margin: -8px 8px 0px 0px!important;
 	}
   }
   
@@ -8041,6 +8055,9 @@ p.modal_price {
 }
 
 // Collection Banner --> Edited by Adam 2/9
+img.collection_banner_img{
+  max-width: 100%;
+}
 @include respond-to('small'){
   img.collection_banner_img {
     display: block;
@@ -8055,9 +8072,10 @@ p.modal_price {
   
   @media (max-width: 960px) {
 .saso-notification {
-    padding: 10px 0px !important;
-    font-size: 110% !important;
-    padding-top: 20px!important;
+    //  Edited out by Adam - 2/13/18
+    // padding: 10px 0px !important;
+    // font-size: 110% !important;
+    // padding-top: 20px!important;
 }
   }
   
@@ -8249,7 +8267,7 @@ p.modal_price {
 }
 
   .saso-notifications-message {
-    font-size: 120%;
+    // font-size: 120%;
     line-height: 3;
 }
   

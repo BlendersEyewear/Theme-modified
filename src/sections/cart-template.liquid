@@ -6,7 +6,7 @@
         <h1 class="cart-title">{{ 'cart.general.title' | t }}</h1>
         	<div class="shippingmessage">
         	{% if cart.total_price >= 4000 %}
-     		 <div class="shipping-notice">Sweet! You scored Free Shipping..</div>
+     		 <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping..</div>
  			{% elsif cart.total_price < 4000 %}
        		<div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
 			{% endif %}
@@ -20,7 +20,7 @@
     </form>
          <div class="feature_divider"></div>
 
-{% comment %} <!-- Start Cart Mobile Upsell -->
+<!-- Start Cart Mobile Upsell -->
     <div class="mobile-upsell">  
       
     {% for item in cart.items %}
@@ -40,7 +40,7 @@
     {% endif %}
 
     </div>
-<!-- End Cart Mobile Upsell --> {% endcomment %}
+<!-- End Cart Mobile Upsell --> 
        
     </div>
 </div>
@@ -86,11 +86,12 @@
 
             <div class="seven columns omega cart_content_info">
               <h3>
-                <a href="{{ item.url }}">{{ item.product.title }}
-<span class="saso-cart-item-discount-notes" data-key="{{item.key}}"></span>
-<span class="saso-cart-item-upsell-notes" data-key="{{item.key}}"></span>
-                                </a>
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
               </h3>
+              <p class="cart-item-saso">
+                <span class="saso-cart-item-discount-notes" data-key="{{item.key}}"></span>
+                <span class="saso-cart-item-upsell-notes" data-key="{{item.key}}"></span>
+              </p>
 
               {% unless item.variant.title contains "Title" %}
                 <p class="meta">
@@ -123,8 +124,8 @@
               <p class="modal_price">
                 {% if item.price > 0 %}
                   <span class="money">
-<span class="saso-cart-item-price" data-key="{{item.key}}">{{ item.price | money }}</span>
-</span>
+                    <span class="saso-cart-item-price" data-key="{{item.key}}">{{ item.price | money }}</span>
+                  </span>
                 {% else %}
                   {{ settings.free_price_text }}
                 {% endif %}
@@ -144,6 +145,7 @@
                 {% endif %}
 
                 {% if item.price < item.variant.compare_at_price %}
+                
                   <span class="money was_price">{{ item.variant.compare_at_price | money }}</span>
                   <span class="sale savings">{{ item.variant.compare_at_price | minus: item.price | times: 100 | divided_by: item.variant.compare_at_price }}% Off</span>
                 {% endif %}
@@ -166,6 +168,7 @@
               {{ 'cart.general.subtotal' | t }}
             </h2>
 
+            {% comment %} edited by Adam - 2/13/18 {% endcomment %}
             <p class="subtotal_amount_p">
               <span class="subtotal_amount">
                 <span class="money">
@@ -180,14 +183,19 @@
               {% endcomment %}
             </p>
 
-            {% comment %}
-            <p class="cart_savings sale">
+            <!-- need to comment out -->
+            {% comment %} <p class="cart_savings sale">
               {% if total_saving > 0 %}
                 <span>Total Savings: </span>
                 <span class="money">{{ total_saving | money }}</span>
               {% endif %}
-            </p>
-            {% endcomment %}
+            </p> {% endcomment %}
+
+            <div class="saso-summary test-1"></div>
+
+            <div class="saso-cart-offers test-2"></div>
+
+            <div class="saso-cart-total test-3"></div>
 
             {% if settings.show_multiple_currencies %}
               <p>
@@ -351,11 +359,26 @@
   
 .shippingmessage {
     text-align: center;
-    margin-bottom: 14px;
     font-weight: bold;
-  padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 24rem;
+    margin: 0 auto 15px;
+}
 
+.shipping-notice {
+    background: none;
+    padding: 1px 5px;
+    color: rgba(0,0,0,0.85);
+    letter-spacing: .05em;
+    display: inline-block;
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.shipping-notice--free{
+  background: #e0fde0;
 }
   
     @media only screen and (max-width: 736px) {
