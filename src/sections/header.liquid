@@ -7,6 +7,8 @@
     </div>
   {% endif %}
   <div class="top_bar clearfix">
+
+    <!-- menu button -->
     <a href="#menu" class="mobile_nav dropdown_link" data-dropdown-rel="menu">
       <div>
         <span></span>
@@ -15,6 +17,7 @@
         <span></span>
       </div>
     </a>
+
     <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="mobile_logo logo">
       {% if section.settings.logo != nil %}
         <img src="{{ section.settings.logo | img_url: '410x' }}" alt="{{ shop.name | escape }}" />
@@ -42,6 +45,7 @@
       </div>
     </div>
   {% endif %}
+
   <div class="dropdown_container" data-dropdown="menu">
     <div class="dropdown">
       <ul class="menu" id="mobile_menu">

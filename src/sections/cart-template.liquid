@@ -5,13 +5,14 @@
       <div class="sixteen columns">
         <h1 class="cart-title">{{ 'cart.general.title' | t }}</h1>
         	
-          {% comment %} <div class="shippingmessage">
+          <div class="shippingmessage">
         	    {% if cart.total_price >= 4000 %}
      		        <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping..</div>
  			        {% elsif cart.total_price < 4000 %}
        		      <div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
 			        {% endif %}
-          </div> {% endcomment %}
+          </div>
+          
           <form action="/cart" method="post" id="cart_form">
             <div class="top-cart-checkout">
               {% if cart.item_count > 0 %}

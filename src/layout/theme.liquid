@@ -92,7 +92,6 @@
     {{ content_for_header }}
 
 {% comment %} Excluded by Adam - 2/9 {% endcomment %}
-{% comment %} {% include 'bacon-menu' %} {% endcomment %}
 
           <script>
           window['friendbuy'] = window['friendbuy'] || [];
@@ -170,6 +169,9 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
   
   {% include 'shogun-head' %}
+
+  {% comment %} Custom Header js - Adam 2/15 {% endcomment %}
+
 </head>
   {% if template contains "index" %}
     {% assign feature_image = true %}
@@ -193,7 +195,9 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
   <body class="{{ template | replace: '.', '-' | handle }}">
 
-    {% section 'header' %}
+    {% comment %} Added custom menu - Adam - 2/15 {% endcomment %}
+    {% comment %} {% section 'header' %} {% endcomment %}
+    {% section 'custom-header'%}
 
     {% unless feature_image %}
     
@@ -225,6 +229,8 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% endif %}
 
     <script src="{{ 'app.js' | asset_url }}"></script>
+    {% comment %} Customer Header js {% endcomment %}
+    <script src="{{'custom-header.js' | asset_url }}"></script>
 
     {% if settings.show_multiple_currencies %}
       {% include 'currencies' %}
