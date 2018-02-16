@@ -8574,7 +8574,10 @@ $btnColor: lightgray;
   max-height: 0;
   transition: all .5s ease-in-out;
 
-  // overflow: scroll;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
 
   .bottom{
     background: darkgray;
@@ -8596,12 +8599,70 @@ $btnColor: lightgray;
 
 }
 
-.custom-header-mobile__link, .custom-header-mobile__sublink{
-  padding: 10px 15px;
-    margin-bottom: 0;
-    background: white;
-    box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.24)
+
+// CUSTOM HEADER VARS --------------------
+$mobItemPadding: 20px 16px;
+$color-accent: #00A3F0;
+$color-light: rgba(0,0,0,0.05);
+
+// CUSTOM HEADER Mixins --------------------
+
+@mixin mobMenuLink($color, $background){
+  display: block;
+  color: $color;
+  background: white;
+  transition: all .15s ease-in-out;
+
+  &:hover, &:focus{
+    background: $background;
+  }
 }
+
+.custom-header-mobile__link, .custom-header-mobile__sublink{
+  padding: 0;
+  margin-bottom: 0;
+  background: white;
+  box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.09);
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+      box-shadow: inset 0 1px 0 0 $color-light;
+      font-variant-caps: all-small-caps;
+
+      &:first-of-type{box-shadow: none}
+
+      a{
+        // display: block;
+        // color: black;
+        padding: 24px 40px;
+        @include mobMenuLink(black, $color-light);
+      }
+
+    }
+  }
+}
+
+.custom-header-mobile__link{
+  padding: 0;
+
+  a {
+    padding: $mobItemPadding;
+    @include mobMenuLink(black, $color-light);
+  }
+}
+
+p.custom-header-mobile__category{
+  margin: 0;
+  padding: $mobItemPadding;
+  box-shadow: inset 0 -2px 0 0 $color-accent;
+}
+
 
 @keyframes mobNavToggle{
   from{

@@ -40,18 +40,23 @@
 
             {% elsif link.handle == "sunglasses" %}
                 <li class="custom-header-mobile__sublink custom-header-mobile__sublink--icon">
-                    <p data-no-instant href="{{ link.url }}">{{ link.title }} sUNNIESS <span class="right icon-down-arrow"></span></p>
+                    <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }} sUNNIESS <span class="right icon-down-arrow"></span></p>
+                    <ul>
+                      {% for link in linklists[link.handle].links %}
+                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {% endfor %}
+                    </ul>
                 </li>
             {% else %}
                 <li class="sublink custom-header-mobile__sublink">
-                    <a data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow"></span></a>
+                    <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow"></span></p>
                 <ul>
                     {% for link in linklists[link.handle].links %}
                         {% if linklists[link.handle] == empty %}
                             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                         {% else %}
                         <li class="sublink custom-header-mobile__sublink">
-                            <p class="" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow"></span></p>
+                            <p class="custom-header-mobile__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow"></span></p>
                             <ul>
                             {% for link in linklists[link.handle].links %}
                                 <li><a href="{{ link.url }}">{{ link.title }}</a></li>
