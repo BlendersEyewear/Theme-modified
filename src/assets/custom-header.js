@@ -1,13 +1,11 @@
 // Custom Header Script by Adam - 2/15
 
-
 // VARS
 const body = document.body;
 const pageContent = document.getElementById('pagecontent');
 
 const promoBanner = document.getElementById("promoBanner");
 const promoBannerClose = document.getElementById("promoBannerClose");
-
 
 const mobHeader = document.getElementById("customHeader");
 const navToggle = document.getElementById("mobileNavToggle");
@@ -84,36 +82,25 @@ const bannerClose = (msg) => {
 
 // Making mobile menu dropdowns work
 const subMenuDropdown = () => {
-  for (let subMenu of mobMenuCategoryHeader){
 
-    subMenu.addEventListener('click', () => {
-      let list = subMenu.nextElementSibling;
-      let arrow = subMenu.querySelector('.arrow');
+  for (let subMenu of mobMenuCategoryHeader){ 
+    console.log(subMenu.innerHTML);
 
-      list.classList.toggle('submenu--hidden');
-      arrow.classList.toggle('arrow--toggle');
-      // console.log('clicked');
-      console.log(arrow)
-
-    });
   }
 
 }
 
-
 // Doc Ready
 $(function() {
-    console.log('custom js loaded');
+    console.log("custom js loaded");
     mobMenuToggle();
     bannerClose("promo_banner_hide");
     console.log(mobHeader.offsetHeight);
 
     // Creating vertical window offset to compensate for fixed header
     let headerHeight = mobHeader.offsetHeight;
-    mobHeader.classList.contains("custom-header-mobile--is-mobile") ?
-        // body.classList.add("custom-header-mobile-offset") :
-        addHeightOffset(headerHeight) :
-        console.log('mobheader isnt mobile');
+    mobHeader.classList.contains("custom-header-mobile--is-mobile") ? // body.classList.add("custom-header-mobile-offset") :
+        addHeightOffset(headerHeight) : console.log("mobheader isnt mobile");
     // console.log(headerHeight);
 
     // Making Mobile Nav submenus works
