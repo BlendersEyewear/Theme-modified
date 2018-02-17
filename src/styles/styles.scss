@@ -40,7 +40,7 @@ Description: Shopify Theme (https://www.shopify.com/?ref=out-of-the-sandbox)
   #Home page - image with text overlay
   #Home page - video
   #Font-Face
-  #Custom Styles */
+  # /* Custom Styles */
 
 /* #Mixins
 ================================================== */
@@ -2186,7 +2186,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="sea
     outline: none;
     background: #fff;
     color: #5f6a7d;
-    font: 13px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 13px "proxima-nova", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-bottom: 15px;
     -webkit-appearance: none;
     text-rendering: optimizeLegibility;
@@ -8433,7 +8433,7 @@ img.collection_banner_img{
   label.yotpo-attribution-indicator {
     display: inline;
 }
-  
+
   .yotpo-grouping-reference {
     margin-top: 10px!important;
 }
@@ -8446,6 +8446,17 @@ img.collection_banner_img{
 // ------------------------------------------------
 //  Custom Header - Adam 2/15
 //  -----------------------------------------------
+
+// CUSTOM HEADER VARS --------------------
+$mobItemPadding: 20px 16px;
+$mobItemPaddingVert: 20px 0;
+$color-accent: #00A3F0;
+$color-accent-secondary: #F7615C;
+$color-light: #F7F9FA;
+$color-background-light: #F7F9FA;
+$btnColor: lightgray;
+
+
 #customHeader{
   .cart_count{
     position: static !important;
@@ -8453,7 +8464,8 @@ img.collection_banner_img{
 }
 
 .custom-header-mobile{
-  background: lightgray;
+  // background: lightgray;
+  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -8461,12 +8473,34 @@ img.collection_banner_img{
   transition: all .5s ease-in-out;
   height: auto;
   width: 100%;
+
+  // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.custom-header-mobile--is-mobile{
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3;
 }
 
 .custom-header-mobile--open{
   height: 100vh;
   position: fixed;
   z-index: 3;
+}
+
+.custom-header-mobile-offset{
+  #pagecontent{
+    display: block;
+    padding-bottom: 104px;
+  }
+}
+.custom-header-mobile-offset--no-promo{
+  #pagecontent{
+    // display:
+    padding-bottom: 104px;
+  }
 }
 
 .custom-header-mobile__header-container{
@@ -8477,6 +8511,12 @@ img.collection_banner_img{
   align-items: stretch;
   
   position: relative;
+  z-index: 999;
+
+  flex: 1 0 auto;
+  max-height: max-content;
+    background: white;
+  box-shadow: inset 0 -1px 0 0 $color-light;
 
 }
 
@@ -8491,7 +8531,7 @@ img.collection_banner_img{
 }
 
 .custom-header-mobile__section{
-  background: white;
+  background: none;
   flex: 1;
   max-width: 25%;
   padding: 1rem;
@@ -8507,12 +8547,55 @@ img.collection_banner_img{
 //   max-width: 100%;
 // }
 
+
+// Mobile Search --------------
+
+.custom-header-mobile__search-form{
+  padding: 1rem;
+  background: white;
+  margin-bottom: 0;
+}
+
+input.custom-header-mobile__search-terms{
+  border: none;
+  background: $color-background-light;
+  padding: .25rem;
+  font-weight: 500;
+  font-size: 14px;
+  padding: .25rem .5rem .375rem;
+  color: black;
+  margin-bottom: 0;
+  min-height: none;
+
+  &:focus{
+    border: none;
+    box-shadow: inset 0 0 0 1px $color-light;
+  }
+}
+
+input.custom-header-mobile__search-terms::-webkit-input-placeholder{
+  color: rgba(0,0,0,0.4);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+input.custom-header-mobile__search-terms::-webkit-input-placeholder,
+input.custom-header-mobile__search-terms::-moz-placeholder,
+input.custom-header-mobile__search-terms:-ms-input-placeholder,
+input.custom-header-mobile__search-terms:-moz-placeholder { 
+  color: rgba(0,0,0,0.4);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+
 // Menu Container
 .custom-header-mobile__section--menu{
   justify-content: flex-start;
 }
 
-$btnColor: lightgray;
 
 // Menu Button
 .custom-header-mobile__menu-toggle {
@@ -8550,6 +8633,26 @@ $btnColor: lightgray;
   width: auto;
 }
 
+.custom-header-logo--mobile{
+  display: block;
+  max-height: 4rem;
+}
+
+.custom-header-logo--large{
+  display: none;
+}
+
+@media screen and (min-width: 768){
+  .custom-header-logo--mobile{
+    display: none;
+  }
+
+  .custom-header-logo--large{
+   display: block;  
+  }
+
+}
+
 .custom-header-mobile__cart{
   position: static;
 }
@@ -8560,14 +8663,15 @@ $btnColor: lightgray;
 
 // Mobile Menu Content
 .custom-header-mobile__menu{
-  background: lightblue;
+  // background: lightblue;
   width: 100%;
   right: 0;
   max-height: 100%;
+  overflow: auto;
   
   flex: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-flow: column nowrap;
   align-items: stretch;
   display: none;
@@ -8579,31 +8683,36 @@ $btnColor: lightgray;
   text-transform: uppercase;
   letter-spacing: .05em;
 
+  &::-webkit-scrollbar {
+      display: none;
+  }
+
   .bottom{
     background: darkgray;
     color: white;
   }
 }
 
+.custom-header-mobile__menu::-webkit-scrollbar {
+      display: none;
+  }
+
 .customer-header-mobile__menu--open{
-  display: block;
+  display: flex;
   // max-height: 100%;
   animation: mobNavToggle .25s;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
 }
 
 .custom-header-mobile__list{
   list-style: none;
-  padding: 0;
+  padding: 0 1rem;
   margin: 0;
 
 }
 
 
-// CUSTOM HEADER VARS --------------------
-$mobItemPadding: 20px 16px;
-$color-accent: #00A3F0;
-$color-light: rgba(0,0,0,0.05);
+
 
 // CUSTOM HEADER Mixins --------------------
 
@@ -8618,6 +8727,12 @@ $color-light: rgba(0,0,0,0.05);
   }
 }
 
+.custom-header-mobile__category, .custom-header-mobile__link{
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .custom-header-mobile__link, .custom-header-mobile__sublink{
   padding: 0;
   margin-bottom: 0;
@@ -8628,6 +8743,9 @@ $color-light: rgba(0,0,0,0.05);
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 100%;
+    transition: all .25s ease-in-out;
+    animation-fill-mode: both;
 
     li {
       margin: 0;
@@ -8642,6 +8760,9 @@ $color-light: rgba(0,0,0,0.05);
         // color: black;
         padding: 24px 40px;
         @include mobMenuLink(black, $color-light);
+        font-size: 0.875rem;
+        letter-spacing: 2px;
+        line-height: 1rem;
       }
 
     }
@@ -8660,9 +8781,91 @@ $color-light: rgba(0,0,0,0.05);
 p.custom-header-mobile__category{
   margin: 0;
   padding: $mobItemPadding;
+  @include mobMenuLink(black, $color-light);
+  clear: both;
+
+  .arrow{
+    transform: rotate(180deg);
+    transition: all .25s ease-in-out;
+  }
+
+  .arrow--toggle{
+    transform: rotate(0);
+  }
+}
+
+.custom-header-mobile__category--open{
   box-shadow: inset 0 -2px 0 0 $color-accent;
 }
 
+// Child lists
+.submenu--hidden{
+  // display: none;
+  // visibility: hidden;
+  height: 0;
+  li {
+    display: none;
+  }
+}
+
+// Friendbuy
+a.custom-header-mobile__refer{
+  display: block;
+  color: white;
+  background: $color-accent-secondary;
+  max-width: 20rem;
+  text-align: center;
+  margin: 1rem auto;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 600;
+  width: fit-content;
+  padding: .5rem 1.5rem;
+  -webkit-clip-path: polygon(8% 0, 100% 0%, 87% 100%, 3% 100%);
+  clip-path: polygon(4% 0, 100% 0%, 96% 100%, 0% 100%);
+}
+
+
+.custom-header-mobile__social{
+  .social_icons{
+    margin-left: 0;
+    margin-top: 0;
+    margin: 3rem 0 2rem;
+    padding: 0 1rem;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a:before{
+    font-size: 1.25rem;
+    margin: 0 .5rem;
+  }
+}
+
+.custom-header-mobile__bottom{
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.mobile-bottom-nav__item{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 .5rem;
+  text-transform: none;
+  &:first-of-type, &:nth-of-type(2){
+    box-shadow: inset -1px 0 0 0 $color-light;
+  }
+
+  &:nth-of-type(2){
+    // background: #Bada55;
+  }
+}
 
 @keyframes mobNavToggle{
   from{

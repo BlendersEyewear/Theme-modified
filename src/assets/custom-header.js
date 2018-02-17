@@ -2,6 +2,9 @@
 
 
 // VARS
+const body = document.body;
+const pageContent = document.getElementById('pagecontent');
+
 const promoBanner = document.getElementById("promoBanner");
 const promoBannerClose = document.getElementById("promoBannerClose");
 
@@ -10,6 +13,8 @@ const mobHeader = document.getElementById("customHeader");
 const navToggle = document.getElementById("mobileNavToggle");
 
 const mobMenu = document.getElementById("mobileMenu");
+
+const mobMenuCategoryHeader = document.querySelectorAll(".custom-header-mobile__category");
 
 // PREVENT SCROLLING
 var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
@@ -37,6 +42,20 @@ const disableScroll = () => {
   document.onkeydown = preventDefaultForScrollKeys;
 }
 
+
+// Height offset for mobile menu
+const addHeightOffset = (headerHeight) => {
+  pageContent.style.paddingBottom = `${headerHeight}px`;
+  pageContent.style.display = 'block';
+  // console.log('offsetted');
+}
+
+const removeHeightOffset = () => {
+  pageContent.style.paddingBottom = `0px`;
+  pageContent.style.display = "none";
+};
+
+
 const enableScroll = () => {
   if (window.removeEventListener)
     window.removeEventListener("DOMMouseScroll", preventDefault, false);
@@ -57,12 +76,46 @@ const mobMenuToggle = () => {
 const bannerClose = (msg) => {
     promoBannerClose.addEventListener('click', () => {
         promoBanner.classList.add(msg);
+        let headerHeightShort = mobHeader.offsetHeight;
+        addHeightOffset(headerHeightShort);
     })
 }
 
+
+// Making mobile menu dropdowns work
+const subMenuDropdown = () => {
+  for (let subMenu of mobMenuCategoryHeader){
+
+    subMenu.addEventListener('click', () => {
+      let list = subMenu.nextElementSibling;
+      let arrow = subMenu.querySelector('.arrow');
+
+      list.classList.toggle('submenu--hidden');
+      arrow.classList.toggle('arrow--toggle');
+      // console.log('clicked');
+      console.log(arrow)
+
+    });
+  }
+
+}
+
+
 // Doc Ready
 $(function() {
-    console.log('ready');
+    console.log('custom js loaded');
     mobMenuToggle();
     bannerClose("promo_banner_hide");
+    console.log(mobHeader.offsetHeight);
+
+    // Creating vertical window offset to compensate for fixed header
+    let headerHeight = mobHeader.offsetHeight;
+    mobHeader.classList.contains("custom-header-mobile--is-mobile") ?
+        // body.classList.add("custom-header-mobile-offset") :
+        addHeightOffset(headerHeight) :
+        console.log('mobheader isnt mobile');
+    // console.log(headerHeight);
+
+    // Making Mobile Nav submenus works
+    subMenuDropdown();
 });

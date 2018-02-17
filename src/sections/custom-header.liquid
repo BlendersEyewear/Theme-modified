@@ -1,5 +1,5 @@
 {% comment %} Mobile Nav {% endcomment %}
-<header id="customHeader" class="custom-header-mobile">
+<header id="customHeader" class="custom-header-mobile custom-header-mobile--is-mobile">
 
     {% comment %} Top menu {% endcomment %}
     <div class="custom-header-mobile__header-container">
@@ -15,13 +15,18 @@
         </div>
 
         <div class="custom-header-mobile__section custom-header-mobile__section--logo">
+
             <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="custom-header-mobile__logo logo">
-                {% if section.settings.logo != nil %}
-                    <img src="{{ section.settings.logo | img_url: '410x' }}" alt="{{ shop.name | escape }}"  class="custom-header-logo"/>
-                {% else %}
+
+                {% if section.settings.mobile_logo != nil %}
+                    <img src="{{ section.settings.mobile_logo | img_url: '480x' }}" alt="{{ shop.name | escape }}"  class="custom-header-logo custom-header-logo--mobile"/>
+                {% elsif section.settings.logo != nil %}
+                  <img src="{{ section.settings.logo | img_url: '480x' }}" alt="{{ shop.name | escape }}"  class="custom-header-logo custom-header-logo--mobile"/>
                 {{ shop.name }}
+
             {% endif %}
             </a>
+
         </div>
 
         <div class="custom-header-mobile__section custom-header-mobile__section--cart">
@@ -32,16 +37,34 @@
     </div>
 
     <div id="mobileMenu" class="custom-header-mobile__menu">
+
+      {% comment %} Search {% endcomment %}
+        {% if section.settings.search_enabled %}
+          <!-- search goes here!! -->
+          <div class="custom-header-mobile__search" data-dropdown="search">
+
+              <form action="/search" class="custom-header-mobile__search-form">
+                {% if settings.search_option != 'everything' %}
+                  <input type="hidden" name="type" value="product" />
+                {% endif %}
+                <span class="icon-search search-submit"></span>
+                <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" autocapitalize="off" autocomplete="off" autocorrect="off" class="custom-header-mobile__search-terms" />
+              </form>
+          </div>
+        {% endif %}
+
+        {% comment %} First Menu {% endcomment %}
         <ul class="custom-header-mobile__list">
         {% for link in linklists.mobile-menu.links %}
+
             {% if link.links == blank %}
 
                 <li class="custom-header-mobile__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
 
             {% elsif link.handle == "sunglasses" %}
                 <li class="custom-header-mobile__sublink custom-header-mobile__sublink--icon">
-                    <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }} sUNNIESS <span class="right icon-down-arrow"></span></p>
-                    <ul>
+                    <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }}<span class="right icon-down-arrow arrow"></span></p>
+                    <ul class="submenu--hidden">
                       {% for link in linklists[link.handle].links %}
                         <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                       {% endfor %}
@@ -49,14 +72,14 @@
                 </li>
             {% else %}
                 <li class="sublink custom-header-mobile__sublink">
-                    <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow"></span></p>
-                <ul>
+                    <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
+                <ul class="submenu--hidden">
                     {% for link in linklists[link.handle].links %}
                         {% if linklists[link.handle] == empty %}
                             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                         {% else %}
                         <li class="sublink custom-header-mobile__sublink">
-                            <p class="custom-header-mobile__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow"></span></p>
+                            <p class="custom-header-mobile__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
                             <ul>
                             {% for link in linklists[link.handle].links %}
                                 <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -67,9 +90,53 @@
                     {% endfor %}
                 </ul>
                 </li>
+
             {% endif %}
 
-        {% endfor %}</ul>
+        {% endfor %}
+        </ul>
+
+        {% comment %} Friendbuy {% endcomment %}
+        <a href="" class="Friendbuy custom-header-mobile__refer">Get $20 Off!</a>
+
+        {% comment %} Social {% endcomment %}
+        <div class="custom-header-mobile__social">
+          {% include 'social-icons' %}
+        </div>
+
+        {% comment %} Bottom Nav {% endcomment %}
+        <div class="custom-header-mobile__bottom">
+
+          <div class="mobile-bottom-nav__item">
+            <a href="tel:+{{ section.settings.phone_number | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}" class="">Call Us</a>
+          </div>
+
+          {% if shop.customer_accounts_enabled %}
+
+            {% if customer %}
+              <div data-no-instant class="mobile-bottom-nav__item">
+                <a href="/account" data-no-instant>Yo, {{ customer.name }}!</a>
+                <span data-no-instant>
+                {{ section.settings.customer_log_out_text  | customer_logout_link }}
+              </span>
+              </div>
+            
+            {% else %}
+
+              <div data-no-instant class="mobile-bottom-nav__item">
+                {{ section.settings.customer_log_in_text | customer_login_link }}
+              </div>
+
+            {% endif %}
+
+          {% endif %}
+          
+          {% if settings.show_multiple_currencies %}
+            <div data-no-instant class="mobile-bottom-nav__item">
+              {% include 'currencies-switcher' %}
+            </div>
+          {% endif %}
+        </div>
     </div>
 </header>
 
@@ -155,22 +222,9 @@
     },
     {
       "type": "image_picker",
-      "id": "logo_home",
-      "label": "Secondary logo over content (optional)",
-      "info": "400 x 100px recommended"
-    },
-    {
-      "type": "image_picker",
-      "id": "logo_mobile",
-      "label": "Mobile logo",
-      "info": "100 x 50px recommended"
-    },
-    {
-      "type": "text",
-      "id": "logo_width",
-      "label": "Logo display width",
-      "info": "Maximum display width is 205 pixels",
-      "default": "205"
+      "id": "mobile_logo",
+      "label": "Mobile Logo",
+      "info": "Smaller logo to show on mobile devices"
     },
     {
      "type": "header",
@@ -182,149 +236,14 @@
       "label": "Main menu"
     },
     {
-      "type": "link_list",
-      "id": "main_linklist2",
-      "label": "Secondary menu"
+      "type":  "text",
+      "id": "customer_log_in_text",
+      "label": "Customer Login Text"
     },
     {
-     "type": "header",
-     "content": "Layout"
-    },
-    {
-      "type": "select",
-      "id": "logo_position",
-      "label": "Logo position",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "logo_alignment",
-      "label": "Logo alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "menu_position",
-      "label": "Menu position",
-      "options": [
-        {
-          "value": "inline",
-          "label": "Inline with logo"
-        },
-        {
-          "value": "block",
-          "label": "Under logo"
-        }
-      ],
-      "default": "inline"
-    },
-    {
-      "type": "select",
-      "id": "menu_alignment",
-      "label": "Menu alignment",
-      "options": [
-        {
-          "value": "align_left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "align_right",
-          "label": "Right"
-        }
-      ],
-      "default": "align_left"
-    },
-    {
-      "type": "select",
-      "id": "logo_top_padding",
-      "label": "Logo top padding (in pixels) ([?](http:\/\/support.outofthesandbox.com\/customer\/portal\/articles\/1339268))",
-      "options": [
-        {"value": "0", "label": "0"},
-        {"value": "1", "label": "1"},
-        {"value": "2", "label": "2"},
-        {"value": "3", "label": "3"},
-        {"value": "4", "label": "4"},
-        {"value": "5", "label": "5"},
-        {"value": "6", "label": "6"},
-        {"value": "7", "label": "7"},
-        {"value": "8", "label": "8"},
-        {"value": "9", "label": "9"},
-        {"value": "10", "label": "10"},
-        {"value": "11", "label": "11"},
-        {"value": "12", "label": "12"},
-        {"value": "13", "label": "13"},
-        {"value": "14", "label": "14"},
-        {"value": "15", "label": "15"},
-        {"value": "16", "label": "16"},
-        {"value": "17", "label": "17"},
-        {"value": "18", "label": "18"},
-        {"value": "19", "label": "19"},
-        {"value": "20", "label": "20"}
-      ],
-      "default": "10"
-    },
-    {
-      "type": "select",
-      "id": "menu_top_padding",
-      "label": "Main menu top padding (in pixels) ([?](http:\/\/support.outofthesandbox.com\/customer\/portal\/articles\/1339268))",
-      "options": [
-        {"value": "0", "label": "0"},
-        {"value": "1", "label": "1"},
-        {"value": "2", "label": "2"},
-        {"value": "3", "label": "3"},
-        {"value": "4", "label": "4"},
-        {"value": "5", "label": "5"},
-        {"value": "6", "label": "6"},
-        {"value": "7", "label": "7"},
-        {"value": "8", "label": "8"},
-        {"value": "9", "label": "9"},
-        {"value": "10", "label": "10"},
-        {"value": "11", "label": "11"},
-        {"value": "12", "label": "12"},
-        {"value": "13", "label": "13"},
-        {"value": "14", "label": "14"},
-        {"value": "15", "label": "15"},
-        {"value": "16", "label": "16"},
-        {"value": "17", "label": "17"},
-        {"value": "18", "label": "18"},
-        {"value": "19", "label": "19"},
-        {"value": "20", "label": "20"},
-        {"value": "21", "label": "21"},
-        {"value": "22", "label": "22"},
-        {"value": "23", "label": "23"},
-        {"value": "24", "label": "24"},
-        {"value": "25", "label": "25"},
-        {"value": "26", "label": "26"},
-        {"value": "27", "label": "27"},
-        {"value": "28", "label": "28"},
-        {"value": "29", "label": "29"},
-        {"value": "30", "label": "30"}
-      ],
-      "default": "0"
+      "type":  "text",
+      "id": "customer_log_out_text",
+      "label": "Customer Logout Text"
     }
   ]
 }
