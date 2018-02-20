@@ -198,6 +198,7 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% comment %} Added custom menu - Adam - 2/15 {% endcomment %}
     {% comment %} {% section 'header' %} {% endcomment %}
     {% section 'custom-header'%}
+    <!-- Testing Header -->
 
     {% unless feature_image %}
     
@@ -229,8 +230,11 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% endif %}
 
     <script src="{{ 'app.js' | asset_url }}"></script>
-    {% comment %} Customer Header js {% endcomment %}
+    <!-- Customer Header js -->
     <script src="{{'custom-header.js' | asset_url }}"></script>
+
+    <!-- slidetoggle lib -->
+    {{ 'slidetoggle.js' | asset_url | script_tag }}
 
     {% if settings.show_multiple_currencies %}
       {% include 'currencies' %}

@@ -2,33 +2,43 @@
 
 // VARS
 const body = document.body;
-const pageContent = document.getElementById('pagecontent');
 
+// Different templates
+const pageContent = document.getElementById("pagecontent");
+const hyperVis = document.querySelector(".hypervisual__root");
 const promoBanner = document.getElementById("promoBanner");
 const promoBannerClose = document.getElementById("promoBannerClose");
+
+//  Third Party Popups
+const ribbonContainer = document.getElementById("56d9-a3be_ribbon_container");
 
 const mobHeader = document.getElementById("customHeader");
 const navToggle = document.getElementById("mobileNavToggle");
 
 const mobMenu = document.getElementById("mobileMenu");
 
-const mobMenuCategoryHeader = document.querySelectorAll(".custom-header-mobile__category");
+const mobMenuCategory = document.querySelectorAll(
+  ".custom-header-mobile__sublink"
+);
+const mobMenuCategoryHeader = document.querySelectorAll(
+  ".custom-header-mobile__category"
+);
 
 // PREVENT SCROLLING
 var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
 
-const preventDefault = (e) => {
+const preventDefault = e => {
   e = e || window.event;
   if (e.preventDefault) e.preventDefault();
   e.returnValue = false;
-}
+};
 
-const preventDefaultForScrollKeys = (e) => {
+const preventDefaultForScrollKeys = e => {
   if (keys[e.keyCode]) {
     preventDefault(e);
     return false;
   }
-}
+};
 
 const disableScroll = () => {
   if (window.addEventListener)
@@ -38,21 +48,33 @@ const disableScroll = () => {
   window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
   window.ontouchmove = preventDefault; // mobile
   document.onkeydown = preventDefaultForScrollKeys;
-}
-
+};
 
 // Height offset for mobile menu
-const addHeightOffset = (headerHeight) => {
-  pageContent.style.paddingBottom = `${headerHeight}px`;
-  pageContent.style.display = 'block';
-  // console.log('offsetted');
-}
+const addHeightOffset = headerHeight => {
+  document.body.contains(pageContent)
+    ? ((pageContent.style.paddingBottom = `${headerHeight}px`),
+      (pageContent.style.display = "block"))
+    : "";
+
+  document.body.contains(hyperVis)
+    ? (hyperVis.style.paddingTop = `${headerHeight}px`)
+    : "";
+
+  // document.body.contains(hyperVis) ? hyperVis.style.paddingTop = `${headerHeight}px` : "";
+
+  // document.body.contains(hyperVis) ? hyperVis.style.paddingTop = `${headerHeight}px` : "";
+
+  mobMenu.style.paddingTop = `${headerHeight}px`;
+
+  console.log(headerHeight);
+};
 
 const removeHeightOffset = () => {
   pageContent.style.paddingBottom = `0px`;
   pageContent.style.display = "none";
+  // mobMenu.style.paddingTop = `${headerHeight}px`;
 };
-
 
 const enableScroll = () => {
   if (window.removeEventListener)
@@ -61,48 +83,72 @@ const enableScroll = () => {
   window.onwheel = null;
   window.ontouchmove = null;
   document.onkeydown = null;
-}
+};
 
 const mobMenuToggle = () => {
-    navToggle.addEventListener('click', () => {
-        console.log('clicked');
-        mobMenu.classList.toggle("customer-header-mobile__menu--open");
-        mobHeader.classList.toggle("custom-header-mobile--open");
+  navToggle.addEventListener("click", () => {
+    console.log("clicked");
+    mobMenu.classList.toggle("custom-header-mobile__menu--open");
+    mobHeader.classList.toggle("custom-header-mobile--open");
 
-    })
-}
-const bannerClose = (msg) => {
-    promoBannerClose.addEventListener('click', () => {
-        promoBanner.classList.add(msg);
-        let headerHeightShort = mobHeader.offsetHeight;
-        addHeightOffset(headerHeightShort);
-    })
-}
 
+    // Hide Get $20 banne when mobile menu is open
+  // mobMenu.classList.contains("custom-header-mobile__menu--open")
+  //   ? (ribbonContainer.style.display = "none", console.log('sliding out'))
+  //   : (ribbonContainer.style.display = "block");
+
+  console.log(ribbonContainer);
+
+  });
+};
+
+const bannerClose = msg => {
+  promoBannerClose.addEventListener("click", () => {
+    promoBanner.classList.add(msg);
+    let headerHeightShort = mobHeader.offsetHeight;
+    addHeightOffset(headerHeightShort);
+  });
+};
 
 // Making mobile menu dropdowns work
 const subMenuDropdown = () => {
+  for (let Menu of mobMenuCategoryHeader) {
+    let subMenu = Menu.nextElementSibling;
+    let arrow = Menu.querySelector(".arrow");
 
-  for (let subMenu of mobMenuCategoryHeader){ 
-    console.log(subMenu.innerHTML);
+    // subMenu.style.display = "none";
 
+    Menu.addEventListener("click", () => {
+      arrow.classList.toggle("arrow--open");
+    });
   }
+};
 
-}
+
+
 
 // Doc Ready
 $(function() {
-    console.log("custom js loaded");
-    mobMenuToggle();
-    bannerClose("promo_banner_hide");
-    console.log(mobHeader.offsetHeight);
+  console.log("custom js loaded");
+  mobMenuToggle();
 
-    // Creating vertical window offset to compensate for fixed header
-    let headerHeight = mobHeader.offsetHeight;
-    mobHeader.classList.contains("custom-header-mobile--is-mobile") ? // body.classList.add("custom-header-mobile-offset") :
-        addHeightOffset(headerHeight) : console.log("mobheader isnt mobile");
-    // console.log(headerHeight);
+  // Enabling/Disabling scrolling
+  // mobMenu.classList.contains("customer-header-mobile__menu--open") ?
+  //     disableScroll() : enableScroll();
 
-    // Making Mobile Nav submenus works
-    subMenuDropdown();
+  bannerClose("promo_banner_hide");
+
+  // Creating vertical window offset to compensate for fixed header
+  let headerHeight = mobHeader.offsetHeight;
+  mobHeader.classList.contains("custom-header-mobile--is-mobile")
+    ? addHeightOffset(headerHeight)
+    : console.log("mobheader isnt mobile");
+
+  // Making Mobile Nav submenus works
+  subMenuDropdown();
+  $(".custom-header-mobile__category").click(function() {
+    $(this)
+      .next()
+      .slideToggle(500, "swing");
+  });
 });
