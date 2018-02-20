@@ -197,7 +197,7 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
     {% unless feature_image %}
     
-      <div class="container main content">
+      <div class="container main content {% if template == 'page.landing' %}landing-page-container{% endif%}">
     {% endunless %}
 
       {{ content_for_layout }}
