@@ -1,0 +1,226 @@
+<a name="pagecontent" id="pagecontent"></a>
+
+
+<div class="page landing-page clearfix">
+
+  <div class="landing__hero" 
+      style="background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url({{ 'PlumGorgeous_UniversityHeights_03.jpg' | asset_img_url: '1920x' }}); background-size: cover; background-position: center;">
+      <h1 class="landing__hero-title">Phat Tuesday<span class="rad">Frames</span></h1>
+  </div>
+
+    {% assign plum = all_products['plum-gorgeous'] %}
+    {% assign uni = all_products['university-heights'] %}
+
+  {% comment %} Plum {% endcomment %}
+  <div class="landing-row landing-row--plum">
+    {% assign plum_hero = 'PlumGorgeous_08.jpg' %}
+    <div class="product-hero product-hero--plum">
+      <img
+        src="{{ plum_hero | asset_img_url: '100x' }}"
+        alt="{{ plum.title }}"
+        class="lazyload blur product-hero__img"
+        data-sizes="auto"
+        data-src="{{ plum_hero | asset_img_url: '900x' }}"
+        data-srcset=" {{ plum_hero | asset_img_url: '300x' }} 300w,
+                      {{ plum_hero | asset_img_url: '400x' }} 400w,
+                      {{ plum_hero | asset_img_url: '500x' }} 500w,
+                      {{ plum_hero | asset_img_url: '600x' }} 600w,
+                      {{ plum_hero | asset_img_url: '700x' }} 700w,
+                      {{ plum_hero | asset_img_url: '800x' }} 800w,
+                      {{ plum_hero | asset_img_url: '900x' }} 900w"
+      />
+    </div>
+
+    <div class="product-info">
+      <a href="{{ plum.url }}" class="product-info__img-link">
+        <img
+          src="{{ plum.featured_image | img_url: '480x'}}"
+          alt="{{ plum.title }}"
+          class="lazyload blur product-info__img"
+          data-sizes="auto"
+          data-src="{{ plum.featured_image | product_img_url: '900x' }}"
+          data-srcset=" {{ plum.featured_image | product_img_url: '300x' }} 300w,
+                        {{ plum.featured_image | product_img_url: '400x' }} 400w,
+                        {{ plum.featured_image | product_img_url: '500x' }} 500w,
+                        {{ plum.featured_image | product_img_url: '600x' }} 600w,
+                        {{ plum.featured_image | product_img_url: '700x' }} 700w,
+                        {{ plum.featured_image | product_img_url: '800x' }} 800w,
+                        {{ plum.featured_image | product_img_url: '900x' }} 900w"
+        />
+      </a>
+      
+      <h2 class="product-info__title"><a href="{{ plum.url }}" class="product-info__title-link">{{ plum.title }}</a></h2>
+
+      {% if plum.metafields.custom_fields["product_subtitle"] != blank %}
+			    <p class="product-info__subtitle">{{ plum.metafields.custom_fields["product_subtitle"] }}</p>
+      {% endif %}
+
+      <h4 class="product-info__price">{{ plum.price | money }} {{ site.url }}</h4>
+
+      <form action="/cart/add">
+        <input type="hidden" name="id" value="{{ plum.variants.first.id }}">
+        <button type="submit" name="add" class="action_button add_to_cart product-info__add" data-label={{ add_to_cart_label | json }}>
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+
+  {% comment %} University Heights {% endcomment %}
+  <div class="landing-row landing-row--uni">
+    <div class="product-hero product-hero--uni">
+      {% assign uni_hero = 'UniversityHeights_19.jpg' %}
+    <img
+      src="{{ uni_hero | asset_img_url: '600x' }}"
+      alt="{{ uni.title }}"
+      class="lazyload blur product-hero__img"
+      data-sizes="auto"
+      data-src="{{ uni_hero | asset_img_url: '900x' }}"
+      data-srcset=" {{ uni_hero | asset_img_url: '300x' }} 300w,
+                    {{ uni_hero | asset_img_url: '400x' }} 400w,
+                    {{ uni_hero | asset_img_url: '500x' }} 500w,
+                    {{ uni_hero | asset_img_url: '600x' }} 600w,
+                    {{ uni_hero | asset_img_url: '700x' }} 700w,
+                    {{ uni_hero | asset_img_url: '800x' }} 800w,
+                    {{ uni_hero | asset_img_url: '900x' }} 900w"
+      />
+    </div>
+    
+    <div class="product-info">
+      <a href="{{ uni.url }}" class="product-info__img-link">
+        <img
+        src="{{ uni.featured_image | img_url:'100x' }}"
+        alt=""
+        class="lazyload blur product-info__img"
+        data-sizes="auto"
+          data-src="{{ uni.featured_image | product_img_url: '900x' }}"
+          data-srcset=" {{ uni.featured_image | product_img_url: '300x' }} 300w,
+                        {{ uni.featured_image | product_img_url: '400x' }} 400w,
+                        {{ uni.featured_image | product_img_url: '500x' }} 500w,
+                        {{ uni.featured_image | product_img_url: '600x' }} 600w,
+                        {{ uni.featured_image | product_img_url: '700x' }} 700w,
+                        {{ uni.featured_image | product_img_url: '800x' }} 800w,
+                        {{ uni.featured_image | product_img_url: '900x' }} 900w"
+        />
+      </a>
+
+      <h2 class="product-info__title"><a href="{{ uni.url }}" class="product-info__title-link">{{ uni.title }}</a></h2>
+
+      {% if plum.metafields.custom_fields["product_subtitle"] != blank %}
+			    <p class="product-info__subtitle">{{ plum.metafields.custom_fields["product_subtitle"] }}</p>
+      {% endif %}
+
+      <h4 class="product-info__price">{{ uni.price | money }}</h4>
+
+      <form action="/cart/add" class="product-info__form">
+        <input type="hidden" name="id" value="{{ uni.variants.first.id }}">
+        <button type="submit" name="add" class="action_button add_to_cart product-info__add" data-label={{ add_to_cart_label | json }}>
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  {% comment %} Photo Grid {% endcomment %}
+  {% assign uni_alt = 'Benders Univeristy Height Sunglasses' %}
+  {% assign plum_alt = 'Benders Plum Gorgeous Sunglasses' %}
+  {% assign both_alt = 'Benders Plum Gorgeous and University Heights Sunglasses' %}
+
+  <div class="landing-gallery">
+    <img
+      src="{{ 'UniversityHeights_10.jpg' | asset_img_url: '100x' }}"
+      alt="{{ uni_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'UniversityHeights_10.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'UniversityHeights_10.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'UniversityHeights_10.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'UniversityHeights_10.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'UniversityHeights_10.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'UniversityHeights_10.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'UniversityHeights_10.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'UniversityHeights_10.jpg' | asset_img_url: '900x' }} 900w"
+    />
+    <img
+      src="{{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'PlumGorgeous_UniversityHeights_20.jpg' | asset_img_url: '900x' }} 900w"
+    />
+    <img
+      src="{{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'PlumGorgeous_UniversityHeights_11.jpg' | asset_img_url: '900x' }} 900w"
+    />
+    <img
+      src="{{ 'PlumGorgeous_03.jpg' | asset_img_url: '100x' }}"
+      alt="{{ plum_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'PlumGorgeous_03.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'PlumGorgeous_03.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'PlumGorgeous_03.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'PlumGorgeous_03.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'PlumGorgeous_03.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'PlumGorgeous_03.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'PlumGorgeous_03.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'PlumGorgeous_03.jpg' | asset_img_url: '900x' }} 900w"
+    />
+    <img
+      src="{{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'PlumGorgeous_UniversityHeights_15.jpg' | asset_img_url: '900x' }} 900w"
+    />
+    <img
+      src="{{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'PlumGorgeous_UniversityHeights_04.jpg' | asset_img_url: '900x' }} 900w"
+    />
+    <hr class="landing-hr">
+  </div>
+
+  {% comment %} Footer Banner {% endcomment %}
+  <div class="landing-cta" style="background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ 'landing-footer-2.jpg' | asset_img_url: '1920x' }}); background-size: cover; background-position: center;">
+    <h2 class="landing-cta__title">Shop The Full Collection</h2>
+    <a href="{{shop.url}}/collections/north-park-blenders-eyewear" class="btn landing-cta__btn">Check 'Em Out</a>
+  </div>
+
+</div>
