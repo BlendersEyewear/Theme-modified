@@ -3,7 +3,8 @@
 
 <div class="page landing-page clearfix">
 
-  <div class="landing__hero" style="background-image: url({{ 'PlumGorgeous_UniversityHeights_03.jpg' | asset_img_url: '600x' }});">
+  <div class="landing__hero" 
+      style="background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url({{ 'PlumGorgeous_UniversityHeights_03.jpg' | asset_img_url: '1920x' }}); background-size: cover; background-position: center;">
       <h1 class="landing__hero-title">Phat Tuesday<span class="rad">Frames</span></h1>
   </div>
 
@@ -57,6 +58,7 @@
       <h4 class="product-info__price">{{ plum.price | money }} {{ site.url }}</h4>
 
       <form action="/cart/add">
+        <input type="hidden" name="id" value="{{ plum.variants.first.id }}">
         <button type="submit" name="add" class="action_button add_to_cart product-info__add" data-label={{ add_to_cart_label | json }}>
           {{ 'products.product.add_to_cart' | t }}
         </button>
@@ -113,6 +115,7 @@
       <h4 class="product-info__price">{{ uni.price | money }}</h4>
 
       <form action="/cart/add" class="product-info__form">
+        <input type="hidden" name="id" value="{{ uni.variants.first.id }}">
         <button type="submit" name="add" class="action_button add_to_cart product-info__add" data-label={{ add_to_cart_label | json }}>
           {{ 'products.product.add_to_cart' | t }}
         </button>
@@ -215,10 +218,9 @@
   </div>
 
   {% comment %} Footer Banner {% endcomment %}
-  <div class="landing-cta" style="background-image: url({{ 'UniversityHeights_landing-page-footer.jpg' | asset_img_url: '600x' }});">
-    <h2 class="landing-cta__title">See The Complete North Park Collection</h2>
+  <div class="landing-cta" style="background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({{ 'landing-footer-2.jpg' | asset_img_url: '1920x' }}); background-size: cover; background-position: center;">
+    <h2 class="landing-cta__title">Shop The Full Collection</h2>
     <a href="{{shop.url}}/collections/north-park-blenders-eyewear" class="btn landing-cta__btn">Check 'Em Out</a>
   </div>
-  {% comment %} Scroll to Top {% endcomment %}
-  <div id="landingScroll" class="landing-scroll-Top">Back to Top</div>
+
 </div>
