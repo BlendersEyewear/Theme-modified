@@ -8969,8 +8969,9 @@ $transparent: rgba(0,0,0,0.0);
     }
     &:nth-child(5){
       height: 390px;
-      -o-object-position: 0 -24rem;
-         object-position: 0 -24rem; 
+      max-width: 58%;
+      -o-object-position: 0 -23rem;
+         object-position: 0 -23rem; 
     }
     &:nth-child(6){
       max-width: 35%;
