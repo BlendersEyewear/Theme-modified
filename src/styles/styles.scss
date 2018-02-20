@@ -8722,14 +8722,14 @@ $transparent: rgba(0,0,0,0.0);
     }
     &:nth-child(5){
       padding: 0;
-      max-width: 65%;
+      max-width: 60%;
       -webkit-box-flex: 50%;
           -ms-flex: 50%;
               flex: 50%;
       max-height: none;
       height: 160px;
-      -o-object-position: 0rem -9.5rem;
-         object-position: 0rem -9.5rem;
+      -o-object-position: 0rem -2.5rem;
+         object-position: 0rem -2.5em;
     }
     &:nth-child(6){
       padding: 0 1rem;
@@ -8851,8 +8851,8 @@ $transparent: rgba(0,0,0,0.0);
 
       &:nth-child(5){
         height: 190px;
-        -o-object-position: 0rem -15rem;
-           object-position: 0rem -15rem;
+        -o-object-position: 0rem -6.5rem;
+           object-position: 0rem -6.5rem;
       }
     }
 
@@ -8970,8 +8970,8 @@ $transparent: rgba(0,0,0,0.0);
     &:nth-child(5){
       height: 390px;
       max-width: 58%;
-      -o-object-position: 0 -23rem;
-         object-position: 0 -23rem; 
+      -o-object-position: 0 -8rem;
+         object-position: 0 -8rem; 
     }
     &:nth-child(6){
       max-width: 35%;
