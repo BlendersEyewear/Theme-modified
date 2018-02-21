@@ -8457,9 +8457,23 @@ $color-background-light: #F7F9FA;
 $btnColor: lightgray;
 
 $headerTabletUp: 620px;
+$headerDesktopUp: 960px;
 
 
-#customHeader{
+// CUSTOM HEADER Mixins --------------------
+
+@mixin mobMenuLink($color, $background){
+  display: block;
+  color: $color;
+  background: white;
+  transition: all .15s ease-in-out;
+
+  &:hover, &:focus{
+    background: $background;
+  }
+}
+
+#customHeaderMobile{
   .cart_count{
     position: static !important;
   }
@@ -8479,6 +8493,10 @@ $headerTabletUp: 620px;
   position: relative;
 
   // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+  @media screen and (min-width: $headerDesktopUp){
+    display: none;
+  }
 }
 
 .custom-header-mobile--is-mobile{
@@ -8596,13 +8614,13 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
 }
 
 
-// Menu Container
+// Mobil Menu Container
 .custom-header-mobile__section--menu{
   justify-content: flex-start;
 }
 
 
-// Menu Button
+// Mobile Menu Button
 .custom-header-mobile__menu-toggle {
   background: $btnColor;
   padding: .5px 10px;
@@ -8715,22 +8733,6 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
   padding: 0 1rem;
   margin: 0;
 
-}
-
-
-
-
-// CUSTOM HEADER Mixins --------------------
-
-@mixin mobMenuLink($color, $background){
-  display: block;
-  color: $color;
-  background: white;
-  transition: all .15s ease-in-out;
-
-  &:hover, &:focus{
-    background: $background;
-  }
 }
 
 .custom-header-mobile__category, .custom-header-mobile__link{
@@ -8876,6 +8878,10 @@ a.custom-header-mobile__refer{
   }
 
 }
+
+// ========================================
+// Custom Desktop Header
+// ========================================
 
 
 // ========================================
