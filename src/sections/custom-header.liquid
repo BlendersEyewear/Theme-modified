@@ -149,11 +149,63 @@
     </div>
 </header>
 
+<header id="customHeader" class="custom-header-desktop">
+  {% if section.settings.promo_text != blank %}
+      <div id="promoBanner" class="promo_banner custom-header-mobile__promo">
+          {{ section.settings.promo_text }}
+          <div id="promoBannerClose" class="promo_banner-close"></div>
+      </div>
+  {% endif %}
+
+  <div class="custom-header-desktop__top-banner">
+    <div class="custom-header-desktop__phone">
+      {% if section.settings.phone_number != '' %}
+        {{ section.settings.phone_number }}
+      {% endif %}
+    </div>
+
+    <div class="custom-header-desktop__account-links">
+
+      {% if shop.customer_accounts_enabled %}
+
+        {% if customer %}
+
+          <div data-no-instant class="custom-header-desktop__top-banner-link">
+          <a href="/account" data-no-instant>Yo, {{ customer.name }}!</a>
+          <span data-no-instant>
+          {{ section.settings.customer_log_out_text  | customer_logout_link }}
+          </span>
+          </div>
+
+        {% else %}
+
+          <div data-no-instant class="custom-header-desktop__top-banner-link">
+            {{ section.settings.customer_log_in_text | customer_login_link }}
+          </div>
+
+        {% endif %} {% comment %} endif customer {% endcomment %}
+
+      {% endif %} {% comment %} endif accounts enables {% endcomment %}
+
+      {% if settings.show_multiple_currencies %}
+
+        <div data-no-instant class="custom-header-desktop__top-banner-link custom-header-desktop__currency">
+          {% include 'currencies-switcher' %}
+        </div>
+
+      {% endif %}
+
+    </div>
+
+  </div>
+</header>
+
 {% comment %} Tablet Nav {% endcomment %}
 
 {% comment %} Desktop Nav {% endcomment %}
 
 {% comment %} Schema tags - {% endcomment %}
+
 {% schema %}
 {
   "name": "Header",
