@@ -8641,14 +8641,14 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
 .custom-header-logo--mobile{
   display: block;
   max-height: 4rem;
+
+  @media screen and (min-width: $headerTabletUp){
+    max-height: 2.5rem;  
+  }
 }
 
 .custom-header-logo--large{
   display: none;
-}
-
-@media screen and (min-width: $headerTabletUp){
-
 }
 
 .custom-header-mobile__cart{
@@ -8875,4 +8875,23 @@ a.custom-header-mobile__refer{
     box-shadow: inset -1px 0 0 0 $color-light;
   }
 
+}
+
+
+// ========================================
+// Different Page templates
+// ========================================
+.page-retail, .page-no-title{
+  .container.main.content{
+    padding: 0;
+  }
+}
+
+.blog {
+  .collection_banner{
+    margin-bottom: 0 !important;
+  }
+  .collection_banner_img{
+    position: static;
+  }
 }

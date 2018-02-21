@@ -6,6 +6,9 @@ const body = document.body;
 // Different templates
 const pageContent = document.getElementById("pagecontent");
 const hyperVis = document.querySelector(".hypervisual__root");
+const pageRetail = document.querySelector(".page-retail");
+
+// Header
 const promoBanner = document.getElementById("promoBanner");
 const promoBannerClose = document.getElementById("promoBannerClose");
 
@@ -61,8 +64,19 @@ const addHeightOffset = headerHeight => {
     ? (hyperVis.style.paddingTop = `${headerHeight}px`)
     : "";
 
-  // document.body.contains(hyperVis) ? hyperVis.style.paddingTop = `${headerHeight}px` : "";
+  document.body.contains(pageContent) && document.body.contains(hyperVis)
+    ? (hyperVis.style.paddingTop = `0px`)
+    : "";
 
+  document.body.classList.contains("page-retail") ||
+  document.body.classList.contains("blog")
+    ? (body.style.paddingTop = `${headerHeight}px`)
+    : "";
+
+  document.body.classList.contains("blog")
+    ? ((pageContent.style.paddingBottom = 0),
+      (pageContent.style.display = "none"))
+    : "";
   // document.body.contains(hyperVis) ? hyperVis.style.paddingTop = `${headerHeight}px` : "";
 
   mobMenu.style.paddingTop = `${headerHeight}px`;
@@ -91,14 +105,10 @@ const mobMenuToggle = () => {
     mobMenu.classList.toggle("custom-header-mobile__menu--open");
     mobHeader.classList.toggle("custom-header-mobile--open");
 
-
     // Hide Get $20 banne when mobile menu is open
-  // mobMenu.classList.contains("custom-header-mobile__menu--open")
-  //   ? (ribbonContainer.style.display = "none", console.log('sliding out'))
-  //   : (ribbonContainer.style.display = "block");
-
-  console.log(ribbonContainer);
-
+    // mobMenu.classList.contains("custom-header-mobile__menu--open")
+    //   ? (ribbonContainer.style.display = "none", console.log('sliding out'))
+    //   : (ribbonContainer.style.display = "block");
   });
 };
 
@@ -124,9 +134,6 @@ const subMenuDropdown = () => {
   }
 };
 
-
-
-
 // Doc Ready
 $(function() {
   console.log("custom js loaded");
@@ -149,6 +156,6 @@ $(function() {
   $(".custom-header-mobile__category").click(function() {
     $(this)
       .next()
-      .slideToggle(500, "swing");
+      .slideToggle(250, "swing");
   });
 });

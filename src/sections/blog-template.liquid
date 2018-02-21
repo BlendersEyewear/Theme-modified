@@ -1,5 +1,5 @@
 {% if section.settings.image != nil %}
-  <header class="banner collection_banner center page_banner dark-overlay-{{ section.settings.image_darken }}">
+  <header class="banner collection_banner collection_banner--has-image center page_banner dark-overlay-{{ section.settings.image_darken }}">
     <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
     <img  src="{{ section.settings.image | img_url: '100x' }}"
           alt="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt }}{% else %}{{ blog.title | escape }}{% endif %}"
