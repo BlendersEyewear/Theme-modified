@@ -11,7 +11,11 @@
         {% endif %}
 
         <div class="custom-header-mobile__section custom-header-mobile__section--menu">
-            <button id="mobileNavToggle" class="custom-header-mobile__menu-toggle">Menu</button>
+            <button id="mobileNavToggle" class="custom-header-mobile__menu-toggle">
+              <span class="menu-toggle-bar"></span>
+              <span class="menu-toggle-bar"></span>
+              <span class="menu-toggle-bar"></span>
+            </button>
         </div>
 
         <div class="custom-header-mobile__section custom-header-mobile__section--logo">
@@ -31,7 +35,7 @@
 
         <div class="custom-header-mobile__section custom-header-mobile__section--cart">
             {% if section.settings.show_cart %}
-                <a href="/cart" class="icon-cart mini_cart dropdown_link custom-header-mobile__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{{ cart.item_count }}</span></a>
+                <a href="/cart" class="dropdown_link custom-header-mobile__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant><img src="{{ 'cart.svg' | asset_url }}" alt="blenders cart icon" class="custom-header-mobile__cart-icon"> <span class="cart_count custom-header-mobile__cart-count">{{ cart.item_count }}</span></a>
             {% endif %}
         </div>
     </div>
@@ -57,14 +61,18 @@
         <ul class="custom-header-mobile__list">
         {% for link in linklists.mobile-menu.links %}
 
-            {% if link.links == blank %}
+            {%if link.handle == 'snow-goggles' %}
+
+              <li class="custom-header-mobile__link custom-header-mobile__link--icon"><a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" alt="snow goggles icon" class="mobile-category-icon">{{ link.title }}</a></li>
+            
+            {% elsif link.links == blank %}
 
                 <li class="custom-header-mobile__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
 
             {% elsif link.handle == "sunglasses" %}
 
                 <li class="custom-header-mobile__sublink custom-header-mobile__sublink--icon">
-                    <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }}<span class="right icon-down-arrow arrow"></span></p>
+                    <p class="custom-header-mobile__category custom-header-mobile__category--icon" data-no-instant href="{{ link.url }}"><img src="{{'icon-sunglasses.svg' | asset_url}}" alt="sunglasses icon" class="mobile-category-icon">{{ link.title }}<span class="right icon-down-arrow arrow"></span></p>
                     <ul class="submenu nst-content">
                       {% for link in linklists[link.handle].links %}
                         <li><a {%if link.active %}class="active"{% endif %}} href="{{ link.url }}">{{ link.title }}</a></li>
@@ -142,7 +150,7 @@
           
           {% if settings.show_multiple_currencies %}
             <div data-no-instant class="mobile-bottom-nav__item">
-              {% include 'currencies-switcher' %}
+              {% include 'currencies-switcher-new' %}
             </div>
           {% endif %}
         </div>
@@ -231,20 +239,27 @@
       </a>
 
       {% comment %} MENU {% endcomment %}
-
       <div class="custom-header-desktop__menu">
 
         {% for link in linklists.mobile-menu.links %}
 
-            {% if link.links == blank %}
+            {%if link.handle == 'snow-goggles' %}
+              <li class="custom-header-desktop__link custom-header-desktop__link--icon custom-header-desktop__link--snow">
+                <a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders {{ link.title }} Icon" />{{ link.title }}</a>
+              </li>
+
+
+            {% elsif link.links == blank %}
 
                 <li class="custom-header-desktop__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
 
+
+            {% comment %} If Sunglasses {% endcomment %}
             {% elsif link.handle == "sunglasses" %}
 
                 <li class="custom-header-desktop__sublink custom-header-desktop__sublink--collection custom-header-desktop__sublink--icon">
 
-                    <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{{link.title}} <span class="right icon-down-arrow arrow"></span></p>
+                    <p class="custom-header-desktop__category custom-header-desktop__category--icon custom-header-desktop__category--sunglasses" data-no-instant href="{{ link.url }}"><img src="{{'icon-sunglasses.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders Sunglasses Icon" /> {{link.title}} <img class="custom-header__menu-arrow custom-header__menu-arrow--sunglasses" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></span></p>
                     
                     <ul class="submenu custom-header-desktop__submenu custom-header-desktop__submenu--collection">
 
@@ -257,7 +272,21 @@
 
                             {%if link.object.image %}
 
-                              <img src="{{ link.object.image | img_url: 'medium'}}" alt="{{shop.title}} {{link.title}}" class="submenu__img">
+                              <img
+                                src="{{ link.object.image | img_url: '200x'}}"
+                                alt="{{shop.title}} {{link.title}}"
+                                class="lazyload blur submenu__img"
+                                data-sizes="auto"
+                                data-src="{{ link.object.image | img_url: '900x' }}"
+                                data-srcset=" {{ link.object.image | img_url: '300x' }} 300w,
+                                              {{ link.object.image | img_url: '400x' }} 400w,
+                                              {{ link.object.image | img_url: '500x' }} 500w,
+                                              {{ link.object.image | img_url: '600x' }} 600w,
+                                              {{ link.object.image | img_url: '700x' }} 700w,
+                                              {{ link.object.image | img_url: '800x' }} 800w,
+                                              {{ link.object.image | img_url: '900x' }} 900w"
+                                
+                                />
 
                               <span class="submenu__title">{{link.title}}</span>
 
@@ -274,10 +303,10 @@
 
                 </li>
 
-            {% else %}
+            {% else %} {% comment %} if not sunglasses  {% endcomment %}
 
                 <li class="sublink custom-header-desktop__sublink">
-                  <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
+                  <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{% if link.handle == "snow-goggles" %}<img src="" alt="" />{% endif%}{{ link.title }} <img class="custom-header__menu-arrow" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></p>
                   <ul class="submenu custom-header-desktop__submenu">
 
                       {% for link in linklists[link.handle].links %}
@@ -289,7 +318,7 @@
                           {% else %}
 
                           <li class="sublink custom-header-desktop__sublink nst-toggle">
-                              <p class="custom-header-desktop__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
+                              <p class="custom-header-desktop__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <img class="custom-header__menu-arrow" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></p>
                               <ul>
                               {% for link in linklists[link.handle].links %}
                                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -306,10 +335,11 @@
 
         {% endfor %}
 
-      </div>{% comment %} End Menu {% endcomment %}
 
-      {% comment %} Freindbuy Refer {% endcomment %}
-      <a href="" class="Friendbuy custom-header-desktop__refer">Get $20 Off!</a>
+        {% comment %} Freindbuy Refer {% endcomment %}
+        <a href="" class="Friendbuy custom-header-desktop__refer">Get $20 Off!</a>
+
+      </div>{% comment %} End Menu {% endcomment %}
 
       {% comment %} SEARCH  {% endcomment %}
 
@@ -318,7 +348,7 @@
           {% if settings.search_option != 'everything' %}
             <input type="hidden" name="type" value="product"/>
           {% endif %}
-          <span class="icon-search search-submit"></span>
+          <span class="search-submit custom-header-desktop__search-submit"><img src="{{'icon-search-white.svg' | asset_url }}" alt="search"></span>
           <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" autocapitalize="off" autocomplete="off" autocorrect="off" class="custom-header-desktop__search-input" />
         </form>
       </div>

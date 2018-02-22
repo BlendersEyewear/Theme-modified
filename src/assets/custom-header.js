@@ -15,7 +15,7 @@ const promoBannerClose = document.getElementById("promoBannerClose");
 //  Third Party Popups
 const ribbonContainer = document.getElementById("56d9-a3be_ribbon_container");
 
-const mobHeader = document.getElementById("customHeader");
+const mobHeader = document.getElementById("customHeaderMobile");
 const navToggle = document.getElementById("mobileNavToggle");
 
 const mobMenu = document.getElementById("mobileMenu");
@@ -102,6 +102,7 @@ const enableScroll = () => {
 const mobMenuToggle = () => {
   navToggle.addEventListener("click", () => {
     console.log("clicked");
+    navToggle.classList.toggle("custom-header-mobile__menu-toggle--open");
     mobMenu.classList.toggle("custom-header-mobile__menu--open");
     mobHeader.classList.toggle("custom-header-mobile--open");
 
@@ -159,3 +160,7 @@ $(function() {
       .slideToggle(250, "swing");
   });
 });
+
+// TO ADD
+//  - Search submit on desktop
+// - Press enter to search sumbit on desktop

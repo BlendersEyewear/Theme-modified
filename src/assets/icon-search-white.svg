@@ -1,0 +1,17 @@
+<svg width="32" height="32" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>icon-search-white</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(453 32)">
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M -453 -32L -421 -32L -421 0L -453 0L -453 -32Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="icon-search-white" clip-path="url(#clip-0)">
+<g id="icon-search">
+<use xlink:href="#path0_fill" transform="translate(-453 -32)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 23 12.5C 23 18.299 18.299 23 12.5 23C 6.70102 23 2 18.299 2 12.5C 2 6.70101 6.70102 2 12.5 2C 18.299 2 23 6.70101 23 12.5ZM 20.6036 22.0178C 18.4214 23.8775 15.5918 25 12.5 25C 5.59644 25 0 19.4036 0 12.5C 0 5.59644 5.59644 0 12.5 0C 19.4036 0 25 5.59644 25 12.5C 25 15.5918 23.8775 18.4214 22.0178 20.6036L 31.7071 30.2929L 30.2929 31.7071L 20.6036 22.0178Z"/>
+</defs>
+</svg>
