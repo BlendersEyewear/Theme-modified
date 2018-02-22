@@ -41,8 +41,11 @@ Description: Shopify Theme (https://www.shopify.com/?ref=out-of-the-sandbox)
   #Home page - image with text overlay
   #Home page - video
   #Font-Face
-  # /* Custom Styles */
-
+  #Custom Styles
+  #Bug Fixes
+  
+  */
+  
 /* #Mixins
 ================================================== */
 @mixin background-opacity($color, $opacity: 0.5) {
@@ -8598,11 +8601,12 @@ $btnColor: lightgray;
 
 $headerTabletUp: 620px;
 $headerDesktopUp: 960px;
+$headerDesktopLargeUp: 1200px;
 
 
 // CUSTOM HEADER Mixins --------------------
 
-@mixin mobMenuLink($color, $background){
+@mixin DropdownMenuLink($color, $background){
   display: block;
   color: $color;
   background: white;
@@ -8683,9 +8687,10 @@ $headerDesktopUp: 960px;
 
 }
 
-.custom-header-mobile__promo{
+.custom-header-mobile__promo, .custom-header-desktop__promo{
   width: 100%;
   flex: 100%;
+  @include flex(100%);
   height: auto;
 
   .promo_banner-close:after{
@@ -8907,7 +8912,7 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
         // display: block;
         // color: black;
         padding: 16px 40px;
-        @include mobMenuLink(black, $color-light);
+        @include DropdownMenuLink(black, $color-light);
         font-size: 0.875rem;
         letter-spacing: 2px;
         line-height: 1rem;
@@ -8927,14 +8932,14 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
 
   a {
     padding: $mobItemPadding;
-    @include mobMenuLink(black, $color-light);
+    @include DropdownMenuLink(black, $color-light);
   }
 }
 
 p.custom-header-mobile__category{
   margin: 0;
   padding: $mobItemPadding;
-  @include mobMenuLink(black, $color-light);
+  @include DropdownMenuLink(black, $color-light);
   clear: both;
 
   .arrow{
@@ -9030,13 +9035,245 @@ a.custom-header-mobile__refer{
   }
 }
 
-.customer-header-desktop__top-banner{
-  font-size: 1rem;
+.custom-header-desktop__top-banner{
+  // background: lightblue;
+  font-size: 0.825rem
+}
+
+.custom-header-desktop__container{
+  // background: lightblue;
+  background: #fff;
   @include flexbox();
   @include flex-flow(row nowrap);
   @include justify-content(space-between);
   @include align-items(center);
+  padding: 0 10px !important;
+
+  position: relative;
+
+  &:after{
+    content: none;
+    display: none;
+  }
 }
+
+.custom-header-desktop__container--flex-start{
+  @include justify-content(flex-start);
+
+}
+
+
+.custom-header-desktop__account-links{
+  @include flexbox();
+  @include flex-flow(row nowrap);
+  @include justify-content(flex-end);
+  @include align-items(center);
+}
+
+.custom-header-desktop__logo{
+  max-width: 10rem;
+  height: auto;
+  display: block;
+}
+
+.custom-header-desktop__nav-container{
+  position: relative;
+}
+
+.custom-header-desktop__menu{
+  list-style: none;
+  font-size: 1rem;
+  margin-left: 1rem;
+  @include flex(1);
+  position: relative;
+
+  @media screen and (min-width: $headerDesktopLargeUp){
+    background: #bada55;
+    margin-left: 3rem;
+  }
+}
+
+.custom-header-desktop__link, .custom-header-desktop__sublink{
+  display: inline-block;
+}
+
+.custom-header-desktop__link > a{
+  display: block;
+  &:hover{
+    color: black;
+  }
+}
+
+.custom-header-desktop__link > a, .custom-header-desktop__sublink{
+  transition: all .15s ease-in-out;
+  padding: .5rem .75rem;
+
+  &:hover{
+    box-shadow: inset 0 -2px 0 0 black;
+  }
+
+  @media screen and (min-width: $headerDesktopLargeUp){
+    padding: .5rem 1rem;
+  }
+}
+
+.custom-header-desktop__sublink{
+  position: relative;
+
+  .submenu{
+    max-height: none;
+  }
+  &:hover, &:focus{
+    .custom-header-desktop__submenu{
+      display:block;  
+      max-height: initial;
+      transition: all .35s ease-in-out;
+      opacity: 1;
+    }
+  }
+}
+
+.custom-header-desktop__sublink--collection{
+  position: static;
+}
+
+.custom-header-desktop__category{
+  margin: 0;
+}
+
+.custom-header-desktop__submenu{
+  position: absolute;
+  z-index: 999;
+  background: white;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  max-width: none;
+  max-height: fit-content;
+  left: 0;
+  top: 100%;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12),
+              0 1px 2px rgba(0,0,0,0.24);
+
+  display: none;
+
+  & > li {
+    margin: 0;
+  }
+
+  & > li > a {
+    display: block;
+    padding: 1rem;
+    width: 15rem;
+    line-height: 1;
+    @include DropdownMenuLink(black, $color-light);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+}
+
+.custom-header-desktop__submenu--collection{
+  width: 100%;
+  @include flexbox();
+  @include flex-flow(row wrap);
+  @include flex-wrap(wrap);
+  @include align-items(stretch);
+  @include justify-content(flex-start);
+
+  display: block;
+
+  & > li {
+    max-width: 33.333%;
+    @include flex(33.333%);
+  }
+
+  & > li > a{
+    width: 100%;
+    // @include flexbox();
+    // @include flex-direction(column);
+    // @include align-items(stretch);
+    // @include justify-content(flex-start);
+  }
+}
+
+.submenu__img{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto .5rem;
+}
+
+.submenu__title{
+  display: block;
+  text-align: center;
+  font-size: .75rem;
+  margin-top: auto;
+}
+
+a.custom-header-desktop__refer{
+  display: inline-block;
+  color: white;
+  background: $color-accent-secondary;
+  max-width: 20rem;
+  text-align: center;
+  margin: 0 1rem;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 600;
+  width: fit-content;
+  padding: .35rem .75rem;
+  -webkit-clip-path: polygon(8% 0, 100% 0%, 87% 100%, 3% 100%);
+  clip-path: polygon(4% 0, 100% 0%, 96% 100%, 0% 100%);
+  transition: all .15s ease-in-out;
+
+  &:hover, &:focus{
+    background: lighten($color-accent-secondary, 3%);
+  }
+}
+
+.custom-header-desktop__search{
+  margin-left: auto;
+  
+  .search-submit{
+    position: static;
+    font-size: 1;
+
+    &:before{
+      background: lightgray;
+      padding: .5rem .125rem;
+      transform: translateY(6px);
+    }
+  }
+}
+
+.custom-header-desktop__search-form{
+    @include flexbox();
+    @include flex-direction(row);
+    @include align-items(stretch);
+    margin: 0;
+}
+
+input.custom-header-desktop__search-input{
+  order: -1;
+
+  border: none;
+  background: $color-background-light;
+  padding: .25rem;
+  font-weight: 500;
+  font-size: 14px;
+  padding: .25rem .5rem .375rem;
+  color: black;
+  margin-bottom: 0;
+  min-height: none;
+
+  &:focus{
+    border: none;
+    box-shadow: inset 0 0 0 1px $color-light;
+  }
+}
+
 
 // ========================================
 // Different Page templates
@@ -9055,3 +9292,14 @@ a.custom-header-mobile__refer{
     position: static;
   }
 }
+
+
+// ========================================
+// Bug Fixes
+// ========================================
+
+  .quick_shops.desktop {
+    #shopmessage-checkbox{
+    	display: none !important;
+    }
+  }

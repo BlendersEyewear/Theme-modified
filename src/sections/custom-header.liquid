@@ -149,16 +149,22 @@
     </div>
 </header>
 
-<header id="customHeader" class="custom-header-desktop">
+
+{% comment %} Desktop Nav {% endcomment %}
+<header id="customHeaderDesktop" class="custom-header-desktop">
+
+  {% comment %} Top Promo Banner {% endcomment %}
   {% if section.settings.promo_text != blank %}
-      <div id="promoBanner" class="promo_banner custom-header-mobile__promo">
+      <div id="promoBanner" class="promo_banner custom-header-desktop__promo">
           {{ section.settings.promo_text }}
           <div id="promoBannerClose" class="promo_banner-close"></div>
       </div>
   {% endif %}
 
+  {% comment %}  Top Banner  {% endcomment %}
   <div class="custom-header-desktop__top-banner">
-    <div class="custom-header-desktop__phone">
+    <div class="container promotions-grid-full_width custom-header-desktop__container">
+      <div class="custom-header-desktop__phone">
       {% if section.settings.phone_number != '' %}
         {{ section.settings.phone_number }}
       {% endif %}
@@ -166,6 +172,7 @@
 
     <div class="custom-header-desktop__account-links">
 
+      {% comment %} Login / Account {% endcomment %}
       {% if shop.customer_accounts_enabled %}
 
         {% if customer %}
@@ -187,6 +194,7 @@
 
       {% endif %} {% comment %} endif accounts enables {% endcomment %}
 
+      {% comment %} Currency Switcher {% endcomment %}
       {% if settings.show_multiple_currencies %}
 
         <div data-no-instant class="custom-header-desktop__top-banner-link custom-header-desktop__currency">
@@ -195,14 +203,131 @@
 
       {% endif %}
 
+      {% comment %} Cart {% endcomment %}
+      {% if section.settings.show_cart %}
+        <div class="custom-header-desktop__top-banner-link custom-header-desktop__cart">
+          <a href="/cart" class="icon-cart mini_cart dropdown_link custom-header-mobile__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{{ cart.item_count }}</span></a>
+        </div>
+      {% endif %}
+
     </div>
-
+    </div>
   </div>
+
+  {% comment %} Main Header {% endcomment %}
+  <div id="mainNavDesktop" class="custom-header-desktop__nav">
+    <div class="container promotions-grid-full_width custom-header-desktop__nav-container custom-header-desktop__container custom-header-desktop__container--flex-start">
+
+      {% comment %} LOGO {% endcomment %}
+      <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="custom-header-desktop__logo">
+
+        {% if section.settings.logo != nil %}
+            <img src="{{ section.settings.mobile_logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
+        {% elsif section.settings.mobile_logo != nil %}
+            <img src="{{ section.settings.logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      </a>
+
+      {% comment %} MENU {% endcomment %}
+
+      <div class="custom-header-desktop__menu">
+
+        {% for link in linklists.mobile-menu.links %}
+
+            {% if link.links == blank %}
+
+                <li class="custom-header-desktop__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+            {% elsif link.handle == "sunglasses" %}
+
+                <li class="custom-header-desktop__sublink custom-header-desktop__sublink--collection custom-header-desktop__sublink--icon">
+
+                    <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{{link.title}} <span class="right icon-down-arrow arrow"></span></p>
+                    
+                    <ul class="submenu custom-header-desktop__submenu custom-header-desktop__submenu--collection">
+
+                      {% for link in linklists[link.handle].links %}
+
+                        <li>
+                          <a {%if link.active %}class="active"{% endif %} href="{{ link.url }}">
+
+                          {{link.image | image_url: 'medium'}}
+
+                            {%if link.object.image %}
+
+                              <img src="{{ link.object.image | img_url: 'medium'}}" alt="{{shop.title}} {{link.title}}" class="submenu__img">
+
+                              <span class="submenu__title">{{link.title}}</span>
+
+                            {% else%}
+                              {{link.title}}
+                            {% endif %}
+
+                          </a>
+                        
+                        </li>
+
+                      {% endfor %}
+                    </ul>
+
+                </li>
+
+            {% else %}
+
+                <li class="sublink custom-header-desktop__sublink">
+                  <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
+                  <ul class="submenu custom-header-desktop__submenu">
+
+                      {% for link in linklists[link.handle].links %}
+
+                          {% if linklists[link.handle] == empty %}
+
+                              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+                          {% else %}
+
+                          <li class="sublink custom-header-desktop__sublink nst-toggle">
+                              <p class="custom-header-desktop__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
+                              <ul>
+                              {% for link in linklists[link.handle].links %}
+                                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                              {% endfor %}
+                              </ul>
+                          </li>
+                          {% endif %}
+
+                      {% endfor %}
+                  </ul>
+                </li>
+
+            {% endif %}
+
+        {% endfor %}
+
+      </div>{% comment %} End Menu {% endcomment %}
+
+      {% comment %} Freindbuy Refer {% endcomment %}
+      <a href="" class="Friendbuy custom-header-desktop__refer">Get $20 Off!</a>
+
+      {% comment %} SEARCH  {% endcomment %}
+
+      <div class="custom-header-desktop__search" data-dropdown="search">
+        <form action="/search" class="custom-header-desktop__search-form">
+          {% if settings.search_option != 'everything' %}
+            <input type="hidden" name="type" value="product"/>
+          {% endif %}
+          <span class="icon-search search-submit"></span>
+          <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" autocapitalize="off" autocomplete="off" autocorrect="off" class="custom-header-desktop__search-input" />
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+
 </header>
-
-{% comment %} Tablet Nav {% endcomment %}
-
-{% comment %} Desktop Nav {% endcomment %}
 
 {% comment %} Schema tags - {% endcomment %}
 
