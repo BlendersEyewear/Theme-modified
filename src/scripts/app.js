@@ -973,11 +973,15 @@ var header = {
 
       var closeMiniCart = function closeMiniCart() {
         $('body').removeClass('is-active');
-        $('.dropdown_link').toggleClass('active_link');
+        if ($('.dropdown_link').hasClass('active_link')) {
+            $('.dropdown_link').removeClass('active_link');
+        }
+        // $('.dropdown_link').toggleClass('active_link');
         $('.cart_container').removeClass('active_link');
       };
 
       var openMiniCart = function openMiniCart($cart_container) {
+        // $("#mobileMenu").removeClass("custom-header-mobile__menu--open"); // Added by Adam - for new header
         $('.mobile_nav div').removeClass('open');
         $('.dropdown_link').removeClass('active_link');
         $cart_container.addClass('active_link');

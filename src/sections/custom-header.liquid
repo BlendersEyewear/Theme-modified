@@ -18,6 +18,8 @@
             </button>
         </div>
 
+
+        {% comment %} LOGO {% endcomment %}
         <div class="custom-header-mobile__section custom-header-mobile__section--logo">
 
             <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="custom-header-mobile__logo logo">
@@ -33,10 +35,104 @@
 
         </div>
 
+        {% comment %} CART {% endcomment %}
         <div class="custom-header-mobile__section custom-header-mobile__section--cart">
+
             {% if section.settings.show_cart %}
-                <a href="/cart" class="dropdown_link custom-header-mobile__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant><img src="{{ 'cart.svg' | asset_url }}" alt="blenders cart icon" class="custom-header-mobile__cart-icon"> <span class="cart_count custom-header-mobile__cart-count">{{ cart.item_count }}</span></a>
+
+                <div class="custom-header__cart_container">
+                  <a href="/cart" class="custom-header__mini_cart dropdown_link custom-header-mobile__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant>
+                    <img src="{{ 'cart.svg' | asset_url }}" alt="blenders cart icon" class="custom-header-mobile__cart-icon"> <span class="cart_count custom-header-mobile__cart-count">{{ cart.item_count }}</span>
+                  </a>
+                
+                {% unless template == 'cart' %}
+                  <div class="cart_content animated fadeIn">
+                    <div class="js-empty-cart__message {% if cart.item_count > 0 %}hidden{% endif %}">
+                      <p class="empty_cart">{{ 'layout.general.empty_cart' | t }}</p>
+                    </div>
+                    <form action="/checkout" method="post" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" data-shop-name="{{ shop.name | escape }}" class="js-cart_content__form {% if cart.item_count == 0 %}hidden{% endif %}">
+                      <a class="cart_content__continue-shopping secondary_button">
+                        {{ 'cart.general.continue_shopping_link_html' | t }}
+                      </a>
+                      <ul class="cart_items js-cart_items clearfix">
+                        {% for item in cart.items %}
+                          <li class="cart_item clearfix">
+                            <a href="{{ item.url }}">
+                              {% if item.image %}
+                                <div class="cart_image">
+                                  <img src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" />
+                                </div>
+                              {% endif %}
+
+                              {% comment %} Add Sale / Before Price - Edited by Adam - 2/9/18 {% endcomment %}
+                              <!-- TESTT -->
+                              <strong class="right price">
+                                <span class="money">{{ item.variant.price | money }}</span>
+                                <span class="was_price">
+                                  {% if variant.price < variant.compare_at_price and variant.available %}
+                                    <span class="money">{{ variant.compare_at_price | money }}</span>
+                                  {% endif %}
+                                </span>
+                              </strong>
+                              <div class="item_title">
+                                {{ item.product.title }}
+                                {% unless item.variant.title contains "Title" %}
+                                  -
+                                  {% for option in item.product.options %}
+                                    {{ item.variant.options[forloop.index0] }} {% unless forloop.last %}/{% endunless %}
+                                  {% endfor %}
+                                {% endunless %}
+                              </div>
+                            </a>
+                            <div class="left product-quantity-box">
+                              <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
+                              <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" />
+                              <span class="ss-icon product-plus js-change-quantity" data-func="plus"><span class="icon-plus"></span></span>
+                            </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                      <hr />
+                      <ul>
+                        <li class="cart_subtotal js-cart_subtotal">
+                          <span class="right">
+                            <span class="money">{{ cart.total_price | money }}</span>
+                          </span>
+                          <span>{{ 'layout.general.subtotal' | t }}</span>
+                        </li>
+                        <li>
+                          {% if settings.display_special_instructions and settings.go_to_checkout %}
+                            <textarea id="note" name="note" rows="2" placeholder="{{ 'layout.general.cart_note' | t }}" class="clearfix">{{ cart.note }}</textarea>
+                          {% endif %}
+
+                          {% if settings.display_tos_checkbox and settings.go_to_checkout %}
+                            <p class="tos">
+                              <input type="checkbox" class="tos_agree" id="sliding_agree" required />
+                                <label class="tos_label">
+                                  {{ 'cart.general.agree_to_terms_html' | t }}
+                                </label>
+                                {% if settings.tos_page != blank %}
+                                  <a href="{{ pages[settings.tos_page].url }}" target="_blank" class="tos_icon">{{ 'cart.general.view_terms' | t }}</a>
+                                {% endif %}
+                            </p>
+                          {% endif %}
+
+                          {% if settings.cart_message != blank %}
+                            <div class="cart_text">
+                              {{ settings.cart_message }}
+                            </div>
+                          {% endif %}
+
+                          <input type="submit" class="action_button" value="{% if settings.go_to_checkout %}{{ 'layout.general.checkout' | t }}{% else %}{{ 'layout.general.go_to_cart' | t }}{% endif %}" />
+                        </li>
+                      </ul>
+                    </form>
+                  </div>
+                {% endunless %}
+
+                </div>
             {% endif %}
+
         </div>
     </div>
 
@@ -227,9 +323,9 @@
       <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="custom-header-desktop__logo">
 
         {% if section.settings.logo != nil %}
-            <img src="{{ section.settings.mobile_logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
-        {% elsif section.settings.mobile_logo != nil %}
             <img src="{{ section.settings.logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
+        {% elsif section.settings.mobile_logo != nil %}
+            <img src="{{ section.settings.mobile_logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
         {% else %}
           {{ shop.name }}
         {% endif %}
@@ -258,45 +354,31 @@
 
                     <p class="custom-header-desktop__category custom-header-desktop__category--icon custom-header-desktop__category--sunglasses" data-no-instant href="{{ link.url }}"><img src="{{'icon-sunglasses.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders Sunglasses Icon" /> {{link.title}} <img class="custom-header__menu-arrow custom-header__menu-arrow--sunglasses" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></span></p>
                     
-                    <ul class="submenu custom-header-desktop__submenu custom-header-desktop__submenu--collection">
+                    <div class="submenu custom-header-desktop__submenu custom-header-desktop__submenu--collection">
 
-                      {% for link in linklists[link.handle].links %}
+                      <div id="customHeaderDesktopMenuImg" class="custom-header-desktop__menu-img"></div>
 
-                        <li>
-                          <a {%if link.active %}class="active"{% endif %} href="{{ link.url }}">
+                      <ul class="custom-header-desktop__link-wrapper">
+                        {% for link in linklists[link.handle].links %}
 
-                          {{link.image | image_url: 'medium'}}
-
-                            {%if link.object.image %}
-
-                              <img
-                                src="{{ link.object.image | img_url: '200x'}}"
-                                alt="{{shop.title}} {{link.title}}"
-                                class="lazyload blur submenu__img"
-                                data-sizes="auto"
-                                data-src="{{ link.object.image | img_url: '900x' }}"
-                                data-srcset=" {{ link.object.image | img_url: '300x' }} 300w,
-                                              {{ link.object.image | img_url: '400x' }} 400w,
-                                              {{ link.object.image | img_url: '500x' }} 500w,
-                                              {{ link.object.image | img_url: '600x' }} 600w,
-                                              {{ link.object.image | img_url: '700x' }} 700w,
-                                              {{ link.object.image | img_url: '800x' }} 800w,
-                                              {{ link.object.image | img_url: '900x' }} 900w"
-                                
-                                />
-
-                              <span class="submenu__title">{{link.title}}</span>
-
-                            {% else%}
+                        {%if link.object.image %}
+                          <li>
+                            <a class="custom-header-desktop__collection-sublink{%if link.active %} active{% endif %}" href="{{ link.url }}" data-menuimg="{{ link.object.image | img_url: '560x'}}">
                               {{link.title}}
-                            {% endif %}
+                            </a>
+                          </li>
+                          
+                        {% else%}
 
-                          </a>
-                        
-                        </li>
+                          {{link.title}}
+
+                        {% endif %}
 
                       {% endfor %}
-                    </ul>
+                      
+                      </ul>
+                    
+                    </div>
 
                 </li>
 
@@ -406,22 +488,6 @@
       "type": "link_list",
       "id": "top_bar_menu",
       "label": "Top bar menu"
-    },
-    {
-      "type": "select",
-      "id": "cart_icon",
-      "label": "Cart icon",
-      "options": [
-        {
-          "value": "cart",
-          "label": "Cart"
-        },
-        {
-          "value": "bag",
-          "label": "Bag"
-        }
-      ],
-      "default": "cart"
     },
     {
      "type": "header",

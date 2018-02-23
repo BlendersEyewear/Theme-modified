@@ -15,8 +15,13 @@ const promoBannerClose = document.getElementById("promoBannerClose");
 //  Third Party Popups
 const ribbonContainer = document.getElementById("56d9-a3be_ribbon_container");
 
+// Header DOM
 const mobHeader = document.getElementById("customHeaderMobile");
 const navToggle = document.getElementById("mobileNavToggle");
+
+// Cart
+const miniCart = document.querySelector('.custom-header__mini_cart');
+const cartContainer = document.querySelector('.custom-header__cart_container');
 
 const mobMenu = document.getElementById("mobileMenu");
 
@@ -25,6 +30,11 @@ const mobMenuCategory = document.querySelectorAll(
 );
 const mobMenuCategoryHeader = document.querySelectorAll(
   ".custom-header-mobile__category"
+);
+
+const MenuImg = document.getElementById("customHeaderDesktopMenuImg");
+const collectionMenuItems = document.querySelectorAll(
+  ".custom-header-desktop__collection-sublink"
 );
 
 // PREVENT SCROLLING
@@ -135,6 +145,50 @@ const subMenuDropdown = () => {
   }
 };
 
+// Making Desktop Colelction Hover change background to current collection image
+const menuCollectionHover = () => {
+
+  // Set initial background using first collection;
+  MenuImg.style.backgroundImage = `url('${collectionMenuItems[0].dataset.menuimg}')`;
+
+  // Collection Dropdown Image hoverover change
+  for (link of collectionMenuItems) {
+    let imgData = link.dataset.menuimg;
+
+    link.addEventListener(
+      "mouseover",
+      () => {
+        MenuImg.style.backgroundImage = `url('${imgData}')`;
+      }
+    );
+  }
+}
+
+// Mini Cart Header Function
+const miniCartFunctions = () => {
+
+  let activeClass = 'cart-is-active';
+
+  let closeCart = () => {
+    miniCart.classList.remove(activeClass);
+  };
+
+  let openCart = () => {
+    mobMenu.classList.contains("custom-header-mobile__menu--open") ? mobMenu.classList.remove("custom-header-mobile__menu--open") : "";
+    navToggle.classList.contains("custom-header-mobile__menu-toggle--open") ? navToggle.classList.remove("custom-header-mobile__menu-toggle--open") : "";
+    mobHeader.classList.contains("custom-header-mobile--open") ? mobHeader.classList.remove("custom-header-mobile--open") : "";
+    miniCart.classList.add(activeClass);
+  };
+
+  // Mini Cart Function
+  miniCart.addEventListener("click", e => {
+    e.preventDefault();
+    let container = miniCart.parentElement;
+    miniCart.classList.contains(activeClass) ? closeCart() : openCart();
+  });
+}
+
+
 // Doc Ready
 $(function() {
   console.log("custom js loaded");
@@ -159,8 +213,14 @@ $(function() {
       .next()
       .slideToggle(250, "swing");
   });
+
+  menuCollectionHover();
+
+  // Mini Cart Function
+  miniCartFunctions();
+  
 });
 
 // TO ADD
-//  - Search submit on desktop
+//  - Search submit on desktop // --> already works. Hooked up to existing theme via css classes
 // - Press enter to search sumbit on desktop

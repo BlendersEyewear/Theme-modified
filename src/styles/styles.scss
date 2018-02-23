@@ -1265,6 +1265,13 @@ a.tos_icon,
   max-height: calc(100vh - 60px);
 }
 
+// Added by Adam foor the new header --> 2/23/18
+.custom-header-mobile__cart.active_link+.cart_content {
+  display: block;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px);
+}
+
 .cart_container.active_link .cart_content::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 7px;
@@ -8625,8 +8632,16 @@ $headerDesktopLargeUp: 1200px;
 
 // GENERAL CUSTOM HEADER --->
 select.custom-header__currencies{
-  min-height: unset !important;
-  height: auto !important;
+    min-height: unset !important;
+    height: auto !important;
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: center;
+    background-position: left 0px;
+    background-size: 24px 20px;
+    padding-left: 1.8rem;
+    min-width: unset;
+    width: auto;
 }
 
 
@@ -8862,8 +8877,33 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
     }
 }
 
+
+// CART
 .custom-header-mobile__section--cart{
   justify-content: flex-end;
+}
+
+.custom-header__cart_container{
+    width: 100%;
+    height: 100%;
+    // background: lightblue;
+    clear: both;
+    position: relative;
+
+    .cart_content{
+      display: none;
+    }
+}
+
+.custom-header__cart_container.cart_active,
+.custom-header__cart_container.cart-is-active{
+  .cart_content{
+    display: block;
+  }
+}
+
+.cart-is-active+.cart_content{
+  display: block;
 }
 
 .custom-header-mobile__section--logo{
@@ -8890,33 +8930,40 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
   display: none;
 }
 
-.custom-header-mobile__cart{
-  position: static;
+a.custom-header-mobile__cart{
+  float: right;
+  display: block;
+  width: 40px;
+  height: 100%;
+  position: relative;
+}
 
-  width: 2.5rem;
-  height: 2.5rem;
-
-  &:hover, &:focus{
-    color: rgba(0,0,0,0.75);
-  }
+a.custom-header-mobile__cart+.cart_content{
+  width: 320px;
+  max-width: 360px;
 }
 
 .custom-header-mobile__cart-icon{
-  position: relative;
-  max-width: 3rem;
-  height: auto
+  position: absolute;
+  max-width: 1.25rem;
+  height: auto;
+  display: block;
+  bottom: 3px;
+  left: 9px;
 }
 
-.custom-header-mobile__cart-count{
+span.custom-header-mobile__cart-count{
   font-size: .75rem;
-  position: absolute;
-  top: 51px;
-  right: 27px;
-  width: 1rem;
   line-height: 1;
   letter-spacing: .05em;
   text-align: center;
-  font-weight: 600;
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  line-height: 1;
+  padding: 0;
+  width: 20px;
+  font-weight: 400;
 }
 
 #preview-bar-iframe{
@@ -9068,12 +9115,6 @@ p.custom-header-mobile__category{
   }
 }
 
-.custom-header-mobile__category--icon, .custom-header-mobile__link--icon{
-  // @include flexbox();
-  // @include flex-flow(row nowrap);
-  // @include justify-content(flex-start);
-  // @include align-items(center);
-}
 
 .custom-header-mobile__category--open{
   box-shadow: inset 0 -2px 0 0 $color-accent;
@@ -9215,9 +9256,10 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__logo{
-  max-width: 8rem;
+  max-width: 7.5rem;
   height: auto;
   display: block;
+  margin: .5rem 0;
 
   @media screen and (min-width: $headerDesktopLargeUp){
     max-width: 10rem;
@@ -9246,7 +9288,7 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__menu-icon{
-  max-width: 2rem;
+  max-width: 2rem !important;
   height: auto;
   margin-right: .35rem;
   display: block;
@@ -9258,6 +9300,7 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__link > a{
+  text-transform: uppercase;
   display: block;
   &:hover{
     color: black;
@@ -9265,7 +9308,7 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__link--snow{
-  min-width: 10.75rem;
+  min-width: 12.25rem;
 }
 
 .custom-header-desktop__link > a, .custom-header-desktop__sublink{
@@ -9285,9 +9328,6 @@ a.custom-header-mobile__refer{
   position: relative;
   cursor: pointer;
 
-  .submenu{
-    max-height: none;
-  }
   &:hover, &:focus{
     .custom-header-desktop__submenu{
       display:block;  
@@ -9299,18 +9339,24 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__sublink--collection{
-  position: static;
 
+  
   &:hover, &:focus{
     .custom-header-desktop__submenu--collection{
       @include flexbox();
     }
+  }
+
+  // Making the sunglass collection wider to show image
+  .submenu{
+    width: 36rem;
   }
 }
 
 .custom-header-desktop__category{
   margin: 0;
   min-width: 7rem;
+  text-transform: uppercase;
 
   .custom-header__menu-arrow{
     transform: translateY(2px);
@@ -9318,6 +9364,7 @@ a.custom-header-mobile__refer{
 
   .custom-header__menu-arrow--sunglasses{
     transform: translateY(0);
+    margin-left: 4px;
   }
 
   @media screen and (min-width: $headerDesktopLargeUp){
@@ -9327,12 +9374,12 @@ a.custom-header-mobile__refer{
 
 .custom-header-desktop__category--icon, .custom-header-desktop__link--icon > a{
   @include flexbox();
-  @include justify-content(space-between);
+  @include justify-content(flex-start); //changed from space-between
   @include align-items(center);
 }
 
 .custom-header-desktop__category--sunglasses{
-  width: 9rem;
+  width: 9.5rem;
 }
 
 .custom-header-desktop__submenu{
@@ -9348,8 +9395,8 @@ a.custom-header-mobile__refer{
   left: 0;
   top: 100%;
 
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12),
-              0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 2px 2px rgba(0,0,0,0.08),
+              0 2px 1px rgba(0,0,0,0.12);
 
   display: none;
 
@@ -9365,17 +9412,16 @@ a.custom-header-mobile__refer{
     @include DropdownMenuLink(black, $color-light);
     text-transform: uppercase;
     letter-spacing: .05em;
+    font-variant-caps: all-small-caps;
   }
 }
-
-// .custom-header-desktop__sublink--icon{}
 
 .custom-header-desktop__submenu--collection{
   width: 100%;
   top: 100%;
   // @include flexbox();
   @include flex-flow(row wrap);
-  @include flex-wrap(wrap);
+  @include flex-wrap(nowrap);
   @include align-items(stretch);
   @include justify-content(flex-start);
 
@@ -9406,11 +9452,43 @@ a.custom-header-mobile__refer{
   }
 }
 
-.submenu__img{
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: auto auto auto;
+// Sunglasses Menu Link Wrapper
+.custom-header-desktop__link-wrapper{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+
+  & > li{
+    margin: 0;
+    padding: 0;
+  }
+  & > li > a {
+    display: block;
+    padding: 1rem;
+    width: 15rem;
+    line-height: 1;
+    @include DropdownMenuLink(black, $color-light);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-variant-caps: all-small-caps;
+  }
+
+  & > li > a.active{
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 0 $color-accent;
+  }
+}
+
+// Sunglasses Menu Image
+.custom-header-desktop__menu-img{
+  max-width: 75%;
+  flex: 75%;
+  background: white;
+  order: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .submenu__title{
