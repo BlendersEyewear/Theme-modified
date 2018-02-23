@@ -233,8 +233,6 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     <!-- Customer Header js -->
     <script src="{{'custom-header.js' | asset_url }}"></script>
 
-    <!-- slidetoggle lib -->
-    {{ 'slidetoggle.js' | asset_url | script_tag }}
 
     {% if settings.show_multiple_currencies %}
       {% include 'currencies' %}

@@ -1,13 +1,18 @@
-<select class="currencies" name="currencies" data-default-shop-currency="{{ shop.currency }}">
+<select class="currencies custom-header__currencies" name="currencies" data-default-shop-currency="{{ shop.currency }}">
   {% capture codes %},USD,EUR,GBP,CAD,ARS,AUD,ILS,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK,{% endcapture %}
   {% assign supported_codes = settings.supported_currencies | split: ' ' %}
-  <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
-  {% for code in supported_codes %}
-    {% if code != shop.currency and codes contains code %}
-    
-    {% assign flag = {{ code | prepend: 'flag-' | append: '.svg' }} %}
 
-    <option value="{{ code }}"><img class="currency-flag-img" src="{{ flag }}" alt=""> {{ code }}</option>
+  {% assign current_flag = shop.currency | downcase | prepend: 'flag-' | append: '.svg' %}
+  <option style="background-image: url('{{ current_flag | asset_url }}');" value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+
+  {% for code in supported_codes %}
+
+    {% if code != shop.currency and codes contains code %}
+
+    {% assign flag = code | prepend: 'flag-' | append: '.svg' %}
+
+    <option style="background-image: url('{{ current_flag | asset_url }}');" value="{{ code }}">{{ code }}</option>
+    {% comment %} <option value="{{ code }}">{{ code }}</option> {% endcomment %}
     {% endif %}
   {% endfor %}
 </select>

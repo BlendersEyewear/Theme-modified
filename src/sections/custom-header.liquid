@@ -132,7 +132,7 @@
 
             {% if customer %}
               <div data-no-instant class="mobile-bottom-nav__item">
-                <a href="/account" data-no-instant>Yo, {{ customer.name }}!</a>
+                <a href="/account" data-no-instant>Yo, {{ customer.first_name }}!</a>
                 <span data-no-instant>
                 {{ section.settings.customer_log_out_text  | customer_logout_link }}
               </span>
@@ -186,10 +186,7 @@
         {% if customer %}
 
           <div data-no-instant class="custom-header-desktop__top-banner-link">
-          <a href="/account" data-no-instant>Yo, {{ customer.name }}!</a>
-          <span data-no-instant>
-          {{ section.settings.customer_log_out_text  | customer_logout_link }}
-          </span>
+          <a href="/account" data-no-instant>Yo, {{ customer.first_name }}!</a>
           </div>
 
         {% else %}
@@ -206,7 +203,7 @@
       {% if settings.show_multiple_currencies %}
 
         <div data-no-instant class="custom-header-desktop__top-banner-link custom-header-desktop__currency">
-          {% include 'currencies-switcher' %}
+          {% include 'currencies-switcher-new' %}
         </div>
 
       {% endif %}

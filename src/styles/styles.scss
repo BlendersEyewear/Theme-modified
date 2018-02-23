@@ -8623,6 +8623,14 @@ $headerDesktopLargeUp: 1200px;
 //   }
 // }
 
+// GENERAL CUSTOM HEADER --->
+select.custom-header__currencies{
+  min-height: unset !important;
+  height: auto !important;
+}
+
+
+
 .custom-header-mobile{
   background: rgba(0,0,0,0.05);
   background: none;
@@ -9172,6 +9180,10 @@ a.custom-header-mobile__refer{
   font-size: 0.825rem
 }
 
+.custom-header-desktop__top-banner-link{
+  margin-left: 1rem;
+}
+
 .custom-header-desktop__container{
   // background: lightblue;
   background: #fff;
@@ -9370,8 +9382,9 @@ a.custom-header-mobile__refer{
   // display: flex;
 
   & > li {
-    max-width: 33.333%;
-    @include flex(33.333%);
+    max-width: 25%;
+    @include flex(25%);
+
   }
 
   & > li > a{
