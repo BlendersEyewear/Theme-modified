@@ -23,6 +23,9 @@ const navToggle = document.getElementById("mobileNavToggle");
 const miniCart = document.querySelector('.custom-header__mini_cart');
 const cartContainer = document.querySelector('.custom-header__cart_container');
 
+// Class to show its open
+const activeCartClass = "cart-is-active";
+
 const mobMenu = document.getElementById("mobileMenu");
 
 const mobMenuCategory = document.querySelectorAll(
@@ -116,18 +119,27 @@ const mobMenuToggle = () => {
     mobMenu.classList.toggle("custom-header-mobile__menu--open");
     mobHeader.classList.toggle("custom-header-mobile--open");
 
-    // Hide Get $20 banne when mobile menu is open
-    // mobMenu.classList.contains("custom-header-mobile__menu--open")
-    //   ? (ribbonContainer.style.display = "none", console.log('sliding out'))
-    //   : (ribbonContainer.style.display = "block");
+    // Close mini cart if its open
+    miniCart.classList.contains(activeCartClass) ? miniCart.classList.remove(activeCartClass) : '';
   });
 };
 
 const bannerClose = msg => {
   promoBannerClose.addEventListener("click", () => {
+    console.log('close, dammit.');
     promoBanner.classList.add(msg);
     let headerHeightShort = mobHeader.offsetHeight;
     addHeightOffset(headerHeightShort);
+  });
+};
+
+
+const bannerCloseDesktop = msg => {
+  promoBannerClose.addEventListener("click", () => {
+    console.log('close, dammit.');
+    // promoBanner.classList.add(msg);
+    // let headerHeightShort = mobHeader.offsetHeight;
+    // addHeightOffset(headerHeightShort);
   });
 };
 
@@ -167,24 +179,22 @@ const menuCollectionHover = () => {
 // Mini Cart Header Function
 const miniCartFunctions = () => {
 
-  let activeClass = 'cart-is-active';
-
   let closeCart = () => {
-    miniCart.classList.remove(activeClass);
+    miniCart.classList.remove(activeCartClass);
   };
 
   let openCart = () => {
     mobMenu.classList.contains("custom-header-mobile__menu--open") ? mobMenu.classList.remove("custom-header-mobile__menu--open") : "";
     navToggle.classList.contains("custom-header-mobile__menu-toggle--open") ? navToggle.classList.remove("custom-header-mobile__menu-toggle--open") : "";
     mobHeader.classList.contains("custom-header-mobile--open") ? mobHeader.classList.remove("custom-header-mobile--open") : "";
-    miniCart.classList.add(activeClass);
+    miniCart.classList.add(activeCartClass);
   };
 
   // Mini Cart Function
   miniCart.addEventListener("click", e => {
     e.preventDefault();
     let container = miniCart.parentElement;
-    miniCart.classList.contains(activeClass) ? closeCart() : openCart();
+    miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
   });
 }
 
@@ -202,9 +212,9 @@ $(function() {
 
   // Creating vertical window offset to compensate for fixed header
   let headerHeight = mobHeader.offsetHeight;
-  mobHeader.classList.contains("custom-header-mobile--is-mobile")
-    ? addHeightOffset(headerHeight)
-    : console.log("mobheader isnt mobile");
+  // mobHeader.classList.contains("custom-header-mobile--is-mobile")
+  //   ? addHeightOffset(headerHeight)
+  //   : console.log("mobheader isnt mobile");
 
   // Making Mobile Nav submenus works
   subMenuDropdown();
@@ -213,6 +223,20 @@ $(function() {
       .next()
       .slideToggle(250, "swing");
   });
+
+  // Banner Close on Desktop
+  // 'desktop' screen size is 960px
+  let desktopScreenSize = 960;
+  window.innerWidth >= desktopScreenSize
+    ? (
+        mobHeader.classList.remove("custom-header-mobile--is-mobile"),
+        console.log('desktop'),
+        bannerCloseDesktop()
+    )
+    : (
+        addHeightOffset(headerHeight),
+        console.log('this is mbile')
+      );
 
   menuCollectionHover();
 

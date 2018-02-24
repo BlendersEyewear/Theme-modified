@@ -307,9 +307,19 @@
       {% comment %} Cart {% endcomment %}
       {% if section.settings.show_cart %}
         <div class="custom-header-desktop__top-banner-link custom-header-desktop__cart">
-          <a href="/cart" class="icon-cart mini_cart dropdown_link custom-header-mobile__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{{ cart.item_count }}</span></a>
+        
+          <div class="custom-header__cart_container custom-header__cart_container--desktop">
+            <a href="/cart" class="custom-header__mini_cart dropdown_link custom-header-desktop__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant>
+              <img src="{{ 'cart.svg' | asset_url }}" alt="blenders cart icon" class="custom-header-desktop__cart-icon"> <span class="cart_count custom-header-desktop__cart-count">{{ cart.item_count }}</span>
+            </a>
+          </div>
+        
         </div>
+
+
       {% endif %}
+
+      
 
     </div>
     </div>
