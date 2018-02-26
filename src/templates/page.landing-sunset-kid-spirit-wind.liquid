@@ -1,0 +1,247 @@
+<a name="pagecontent" id="pagecontent"></a>
+
+
+<div class="page landing-page clearfix">
+
+  <div class="landing__hero" 
+      style="background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url({{ 'SpiritWind_SunsetKid_14-hero.jpg' | asset_img_url: '1920x' }}); background-size: cover; background-position: center;">
+      <h1 class="landing__hero-title">Phat Tuesday<span class="rad">Frames</span></h1>
+  </div>
+
+    {% assign spirit = all_products.spirit-wind %}
+    {% assign sunset = all_products.sunset-kid %}
+
+  {% comment %} Spirit Wind {% endcomment %}
+  <div class="landing-row landing-row--plum">
+  
+    {% assign spirit_hero = 'SpiritWind_14.jpg' %}
+    <div class="product-hero product-hero--first product-hero--plum product-hero--spirit">
+      <img
+        src="{{ spirit_hero | asset_img_url: '100x' }}"
+        alt="{{ sunset.title }}"
+        class="lazyload blur product-hero__img"
+        data-sizes="auto"
+        data-src="{{ spirit_hero | asset_img_url: '1200x' }}"
+        data-srcset=" {{ spirit_hero | asset_img_url: '300x' }} 300w,
+                      {{ spirit_hero | asset_img_url: '400x' }} 400w,
+                      {{ spirit_hero | asset_img_url: '500x' }} 500w,
+                      {{ spirit_hero | asset_img_url: '600x' }} 600w,
+                      {{ spirit_hero | asset_img_url: '700x' }} 700w,
+                      {{ spirit_hero | asset_img_url: '800x' }} 800w,
+                      {{ spirit_hero | asset_img_url: '900x' }} 900w,
+                      {{ spirit_hero | asset_img_url: '1200x' }} 1200w"
+      />
+    </div>
+
+    <div class="product-info">
+      <a href="{{ spirit.url }}" class="product-info__img-link">
+        <img
+          src="{{ spirit.featured_image | img_url: '480x'}}"
+          alt="{{ spirit.title }}"
+          class="lazyload blur product-info__img"
+          data-sizes="auto"
+          data-src="{{ spirit.featured_image | product_img_url: '900x' }}"
+          data-srcset=" {{ spirit.featured_image | product_img_url: '300x' }} 300w,
+                        {{ spirit.featured_image | product_img_url: '400x' }} 400w,
+                        {{ spirit.featured_image | product_img_url: '500x' }} 500w,
+                        {{ spirit.featured_image | product_img_url: '600x' }} 600w,
+                        {{ spirit.featured_image | product_img_url: '700x' }} 700w,
+                        {{ spirit.featured_image | product_img_url: '800x' }} 800w,
+                        {{ spirit.featured_image | product_img_url: '900x' }} 900w"
+        />
+      </a>
+      
+      <h2 class="product-info__title"><a href="{{ spirit.url }}" class="product-info__title-link">{{ spirit.title }}</a></h2>
+
+      {% if sunset.metafields.custom_fields["product_subtitle"] != blank %}
+			    <p class="product-info__subtitle">{{ spirit.metafields.custom_fields["product_subtitle"] }}</p>
+      {% endif %}
+
+      <h4 class="product-info__price">{{ spirit.price | money }} {{ site.url }}</h4>
+
+      <form action="/cart/add">
+        <input type="hidden" name="id" value="{{ spirit.variants.first.id }}">
+        <button type="submit" name="add" class="action_button add_to_cart product-info__add product-info__add--green" data-label={{ add_to_cart_label | json }}>
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </form>
+      
+      <div id="shopmessage-checkbox"></div>
+
+    </div>
+  </div>
+
+
+  {% comment %} Sunset Kid{% endcomment %}
+  <div class="landing-row landing-row--uni">
+    <div class="product-hero product-hero--second product-hero--uni product-hero--sunset">
+    
+      {% assign sunset_hero = 'SunsetKid_11.jpg' %}
+      <img
+        src="{{ sunset_hero | asset_img_url: '600x' }}"
+        alt="{{ sunset.title }}"
+        class="lazyload blur product-hero__img"
+        data-sizes="auto"
+        data-src="{{ sunset_hero | asset_img_url: '900x' }}"
+        data-srcset=" {{ sunset_hero | asset_img_url: '300x' }} 300w,
+                      {{ sunset_hero | asset_img_url: '400x' }} 400w,
+                      {{ sunset_hero | asset_img_url: '500x' }} 500w,
+                      {{ sunset_hero | asset_img_url: '600x' }} 600w,
+                      {{ sunset_hero | asset_img_url: '700x' }} 700w,
+                      {{ sunset_hero | asset_img_url: '800x' }} 800w,
+                      {{ sunset_hero | asset_img_url: '900x' }} 900w"
+        />
+    </div>
+    
+    <div class="product-info">
+      <a href="{{ sunset.url }}" class="product-info__img-link">
+        <img
+        src="{{ sunset.featured_image | img_url:'100x' }}"
+        alt=""
+        class="lazyload blur product-info__img"
+        data-sizes="auto"
+          data-src="{{ sunset.featured_image | product_img_url: '900x' }}"
+          data-srcset=" {{ sunset.featured_image | product_img_url: '300x' }} 300w,
+                        {{ sunset.featured_image | product_img_url: '400x' }} 400w,
+                        {{ sunset.featured_image | product_img_url: '500x' }} 500w,
+                        {{ sunset.featured_image | product_img_url: '600x' }} 600w,
+                        {{ sunset.featured_image | product_img_url: '700x' }} 700w,
+                        {{ sunset.featured_image | product_img_url: '800x' }} 800w,
+                        {{ sunset.featured_image | product_img_url: '900x' }} 900w"
+        />
+      </a>
+
+      <h2 class="product-info__title"><a href="{{ sunset.url }}" class="product-info__title-link">{{ sunset.title }}</a></h2>
+
+      {% if sunset.metafields.custom_fields["product_subtitle"] != blank %}
+			    <p class="product-info__subtitle">{{ sunset.metafields.custom_fields["product_subtitle"] }}</p>
+      {% endif %}
+
+      <h4 class="product-info__price">{{ sunset.price | money }}</h4>
+
+      <form action="/cart/add" class="product-info__form">
+        <input type="hidden" name="id" value="{{ sunset.variants.first.id }}">
+        <button type="submit" name="add" class="action_button add_to_cart product-info__add product-info__add--green" data-label={{ add_to_cart_label | json }}>
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </form>
+      
+      <div id="shopmessage-checkbox"></div>
+
+    </div>
+  </div>
+
+  {% comment %} Photo Grid {% endcomment %}
+  {% assign spirit_alt = 'Benders Spirit Wind Sunglasses' %}
+  {% assign sunset_alt = 'Benders Sunset Kid Sunglasses' %}
+  {% assign both_alt = 'Benders Eyewear Spirit Wind and Sunset Kid Sunglasses' %}
+
+  <div class="landing-gallery landing-gallery--spirit-sunset">
+    <img
+      src="{{ 'SpiritWind_10.jpg' | asset_img_url: '100x' }}"
+      alt="{{ spirit_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'SpiritWind_10.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'SpiritWind_10.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'SpiritWind_10.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'SpiritWind_10.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'SpiritWind_10.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'SpiritWind_10.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'SpiritWind_10.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'SpiritWind_10.jpg' | asset_img_url: '900x' }} 900w"
+    />
+
+    {% comment %} Image 2 {% endcomment %}
+    <img
+      src="{{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'SpiritWind_SunsetKid_03_square.jpg' | asset_img_url: '900x' }} 900w"
+    />
+
+    {% comment %} Image 3 {% endcomment %}
+    <img
+      src="{{ 'SunsetKid_01_square.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'SunsetKid_01_square.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'SunsetKid_01_square.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'SunsetKid_01_square.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'SunsetKid_01_square.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'SunsetKid_01_square.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'SunsetKid_01_square.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'SunsetKid_01_square.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'SunsetKid_01_square.jpg' | asset_img_url: '900x' }} 900w"
+    />
+
+    {% comment %} Image 4 {% endcomment %}
+    <img
+      src="{{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '100x' }}"
+      alt="{{ sunset_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '1200x' }}"
+      data-srcset=" {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '900x' }} 900w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '1000x' }} 1000w,
+                    {{ 'SpiritWind_SunsetKid_12.jpg' | asset_img_url: '1200x' }} 1200w"
+    />
+
+    {% comment %} Image 5 {% endcomment %}
+    <img
+      src="{{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '1200x' }}"
+      data-srcset=" {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '900x' }} 900w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '1000x' }} 1000w,
+                    {{ 'SpiritWind_SunsetKid_05.jpg' | asset_img_url: '1200x' }} 1200w"
+    />
+
+    {% comment %} Image 6 {% endcomment %}
+    <img
+      src="{{ 'SunsetKid_05_square.jpg' | asset_img_url: '100x' }}"
+      alt="{{ both_alt }}"
+      class="lazyload blur landing-gallery__img"
+      data-sizes="auto"
+      data-src="{{ 'SunsetKid_05_square.jpg' | asset_img_url: '900x' }}"
+      data-srcset=" {{ 'SunsetKid_05_square.jpg' | asset_img_url: '300x' }} 300w,
+                    {{ 'SunsetKid_05_square.jpg' | asset_img_url: '400x' }} 400w,
+                    {{ 'SunsetKid_05_square.jpg' | asset_img_url: '500x' }} 500w,
+                    {{ 'SunsetKid_05_square.jpg' | asset_img_url: '600x' }} 600w,
+                    {{ 'SunsetKid_05_square.jpg' | asset_img_url: '700x' }} 700w,
+                    {{ 'SunsetKid_05_square.jpg' | asset_img_url: '800x' }} 800w,
+                    {{ 'SunsetKid_05_square.jpg' | asset_img_url: '900x' }} 900w"
+    />
+    <hr class="landing-hr">
+  </div>
+
+  {% comment %} Footer Banner {% endcomment %}
+  <div class="landing-cta" style="background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url({{ 'SpiritWind_06_Long.jpg' | asset_img_url: '2400x' }}); background-size: cover; background-position: center;">
+    <h2 class="landing-cta__title">Shop The Full Collection</h2>
+    <a href="{{shop.url}}/collections/east-village" class="btn landing-cta__btn">Check 'Em Out</a>
+  </div>
+
+</div>

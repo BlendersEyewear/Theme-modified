@@ -8418,6 +8418,7 @@ img.collection_banner_img{
     margin-top: 10px!important;
 }
   
+
 // --------------------------------
 // LANDING PAGES ------------------
 // --------------------------------
@@ -8521,8 +8522,12 @@ $transparent: rgba(0,0,0,0.0);
     width: 100%;
     height: auto;
   }
+
+  .product-hero--first:after{
+    
+  }
   
-  .product-hero--plum:after{
+  .product-hero--plum:after, .product-hero--first:after{
     content: '';
     display: block;
     position: absolute;
@@ -8537,11 +8542,18 @@ $transparent: rgba(0,0,0,0.0);
     z-index: -3;
   }
 
+  .product-hero--spirit:after{
+    background-image: url('https://cdn.shopify.com/s/files/1/0148/9585/files/bg-Green.png?11156546473437728142');
+    background-position: top left !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+
   .product-hero--uni{
     margin-bottom: 3rem;
   }
 
-  .product-hero--uni:after{
+  .product-hero--uni:after, .product-hero--second:after{
     content: '';
     display: block;
     position: absolute;
@@ -8551,6 +8563,14 @@ $transparent: rgba(0,0,0,0.0);
     bottom: -3rem;
     right: -3rem;
     z-index: -3;
+  }
+
+  .product-hero--sunset:after{
+    background: none;
+    background-image: url('https://cdn.shopify.com/s/files/1/0148/9585/files/bg-Yellow.png?11156546473437728142');
+    background-position: bottom right !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
   }
 
   .product-info__title{
@@ -8738,6 +8758,22 @@ $transparent: rgba(0,0,0,0.0);
   }
 }
 
+.landing-gallery--spirit-sunset{
+  &:before{
+    background: #ffda08 !important;
+  }
+  &:after{
+    background: #914ba5;
+  }
+
+  .landing-gallery__img{
+    &:nth-child(5){
+      -o-object-position: 0 0 !important;
+      object-position: 0 0 !important;
+    }
+  }
+}
+
 .landing-hr {
   @extend %dots;
   height: 20px;
@@ -8807,6 +8843,10 @@ $transparent: rgba(0,0,0,0.0);
       min-height: -moz-max-content;
       min-height: max-content;
       height: auto;
+    }
+
+    .product-info__add--green{
+      background: #00af4c;
     }
 
 
@@ -9002,3 +9042,10 @@ $transparent: rgba(0,0,0,0.0);
     margin: 0 auto 1rem;
   }
 }
+
+/*    BUG FIXES */
+  .quick_shops.desktop {
+    #shopmessage-checkbox{
+    	display: none !important;
+    }
+  }
