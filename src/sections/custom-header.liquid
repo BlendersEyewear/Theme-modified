@@ -22,12 +22,27 @@
         {% comment %} LOGO {% endcomment %}
         <div class="custom-header-mobile__section custom-header-mobile__section--logo">
 
-            <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="custom-header-mobile__logo logo">
+            <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="lazyload blur custom-header-mobile__logo logo">
 
                 {% if section.settings.mobile_logo != nil %}
-                    <img src="{{ section.settings.mobile_logo | img_url: '480x' }}" alt="{{ shop.name | escape }}"  class="custom-header-logo custom-header-logo--mobile"/>
+                    <img
+                      src="{{ section.settings.mobile_logo | img_url: '480x' }}"
+                      data-sizes="auto"
+                      data-src="{{ section.settings.mobile_logo | img_url: '900x' }}"
+                      data-srcset=" {{ section.settings.mobile_logo | img_url: '300x' }} 300w,
+                                    {{ section.settings.mobile_logo | img_url: '400x' }} 400w,
+                                    {{ section.settings.mobile_logo | img_url: '500x' }} 500w,
+                                    {{ section.settings.mobile_logo | img_url: '600x' }} 600w,
+                                    {{ section.settings.mobile_logo | img_url: '700x' }} 700w,
+                                    {{ section.settings.mobile_logo | img_url: '800x' }} 800w,
+                                    {{ section.settings.mobile_logo | img_url: '900x' }} 900w"
+                      alt="{{ shop.name | escape }}" 
+                      class="custom-header-logo custom-header-logo--mobile"/>
                 {% elsif section.settings.logo != nil %}
-                  <img src="{{ section.settings.logo | img_url: '480x' }}" alt="{{ shop.name | escape }}"  class="custom-header-logo custom-header-logo--mobile"/>
+                  <img
+                    src="{{ section.settings.logo | img_url: '480x' }}"
+                    alt="{{ shop.name | escape }}" 
+                    class="custom-header-logo custom-header-logo--mobile"/>
                 {{ shop.name }}
 
             {% endif %}
@@ -210,11 +225,12 @@
         </ul>
 
         {% comment %} Friendbuy {% endcomment %}
-        <a href="" class="Friendbuy custom-header-mobile__refer">Get $20 Off!</a>
+        <a href="#" class="Friendbuy friendbuy-cF0-hXa custom-header-mobile__refer">Get $20 Off!</a>
 
         {% comment %} Social {% endcomment %}
         <div class="custom-header-mobile__social">
           {% include 'social-icons' %}
+          <p style="text-align: center; margin: -1.75rem 0 0; font-variant-caps: all-small-caps; letter-spacing: 0.1em;" class="custom-header-mobile__social_at">@blenderseyewear</p>
         </div>
 
         {% comment %} Bottom Nav {% endcomment %}
@@ -259,9 +275,9 @@
 
   {% comment %} Top Promo Banner {% endcomment %}
   {% if section.settings.promo_text != blank %}
-      <div id="promoBanner" class="promo_banner custom-header-desktop__promo">
+      <div id="promoBannerDesktop" class="promo_banner custom-header-desktop__promo">
           {{ section.settings.promo_text }}
-          <div id="promoBannerClose" class="promo_banner-close"></div>
+          <div id="promoBannerDesktopClose" class="promo_banner-close"></div>
       </div>
   {% endif %}
 
@@ -333,7 +349,11 @@
       <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="custom-header-desktop__logo">
 
         {% if section.settings.logo != nil %}
-            <img src="{{ section.settings.logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
+            <img
+              src="{{ section.settings.logo | img_url: '400x' }}"
+              alt="{{ shop.name | escape }}" 
+              class="custom-header-desktop__logo"
+              />
         {% elsif section.settings.mobile_logo != nil %}
             <img src="{{ section.settings.mobile_logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
         {% else %}
@@ -426,7 +446,7 @@
 
 
         {% comment %} Freindbuy Refer {% endcomment %}
-        <a href="" class="Friendbuy custom-header-desktop__refer">Get $20 Off!</a>
+        <a href="#" class="Friendbuy friendbuy-cF0-hXa custom-header-desktop__refer">Get $20 Off!</a>
 
       </div>{% comment %} End Menu {% endcomment %}
 

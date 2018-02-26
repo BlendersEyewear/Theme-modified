@@ -8943,6 +8943,19 @@ a.custom-header-mobile__cart{
   position: relative;
 }
 
+.custom-header-desktop__cart{
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  // background: lightblue; // temp
+  padding: 2px;
+
+  &:hover, &:focus{
+    color: black;
+  }
+}
+
 a.custom-header-mobile__cart+.cart_content{
   width: 320px;
   max-width: 360px;
@@ -9293,9 +9306,11 @@ a.custom-header-mobile__refer{
   @include justify-content(flex-start);
   @include align-items(flex-end);
 
+  z-index: 999;
+
   @media screen and (min-width: $headerDesktopLargeUp){
     // background: #bada55;
-    margin-left: 3rem;
+    margin-left: 2rem;
   }
 }
 
@@ -9328,7 +9343,11 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__link--snow{
-  min-width: 11rem;
+  min-width: 10.25rem;
+
+  @media screen and (min-width: $headerDesktopLargeUp){
+    min-width: 12.25rem;
+  }
 }
 
 .custom-header-desktop__link > a, .custom-header-desktop__sublink{
@@ -9347,6 +9366,7 @@ a.custom-header-mobile__refer{
 .custom-header-desktop__sublink{
   position: relative;
   cursor: pointer;
+  transform: translateY(-3px);
 
   &:hover, &:focus{
     .custom-header-desktop__submenu{
@@ -9356,11 +9376,18 @@ a.custom-header-mobile__refer{
       opacity: 1;
     }
   }
+
+  @media screen and (min-width: $headerDesktopLargeUp){
+    transform: translateY(-1px);
+  }
 }
 
 .custom-header-desktop__sublink--collection{
 
-  
+  &:first-of-type{
+    padding-left: 0;
+  }
+
   &:hover, &:focus{
     .custom-header-desktop__submenu--collection{
       @include flexbox();
@@ -9389,7 +9416,7 @@ a.custom-header-mobile__refer{
   }
 
   @media screen and (min-width: $headerDesktopLargeUp){
-    width: auto;
+    width: 8.1rem;
   }
 }
 
@@ -9400,7 +9427,12 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__category--sunglasses{
-  width: 9.5rem;
+  width: 8.25rem;
+  transform: translateY(4px);
+
+  @media screen and (min-width: $headerDesktopLargeUp){
+    min-width: 9.5rem;
+  }
 }
 
 .custom-header-desktop__submenu{
@@ -9432,8 +9464,9 @@ a.custom-header-mobile__refer{
     line-height: 1;
     @include DropdownMenuLink(black, $color-light);
     text-transform: uppercase;
-    letter-spacing: .05em;
+    letter-spacing: .1em;
     font-variant-caps: all-small-caps;
+    font-size: 0.875rem;
   }
 }
 
@@ -9491,8 +9524,9 @@ a.custom-header-mobile__refer{
     line-height: 1;
     @include DropdownMenuLink(black, $color-light);
     text-transform: uppercase;
-    letter-spacing: .05em;
+    letter-spacing: .1em;
     font-variant-caps: all-small-caps;
+    font-size: 0.875rem;
   }
 
   & > li > a.active{

@@ -12,6 +12,11 @@ const pageRetail = document.querySelector(".page-retail");
 const promoBanner = document.getElementById("promoBanner");
 const promoBannerClose = document.getElementById("promoBannerClose");
 
+const promoBannerDesktop = document.getElementById("promoBannerDesktop");
+const promoBannerDesktopClose = document.getElementById(
+  "promoBannerDesktopClose"
+);
+
 //  Third Party Popups
 const ribbonContainer = document.getElementById("56d9-a3be_ribbon_container");
 
@@ -20,8 +25,8 @@ const mobHeader = document.getElementById("customHeaderMobile");
 const navToggle = document.getElementById("mobileNavToggle");
 
 // Cart
-const miniCart = document.querySelector('.custom-header__mini_cart');
-const cartContainer = document.querySelector('.custom-header__cart_container');
+const miniCart = document.querySelector(".custom-header__mini_cart");
+const cartContainer = document.querySelector(".custom-header__cart_container");
 
 // Class to show its open
 const activeCartClass = "cart-is-active";
@@ -39,6 +44,9 @@ const MenuImg = document.getElementById("customHeaderDesktopMenuImg");
 const collectionMenuItems = document.querySelectorAll(
   ".custom-header-desktop__collection-sublink"
 );
+
+// WINDOW SIZES
+const desktopScreenSize = 960;
 
 // PREVENT SCROLLING
 var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
@@ -94,7 +102,7 @@ const addHeightOffset = headerHeight => {
 
   mobMenu.style.paddingTop = `${headerHeight}px`;
 
-  console.log(headerHeight);
+  // console.log(headerHeight);
 };
 
 const removeHeightOffset = () => {
@@ -120,26 +128,24 @@ const mobMenuToggle = () => {
     mobHeader.classList.toggle("custom-header-mobile--open");
 
     // Close mini cart if its open
-    miniCart.classList.contains(activeCartClass) ? miniCart.classList.remove(activeCartClass) : '';
+    miniCart.classList.contains(activeCartClass)
+      ? miniCart.classList.remove(activeCartClass)
+      : "";
   });
 };
 
-const bannerClose = msg => {
-  promoBannerClose.addEventListener("click", () => {
-    console.log('close, dammit.');
-    promoBanner.classList.add(msg);
+const bannerClose = (banner, className) => {
+  console.log(`${banner.id} ${className}`);
+
+  let bannerDiv = document.getElementById(banner);
+  let closeButton = document.getElementById(`${banner.id}Close`);
+  console.log(closeButton);
+
+  closeButton.addEventListener("click", () => {
+    console.log('clicked');
+    banner.classList.add(className);
     let headerHeightShort = mobHeader.offsetHeight;
     addHeightOffset(headerHeightShort);
-  });
-};
-
-
-const bannerCloseDesktop = msg => {
-  promoBannerClose.addEventListener("click", () => {
-    console.log('close, dammit.');
-    // promoBanner.classList.add(msg);
-    // let headerHeightShort = mobHeader.offsetHeight;
-    // addHeightOffset(headerHeightShort);
   });
 };
 
@@ -159,56 +165,55 @@ const subMenuDropdown = () => {
 
 // Making Desktop Colelction Hover change background to current collection image
 const menuCollectionHover = () => {
-
   // Set initial background using first collection;
-  MenuImg.style.backgroundImage = `url('${collectionMenuItems[0].dataset.menuimg}')`;
+  MenuImg.style.backgroundImage = `url('${
+    collectionMenuItems[0].dataset.menuimg
+  }')`;
 
   // Collection Dropdown Image hoverover change
   for (link of collectionMenuItems) {
     let imgData = link.dataset.menuimg;
 
-    link.addEventListener(
-      "mouseover",
-      () => {
-        MenuImg.style.backgroundImage = `url('${imgData}')`;
-      }
-    );
+    link.addEventListener("mouseover", () => {
+      MenuImg.style.backgroundImage = `url('${imgData}')`;
+    });
   }
-}
+};
 
 // Mini Cart Header Function
 const miniCartFunctions = () => {
+  console.log("mini cart loadeddd");
 
   let closeCart = () => {
     miniCart.classList.remove(activeCartClass);
   };
 
   let openCart = () => {
-    mobMenu.classList.contains("custom-header-mobile__menu--open") ? mobMenu.classList.remove("custom-header-mobile__menu--open") : "";
-    navToggle.classList.contains("custom-header-mobile__menu-toggle--open") ? navToggle.classList.remove("custom-header-mobile__menu-toggle--open") : "";
-    mobHeader.classList.contains("custom-header-mobile--open") ? mobHeader.classList.remove("custom-header-mobile--open") : "";
+    mobMenu.classList.contains("custom-header-mobile__menu--open")
+      ? mobMenu.classList.remove("custom-header-mobile__menu--open")
+      : "";
+    navToggle.classList.contains("custom-header-mobile__menu-toggle--open")
+      ? navToggle.classList.remove("custom-header-mobile__menu-toggle--open")
+      : "";
+    mobHeader.classList.contains("custom-header-mobile--open")
+      ? mobHeader.classList.remove("custom-header-mobile--open")
+      : "";
     miniCart.classList.add(activeCartClass);
   };
 
   // Mini Cart Function
   miniCart.addEventListener("click", e => {
     e.preventDefault();
+    console.log("clicking");
     let container = miniCart.parentElement;
     miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
   });
-}
-
+};
 
 // Doc Ready
 $(function() {
   console.log("custom js loaded");
   mobMenuToggle();
-
-  // Enabling/Disabling scrolling
-  // mobMenu.classList.contains("customer-header-mobile__menu--open") ?
-  //     disableScroll() : enableScroll();
-
-  bannerClose("promo_banner_hide");
 
   // Creating vertical window offset to compensate for fixed header
   let headerHeight = mobHeader.offsetHeight;
@@ -225,24 +230,20 @@ $(function() {
   });
 
   // Banner Close on Desktop
-  // 'desktop' screen size is 960px
-  let desktopScreenSize = 960;
   window.innerWidth >= desktopScreenSize
-    ? (
-        mobHeader.classList.remove("custom-header-mobile--is-mobile"),
-        console.log('desktop'),
-        bannerCloseDesktop()
-    )
-    : (
-        addHeightOffset(headerHeight),
-        console.log('this is mbile')
-      );
+    ? (mobHeader.classList.remove("custom-header-mobile--is-mobile"),
+      console.log("desktop"),
+      bannerClose(promoBannerDesktop, "promo_banner_hide"),
+      addHeightOffset(headerHeight))
+
+    : (bannerClose(promoBanner, "promo_banner_hide"),
+      addHeightOffset(headerHeight),
+      console.log("this is mobile"));
 
   menuCollectionHover();
 
   // Mini Cart Function
   miniCartFunctions();
-  
 });
 
 // TO ADD
