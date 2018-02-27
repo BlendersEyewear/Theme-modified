@@ -8712,7 +8712,9 @@ select.custom-header__currencies{
   position: relative;
   z-index: 999;
 
+  @include flex(1 0 auto);
   flex: 1 0 auto;
+  max-height: -webkit-max-content;
   max-height: max-content;
   background: white;
   box-shadow: inset 0 -1px 0 0 $color-light;
@@ -9248,6 +9250,7 @@ a.custom-header-mobile__refer{
 
 .custom-header-desktop__top-banner-link{
   margin-left: 1rem;
+  width: unset;
 }
 
 .custom-header-desktop__container{
@@ -9416,7 +9419,7 @@ a.custom-header-mobile__refer{
   }
 
   @media screen and (min-width: $headerDesktopLargeUp){
-    width: 8.1rem;
+    width: 140px;
   }
 }
 
@@ -9431,7 +9434,7 @@ a.custom-header-mobile__refer{
   transform: translateY(4px);
 
   @media screen and (min-width: $headerDesktopLargeUp){
-    min-width: 9.5rem;
+    min-width: 165px;
   }
 }
 
@@ -9581,7 +9584,8 @@ a.custom-header-desktop__refer{
     font-weight: 600;
     letter-spacing: 2px;
     padding: .35rem .75rem;
-    width: max-content;
+    min-width: -webkit-max-content;
+    min-width: max-content;
   }
 }
 
