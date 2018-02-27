@@ -1,7 +1,8 @@
 /* Default currency */
 var defaultCurrency = "USD" || shopCurrency;
 
-if ($(window).width() >= 768) {
+// Increase desktop size from 768 to 960 -- also changed the css classes to what I'm using
+if ($(window).width() >= 960) {
   var $currencySelector = $(".custom-header-desktop__currency .currencies");
 } else {
   var $currencySelector = $(".mobile-bottom-nav__item .currencies");

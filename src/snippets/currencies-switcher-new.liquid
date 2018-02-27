@@ -9,9 +9,9 @@
 
     {% if code != shop.currency and codes contains code %}
 
-    {% assign flag = code | prepend: 'flag-' | append: '.svg' %}
+    {% assign flag = code | downcase | prepend: 'flag-' | append: '.svg' %}
 
-    <option data-fla="{{ flag | asset_url }}" value="{{ code }}">{{ code }}</option>
+    <option data-flag="https:{{ flag | asset_url }}" value="{{ code }}">{{ code }}</option>
     {% comment %} <option value="{{ code }}">{{ code }}</option> {% endcomment %}
     {% endif %}
   {% endfor %}

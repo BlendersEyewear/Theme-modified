@@ -85,10 +85,9 @@ const removeHeightOffset = () => {
   // mobMenu.style.paddingTop = `${headerHeight}px`;
 };
 
-
 const mobMenuToggle = () => {
   navToggle.addEventListener("click", () => {
-    console.log("clicked");
+    // console.log("clicked");
     navToggle.classList.toggle("custom-header-mobile__menu-toggle--open");
     mobMenu.classList.toggle("custom-header-mobile__menu--open");
     mobHeader.classList.toggle("custom-header-mobile--open");
@@ -101,14 +100,13 @@ const mobMenuToggle = () => {
 };
 
 const bannerClose = (banner, className) => {
-  console.log(`${banner.id} ${className}`);
 
   let bannerDiv = document.getElementById(banner);
   let closeButton = document.getElementById(`${banner.id}Close`);
-  console.log(closeButton);
+  // console.log(closeButton);
 
   closeButton.addEventListener("click", () => {
-    console.log('clicked');
+    // console.log("clicked");
     banner.classList.add(className);
     let headerHeightShort = mobHeader.offsetHeight;
     addHeightOffset(headerHeightShort);
@@ -178,7 +176,7 @@ const miniCartFunctions = () => {
 
 // Doc Ready
 $(function() {
-  console.log("custom js loaded");
+  console.log("custom header js loaded");
   mobMenuToggle();
 
   // Creating vertical window offset to compensate for fixed header
@@ -201,7 +199,6 @@ $(function() {
       console.log("desktop"),
       bannerClose(promoBannerDesktop, "promo_banner_hide"),
       addHeightOffset(headerHeight))
-
     : (bannerClose(promoBanner, "promo_banner_hide"),
       addHeightOffset(headerHeight),
       console.log("this is mobile"));
@@ -210,6 +207,85 @@ $(function() {
 
   // Mini Cart Function
   miniCartFunctions();
+
+
+  // Currency Selector --> inherited and modified from Turbo Theme
+  /* Default currency */
+  var defaultCurrency = "USD" || shopCurrency;
+
+  // Increase desktop size from 768 to 960 -- also changed the css classes to what I'm using
+  if ($(window).width() >= 960) {
+    var $currencySelector = $(".custom-header-desktop__currency .currencies");
+  } else {
+    var $currencySelector = $(".mobile-bottom-nav__item .currencies");
+  }
+
+  /* Cookie currency */
+  var cookieCurrency = Currency.cookie.read();
+
+  /* Fix for customer account pages */
+  $("span.money span.money").each(function() {
+    $(this)
+      .parents("span.money")
+      .removeClass("money");
+  });
+
+  /* Saving the current price */
+  $("span.money").each(function() {
+    $(this).attr("data-currency-USD", $(this).html());
+  });
+
+  // If there's no cookie.
+  if (cookieCurrency == null) {
+    if (shopCurrency !== defaultCurrency) {
+      Currency.convertAll(shopCurrency, defaultCurrency);
+    } else {
+      Currency.currentCurrency = defaultCurrency;
+    }
+  } else if (
+    $currencySelector.size() &&
+    $currencySelector.find("option[value=" + cookieCurrency + "]").size() === 0
+  ) {
+    // If the cookie value does not correspond to any value in the currency dropdown.
+    Currency.currentCurrency = shopCurrency;
+    Currency.cookie.write(shopCurrency);
+  } else if (cookieCurrency === shopCurrency) {
+    Currency.currentCurrency = shopCurrency;
+  } else {
+    Currency.convertAll(shopCurrency, cookieCurrency);
+  }
+
+  $currencySelector.val(Currency.currentCurrency).change(function() {
+    var newCurrency = $(this).val();
+    Currency.convertAll(Currency.currentCurrency, newCurrency);
+    jQuery(".selected-currency").text(Currency.currentCurrency);
+    // console.log(Currency.currentCurrency); // <-- Add flag change here
+    var flagImg = $(this).find(':selected').data('flag');
+    var flagImgUrl = 'url(\'' +flagImg + '\')';
+    // console.log(flagImgUrl)
+    $(this).css('background-image', flagImgUrl);
+    console.log(flagImg);
+  });
+
+  var original_selectCallback = window.selectCallback;
+  var selectCallback = function(variant, selector) {
+    original_selectCallback(variant, selector);
+    Currency.convertAll(shopCurrency, $currencySelector.val());
+    jQuery(".selected-currency").text(Currency.currentCurrency);
+  };
+
+  function convertCurrencies() {
+    if (
+      $currencySelector.val() &&
+      $currencySelector.val() != $currencySelector.data("default-shop-currency")
+    ) {
+      Currency.convertAll(
+        $currencySelector.data("default-shop-currency"),
+        $currencySelector.val()
+      );
+      jQuery(".selected-currency").text(Currency.currentCurrency);
+    }
+  }
 });
 
 // TO ADD
