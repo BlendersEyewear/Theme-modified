@@ -211,11 +211,27 @@ $(function() {
 
   // Mini Cart Functions for Header
   if (window.innerWidth >= desktopScreenSize) {
+    console.log('desktop');
     var miniCartDesktop = $(".custom-header__mini_cart");
     $(miniCartDesktop).removeClass("active_link");
 
     $(".dropdown_link").on("click", function(e) {
       e.preventDefault();
+    });
+
+    $(miniCartDesktop).on("mouseenter", function(e) {
+      $(this).addClass("active_link");
+
+      if ($(this).hasClass("active_link")) {
+        console.log('its active');
+      }
+    });
+
+    // Close Desktop Mini Cart by click outside of it
+    $("html").on("click", function(event) {
+      if (!$(event.target).closest(".custom-header__mini_cart").length && $(".cart_content").is(":visible")) {
+        $(miniCartDesktop).removeClass("active_link");
+      }
     });
 
     $(".dropdown_link").on("mouseenter", function() {

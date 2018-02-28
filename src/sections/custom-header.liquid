@@ -4,7 +4,7 @@
     {% comment %} Top menu {% endcomment %}
     <div class="custom-header-mobile__header-container">
         {% if section.settings.promo_text != blank %}
-            <div id="promoBanner" class="promo_banner custom-header-mobile__promo">
+            <div id="promoBanner" {% if section.settings.promo_text_color %}style="background-color: {{ section.settings.promo_text_color }}"{% endif %} class="promo_banner custom-header-mobile__promo">
                 {{ section.settings.promo_text }}
                 <div id="promoBannerClose" class="promo_banner-close"></div>
             </div>
@@ -276,7 +276,7 @@
 
   {% comment %} Promo Banner {% endcomment %}
   {% if section.settings.promo_text != blank %}
-      <div id="promoBannerDesktop" class="promo_banner custom-header-desktop__promo">
+      <div id="promoBannerDesktop"{% if section.settings.promo_text_color %} style="background-color: {{ section.settings.promo_text_color }}"{% endif %} class="promo_banner custom-header-desktop__promo">
           {{ section.settings.promo_text }}
           <div id="promoBannerDesktopClose" class="promo_banner-close"></div>
       </div>
@@ -480,7 +480,7 @@
                       <ul class="custom-header-desktop__link-wrapper">
                         {% for link in linklists[link.handle].links %}
 
-                        {%if link.object.image %}
+                        {% if link.object.image %}
                           <li>
                             <a class="custom-header-desktop__collection-sublink{%if link.active %} active{% endif %}" href="{{ link.url }}" data-menuimg="{{ link.object.image | img_url: '560x'}}">
                               {{link.title}}
@@ -584,6 +584,12 @@
       "type": "richtext",
       "id": "promo_text",
       "label": "Promotional banner text"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_color",
+      "label": "Promo Banner Color",
+      "info": "use a hex color with the # symbol included. Will be black if field is empty."
     },
     {
       "type": "checkbox",

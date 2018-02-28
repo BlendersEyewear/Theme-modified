@@ -8730,6 +8730,7 @@ img.currency-arrow {
   flex: 100%;
   @include flex(100%);
   height: auto;
+  font-weight: bold;
 
   .promo_banner-close:after{
     color: red;
@@ -8966,6 +8967,13 @@ a.custom-header-desktop__cart{
   }
 }
 
+@media screen and (min-width: $headerDesktopUp){
+  .custom-header-desktop__cart.active_link+.cart_content{
+    display: block;
+    min-width: 360px;
+  }
+}
+
 a.custom-header-mobile__cart+.cart_content{
   width: 320px;
   max-width: 360px;
@@ -9193,7 +9201,7 @@ a.custom-header-mobile__refer{
 
 
 .custom-header-mobile__social{
-  margin: 2rem 0 3rem;
+  margin: 2rem 0 2.25rem;
 
   .social-username{
     text-align: center;
@@ -9203,7 +9211,7 @@ a.custom-header-mobile__refer{
   }
 
   .social_icons{
-    margin: 0 0 0.5rem;
+    margin: 0 0 1.75rem;
     padding: 0 1rem;
     max-width: 100%;
 
@@ -9595,6 +9603,7 @@ a.custom-header-mobile__refer{
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  margin: 1rem;
 }
 
 .submenu__title{
