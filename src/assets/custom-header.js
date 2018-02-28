@@ -27,6 +27,7 @@ const navToggle = document.getElementById("mobileNavToggle");
 // Cart
 const miniCart = document.querySelector(".custom-header__mini_cart");
 const cartContainer = document.querySelector(".custom-header__cart_container");
+const headerMiniCart = document.querySelector("#headerCart");
 
 // Class to show its open
 const activeCartClass = "cart-is-active";
@@ -100,7 +101,6 @@ const mobMenuToggle = () => {
 };
 
 const bannerClose = (banner, className) => {
-
   let bannerDiv = document.getElementById(banner);
   let closeButton = document.getElementById(`${banner.id}Close`);
   // console.log(closeButton);
@@ -146,7 +146,7 @@ const menuCollectionHover = () => {
 
 // Mini Cart Header Function
 const miniCartFunctions = () => {
-  console.log("mini cart loadeddd");
+  console.log("mini cart loaded");
 
   let closeCart = () => {
     miniCart.classList.remove(activeCartClass);
@@ -165,16 +165,16 @@ const miniCartFunctions = () => {
     miniCart.classList.add(activeCartClass);
   };
 
-  // Mini Cart Function
-  miniCart.addEventListener("click", e => {
-    e.preventDefault();
-    console.log("clicking");
-    let container = miniCart.parentElement;
-    miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
-  });
+    miniCart.addEventListener("click", e => {
+      e.preventDefault();
+      console.log("clicking");
+      let container = miniCart.parentElement;
+      miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
+    });
 };
 
 // Doc Ready
+// ----------------------------------------
 $(function() {
   console.log("custom header js loaded");
   mobMenuToggle();
@@ -208,6 +208,37 @@ $(function() {
   // Mini Cart Function
   miniCartFunctions();
 
+
+  // Mini Cart Functions for Header
+  if (window.innerWidth >= desktopScreenSize) {
+    var miniCartDesktop = $(".custom-header__mini_cart");
+    $(miniCartDesktop).removeClass("active_link");
+
+    $(".dropdown_link").on("click", function(e) {
+      e.preventDefault();
+    });
+
+    $(".dropdown_link").on("mouseenter", function() {
+      if (!$(this).hasClass("active_link")) {
+        $(".dropdown_container").hide();
+        $(this)
+          .parents(".main_nav")
+          .find('[data-dropdown="' + $(this).data("dropdown-rel") + '"]')
+          .show();
+
+        if ($(this).hasClass("mini_cart")) {
+          $(this)
+            .parent(".cart_container")
+            .addClass("active_link");
+        } else {
+          $(this).addClass("active_link");
+          $(".is-absolute")
+            .parent()
+            .removeClass("feature_image");
+        }
+      }
+    });
+  }
 
   // Currency Selector --> inherited and modified from Turbo Theme
   /* Default currency */
@@ -260,11 +291,11 @@ $(function() {
     Currency.convertAll(Currency.currentCurrency, newCurrency);
     jQuery(".selected-currency").text(Currency.currentCurrency);
     // console.log(Currency.currentCurrency); // <-- Add flag change here
-    var flagImg = $(this).find(':selected').data('flag');
-    var flagImgUrl = 'url(\'' +flagImg + '\')';
-    // console.log(flagImgUrl)
-    $(this).css('background-image', flagImgUrl);
-    console.log(flagImg);
+    var flagImg = $(this)
+      .find(":selected")
+      .data("flag");
+    var flagImgUrl = "url('" + flagImg + "')";
+    $(this).css("background-image", flagImgUrl);
   });
 
   var original_selectCallback = window.selectCallback;
@@ -272,6 +303,7 @@ $(function() {
     original_selectCallback(variant, selector);
     Currency.convertAll(shopCurrency, $currencySelector.val());
     jQuery(".selected-currency").text(Currency.currentCurrency);
+    console.log("here!!");
   };
 
   function convertCurrencies() {
