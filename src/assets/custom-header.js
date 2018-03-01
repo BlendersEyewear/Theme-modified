@@ -1,6 +1,8 @@
 // Custom Header Script by Adam - 2/15
 
-// VARS
+// --------------------------------------
+// VARS 
+// --------------------------------------
 const body = document.body;
 
 // Different templates
@@ -13,9 +15,7 @@ const promoBanner = document.getElementById("promoBanner");
 const promoBannerClose = document.getElementById("promoBannerClose");
 
 const promoBannerDesktop = document.getElementById("promoBannerDesktop");
-const promoBannerDesktopClose = document.getElementById(
-  "promoBannerDesktopClose"
-);
+const promoBannerDesktopClose = document.getElementById("promoBannerDesktopClose");
 
 //  Third Party Popups
 const ribbonContainer = document.getElementById("56d9-a3be_ribbon_container");
@@ -23,6 +23,7 @@ const ribbonContainer = document.getElementById("56d9-a3be_ribbon_container");
 // Header DOM
 const mobHeader = document.getElementById("customHeaderMobile");
 const navToggle = document.getElementById("mobileNavToggle");
+const customStickyNav = document.getElementById("customStickyNav");
 
 // Cart
 const miniCart = document.querySelector(".custom-header__mini_cart");
@@ -41,13 +42,27 @@ const mobMenuCategoryHeader = document.querySelectorAll(
   ".custom-header-mobile__category"
 );
 
-const MenuImg = document.getElementById("customHeaderDesktopMenuImg");
+const MenuImg = document.querySelector(".custom-header-desktop__menu-img");
 const collectionMenuItems = document.querySelectorAll(
   ".custom-header-desktop__collection-sublink"
 );
 
 // WINDOW SIZES
 const desktopScreenSize = 960;
+
+// --------------------------------------
+// Utilities 
+// --------------------------------------
+const throttle = (fn, wait) => {
+  let time = Date.now();
+
+  return () => {
+    if (time + wait - Date.now() < 0) {
+      fn();
+      time = Date.now();
+    }
+  }
+}
 
 // Height offset for mobile menu
 const addHeightOffset = headerHeight => {
@@ -165,12 +180,12 @@ const miniCartFunctions = () => {
     miniCart.classList.add(activeCartClass);
   };
 
-    miniCart.addEventListener("click", e => {
-      e.preventDefault();
-      console.log("clicking");
-      let container = miniCart.parentElement;
-      miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
-    });
+  miniCart.addEventListener("click", e => {
+    e.preventDefault();
+    console.log("clicking");
+    let container = miniCart.parentElement;
+    miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
+  });
 };
 
 // Doc Ready
@@ -191,6 +206,7 @@ $(function() {
     $(this)
       .next()
       .slideToggle(250, "swing");
+    $(this).toggleClass("custom-header-mobile__category--open");
   });
 
   // Banner Close on Desktop
@@ -208,10 +224,9 @@ $(function() {
   // Mini Cart Function
   miniCartFunctions();
 
-
   // Mini Cart Functions for Header
   if (window.innerWidth >= desktopScreenSize) {
-    console.log('desktop');
+    console.log("desktop");
     var miniCartDesktop = $(".custom-header__mini_cart");
     $(miniCartDesktop).removeClass("active_link");
 
@@ -223,13 +238,16 @@ $(function() {
       $(this).addClass("active_link");
 
       if ($(this).hasClass("active_link")) {
-        console.log('its active');
+        console.log("its active");
       }
     });
 
     // Close Desktop Mini Cart by click outside of it
     $("html").on("click", function(event) {
-      if (!$(event.target).closest(".custom-header__mini_cart").length && $(".cart_content").is(":visible")) {
+      if (
+        !$(event.target).closest(".custom-header__mini_cart").length &&
+        $(".cart_content").is(":visible")
+      ) {
         $(miniCartDesktop).removeClass("active_link");
       }
     });
@@ -256,7 +274,24 @@ $(function() {
     });
   }
 
-  // Currency Selector --> inherited and modified from Turbo Theme
+  // Sticky Header on Scroll on Dekstop
+  if (window.innerWidth >= desktopScreenSize) {
+
+    let stickyHeight = 800;    
+
+    let scrollPositionFunc = () =>{
+      let windowOffset = window.pageYOffset;
+      windowOffset > stickyHeight ? (console.log('header should pop out')) : '';
+    }
+    
+    window.addEventListener("scroll", throttle(scrollPositionFunc, 300));
+  
+  }
+
+  // --------------------------------------
+  // Currency Selector
+  // --------------------------------------
+  //  --> inherited and modified from Turbo Theme
   /* Default currency */
   var defaultCurrency = "USD" || shopCurrency;
 

@@ -8602,7 +8602,8 @@ $mobItemPadding: 20px 16px;
 $mobItemPaddingVert: 20px 0;
 $color-accent: #00A3F0;
 $color-accent-secondary: #F7615C;
-$color-light: #F7F9FA;
+$color-light: hsla(192, 6%, 98%, 1);
+$color-border-light: rgb(200, 202, 202);
 $color-background-light: #F7F9FA;
 $btnColor: lightgray;
 
@@ -8634,14 +8635,21 @@ $headerDesktopLargeUp: 1280px;
 select.custom-header__currencies{
     min-height: unset !important;
     height: auto !important;
-    font-weight: 400;
-    font-size: .75rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1;
     text-align: center;
-    background-position: left -2px;
+    font-variant-caps: all-small-caps;
+    background-position: left center;
     background-size: 24px 20px;
     padding-left: 26px;
     min-width: unset;
     width: auto;
+
+    @media screen and (min-width: $headerDesktopUp){
+      font-weight: 400;
+      font-size: 0.75rem;
+    }
 }
 
 img.currency-arrow {
@@ -8765,6 +8773,19 @@ img.currency-arrow {
   padding: 1rem;
   background: white;
   margin-bottom: 0;
+  position: relative;
+
+  .search-submit{
+    top: 29px;
+    right: 22px;
+    opacity: 0.8;
+    
+    &:before{
+      font-size: 1rem;
+      opacity: 0.5;
+      font-weight: bold;
+    }
+  }
 }
 
 input.custom-header-mobile__search-terms{
@@ -8831,17 +8852,17 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
   .menu-toggle-bar{
     position: absolute;
     display: block;
-    width: 32px;
+    width: 24px;
     height: 2px;
     background: black;
-    left: 4px;
+    left: 8px;
     -moz-transform-origin: left;
     -webkit-transform-origin: left;
     transform-origin: left;
     transition: all .25s ease-in-out;
 
     &:nth-of-type(1){
-      top: 12px;
+      top: 14px;
       transform: rotate(0);
     }
 
@@ -8852,7 +8873,7 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
 
     &:nth-of-type(3){
       top: unset;
-      bottom: 12px;
+      bottom: 14px;
       transform: rotate(0);
     }
   }
@@ -8866,9 +8887,7 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
 .custom-header-mobile__menu-toggle--open .menu-toggle-bar{
 
     &:nth-of-type(1){
-      top: 9px;
-      left: 8px;
-      transform: rotate(45deg);
+      transform: translate(4px, -3px) rotate(45deg);
     }
 
     &:nth-of-type(2){
@@ -8877,10 +8896,7 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
     }
 
     &:nth-of-type(3){
-      top: unset;
-      left: 8px;
-      bottom: 9px;
-      transform: rotate(-45deg);
+      transform: translate(4px, 2px) rotate(-45deg);
     }
 }
 
@@ -9060,6 +9076,10 @@ span.custom-header-mobile__cart-count{
     background: darkgray;
     color: white;
   }
+
+  @media screen and (min-width: $headerTabletUp){
+    max-width: 24rem;
+  }
 }
 
 .custom-header-mobile__menu::-webkit-scrollbar {
@@ -9067,12 +9087,13 @@ span.custom-header-mobile__cart-count{
 }
 
 .custom-header-mobile__menu--open{
-  max-width: 100%;
+  // max-width: 100%;
   transform: translateX(0);
-  overflow: scroll;
+  overflow-y: scroll;
 
   @media screen and (min-width: $headerTabletUp){
-    max-width: 24rem;
+    // width: 24rem;
+    // max-width: 24rem;
   }
 }
 
@@ -9123,7 +9144,7 @@ span.custom-header-mobile__cart-count{
         // display: block;
         // color: black;
         padding: 16px 40px;
-        @include DropdownMenuLink(black, $color-light);
+        @include DropdownMenuLink(black, white);
         font-size: 18px;
         letter-spacing: 2px;
         line-height: 1rem;
@@ -9144,7 +9165,7 @@ span.custom-header-mobile__cart-count{
 
   a {
     padding: $mobItemPadding;
-    @include DropdownMenuLink(black, $color-light);
+    @include DropdownMenuLink(black, white);
   }
 }
 
@@ -9152,7 +9173,7 @@ p.custom-header-mobile__category{
   margin: 0;
   padding: $mobItemPadding;
   cursor: pointer;
-  @include DropdownMenuLink(black, $color-light);
+  @include DropdownMenuLink(black, white);
   clear: both;
 
   .arrow{
@@ -9163,11 +9184,13 @@ p.custom-header-mobile__category{
   .arrow--open{
     transform: rotate(180deg);
   }
+
+
 }
 
 
 .custom-header-mobile__category--open{
-  box-shadow: inset 0 -2px 0 0 $color-accent;
+  box-shadow: inset 0 -1px 0 0 hsla(0, 0%, 72%, 0.6);
 }
 
 // Child lists
@@ -9175,6 +9198,10 @@ p.custom-header-mobile__category{
   max-height: 0;
   overflow: hidden;
   transition: max-height .3s ease-in-out;
+
+  & > li > a{
+    @include DropdownMenuLink(black, white);
+  }
 }
 
 .submenu--open{
@@ -9201,7 +9228,8 @@ a.custom-header-mobile__refer{
 
 
 .custom-header-mobile__social{
-  margin: 2rem 0 2.25rem;
+  margin: 2rem 0 0;
+  padding: 0 0 3.25rem;
 
   .social-username{
     text-align: center;
@@ -9211,7 +9239,7 @@ a.custom-header-mobile__refer{
   }
 
   .social_icons{
-    margin: 0 0 1.75rem;
+    margin: 0 0 1.25rem;
     padding: 0 1rem;
     max-width: 100%;
 
@@ -9232,7 +9260,8 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-mobile__bottom{
-  margin-top: auto;
+  margin: auto 0  0;
+  padding: 0 0 2rem;
 
   // display: flex;
   // justify-content: center;
@@ -9253,10 +9282,12 @@ a.custom-header-mobile__refer{
   @include flexbox();
   @include justify-content(center);
   @include align-items(center);
+  font-size: 1.125rem;
+  font-weight: 600;
   font-variant-caps: all-small-caps;
   letter-spacing: 1px;
 
-  padding: 2rem .5rem;
+  padding: 0 .5rem;
   text-transform: none;
   &:first-of-type, &:nth-of-type(2){
     box-shadow: inset -1px 0 0 0 $color-light;
@@ -9264,8 +9295,21 @@ a.custom-header-mobile__refer{
 
 }
 
+@media screen and (min-width: $headerTabletUp){
+  .custom-header-mobile__social{
+    margin: auto 0 1.75rem;
+  }
+  .custom-header-mobile__bottom{
+    margin: 2rem 0;
+  }
+
+  .mobile-bottom-nav__item{
+    padding: 0 .5rem;
+  }
+}
+
 // ========================================
-// Custom Desktop Header
+// Custom Desktop Header / Custom Header Dekstop
 // ========================================
 .custom-header-desktop{
   display: none;
@@ -9706,6 +9750,31 @@ input.custom-header-desktop__search-input{
     border: none;
     box-shadow: inset 0 0 0 2px #919A9F;
   }
+}
+
+
+// --------------------------
+// Custom Header Sticky / Custom Sticky Header
+// --------------------------
+.custom-header-sticky-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
+  transition: all .25s ease-in-out;
+  transform: translateY(-110%);
+
+  span.cart_count{
+    font-size: .75rem;
+  }
+
+}
+
+.custom-header-sticky-nav--sticky{
+  transform: translateY(-0%);
 }
 
 

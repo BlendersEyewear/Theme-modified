@@ -174,7 +174,9 @@
 
             {%if link.handle == 'snow-goggles' %}
 
-              <li class="custom-header-mobile__link custom-header-mobile__link--icon"><a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" alt="snow goggles icon" class="mobile-category-icon">{{ link.title }}</a></li>
+              <li class="custom-header-mobile__link custom-header-mobile__link--icon">
+                <a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" alt="snow goggles icon" class="mobile-category-icon">{{ link.title }}</a>
+              </li>
             
             {% elsif link.links == blank %}
 
@@ -183,10 +185,13 @@
             {% elsif link.handle == "sunglasses" %}
 
                 <li class="custom-header-mobile__sublink custom-header-mobile__sublink--icon">
-                    <p class="custom-header-mobile__category custom-header-mobile__category--icon" data-no-instant href="{{ link.url }}"><img src="{{'icon-sunglasses.svg' | asset_url}}" alt="sunglasses icon" class="mobile-category-icon">{{ link.title }}<span class="right icon-down-arrow arrow"></span></p>
-                    <ul class="submenu nst-content">
+                    <p class="custom-header-mobile__category custom-header-mobile__category--icon" data-no-instant href="{{ link.url }}">
+                      <img src="{{'icon-sunglasses.svg' | asset_url}}" alt="sunglasses icon" class="mobile-category-icon">{{ link.title }}<span class="right icon-down-arrow arrow"></span>
+                    </p>
+                    
+                    <ul class="submenu">
                       {% for link in linklists[link.handle].links %}
-                        <li><a {%if link.active %}class="active"{% endif %}} href="{{ link.url }}">{{ link.title }}</a></li>
+                        <li><a {%if link.active %}class="active"{% endif %} href="{{ link.url }}">{{ link.title }}</a></li>
                       {% endfor %}
                     </ul>
                 </li>
@@ -550,6 +555,211 @@
           <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" autocapitalize="off" autocomplete="off" autocorrect="off" class="custom-header-desktop__search-input" />
         </form>
       </div>
+
+
+    </div>
+  </div>
+
+
+  {% comment %} Sticky Navigation on Dekstop Header {% endcomment %}
+  <div id="customStickyNav" class="main_nav_wrapper custom-header-sticky-nav">
+    <div class="container promotions-grid-full_width custom-header-desktop__nav-container custom-header-desktop__container custom-header-desktop__container--flex-start">
+
+      {% comment %} LOGO {% endcomment %}
+      <a href="{{ shop.url }}" title="{{ shop.name | escape }}" class="custom-header-desktop__logo">
+
+        {% if section.settings.logo != nil %}
+            <img
+              src="{{ section.settings.logo | img_url: '400x' }}"
+              alt="{{ shop.name | escape }}" 
+              class="custom-header-desktop__logo"
+              />
+        {% elsif section.settings.mobile_logo != nil %}
+            <img src="{{ section.settings.mobile_logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      </a>
+
+      {% comment %} MENU {% endcomment %}
+      <div class="custom-header-desktop__menu">
+
+        {% for link in linklists.mobile-menu.links %}
+
+            {%if link.handle == 'snow-goggles' %}
+              <li class="custom-header-desktop__link custom-header-desktop__link--icon custom-header-desktop__link--snow">
+                <a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders {{ link.title }} Icon" />{{ link.title }}</a>
+              </li>
+
+
+            {% elsif link.links == blank %}
+
+                <li class="custom-header-desktop__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+
+            {% comment %} If Sunglasses {% endcomment %}
+            {% elsif link.handle == "sunglasses" %}
+
+                <li class="custom-header-desktop__sublink custom-header-desktop__sublink--icon">
+
+                    <p class="custom-header-desktop__category custom-header-desktop__category--icon custom-header-desktop__category--sunglasses" data-no-instant href="{{ link.url }}"><img src="{{'icon-sunglasses.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders Sunglasses Icon" /> {{link.title}} <img class="custom-header__menu-arrow custom-header__menu-arrow--sunglasses" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></span></p>
+                    
+                      <ul class="submenu custom-header-desktop__submenu">
+                        {% for link in linklists[link.handle].links %}
+                          <li>
+                            <a href="{{ link.url }}">{{ link.title }}</a>
+                          </li>
+
+                        {% endfor %}
+                      </ul>
+
+                </li>
+
+            {% else %} {% comment %} if not sunglasses  {% endcomment %}
+
+                <li class="sublink custom-header-desktop__sublink">
+                  <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{% if link.handle == "snow-goggles" %}<img src="" alt="" />{% endif%}{{ link.title }} <img class="custom-header__menu-arrow" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></p>
+                  <ul class="submenu custom-header-desktop__submenu">
+
+                      {% for link in linklists[link.handle].links %}
+
+                          {% if linklists[link.handle] == empty %}
+
+                              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+                          {% else %}
+
+                          <li class="sublink custom-header-desktop__sublink">
+                              <p class="custom-header-desktop__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <img class="custom-header__menu-arrow" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></p>
+                              <ul>
+                              {% for link in linklists[link.handle].links %}
+                                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                              {% endfor %}
+                              </ul>
+                          </li>
+                          {% endif %}
+
+                      {% endfor %}
+                  </ul>
+                </li>
+
+            {% endif %}
+
+        {% endfor %}
+
+      </div>{% comment %} End Menu {% endcomment %}
+
+      {% comment %} SEARCH  {% endcomment %}
+
+      <div class="custom-header-desktop__search" data-dropdown="search">
+        <form action="/search" class="custom-header-desktop__search-form">
+          {% if settings.search_option != 'everything' %}
+            <input type="hidden" name="type" value="product"/>
+          {% endif %}
+          <span class="search-submit custom-header-desktop__search-submit"><img src="{{'icon-search-white.svg' | asset_url }}" alt="search"></span>
+          <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" autocapitalize="off" autocomplete="off" autocorrect="off" class="custom-header-desktop__search-input" />
+        </form>
+      </div>
+
+      {% comment %} Cart {% endcomment %}
+      {% if section.settings.show_cart %}
+        <div class="custom-header-desktop__top-banner-link custom-header-desktop__top-banner-link--cart">
+        
+          <div class="custom-header__cart_container custom-header__cart_container--desktop">
+            <a href="/cart" class="custom-header__mini_cart dropdown_link custom-header-desktop__cart" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant>
+              <img src="{{ 'cart.svg' | asset_url }}" alt="blenders cart icon" class="custom-header-desktop__cart-icon"> <span class="cart_count custom-header-desktop__cart-count">{{ cart.item_count }}</span>
+            </a>
+
+            {% unless template == 'cart' %}
+              <div class="cart_content cart_content--desktop animated fadeIn">
+                <div class="js-empty-cart__message {% if cart.item_count > 0 %}hidden{% endif %}">
+                  <p class="empty_cart">{{ 'layout.general.empty_cart' | t }}</p>
+                </div>
+                <form action="/checkout" method="post" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" data-shop-name="{{ shop.name | escape }}" class="js-cart_content__form {% if cart.item_count == 0 %}hidden{% endif %}">
+                  <a class="cart_content__continue-shopping secondary_button">
+                    {{ 'cart.general.continue_shopping_link_html' | t }}
+                  </a>
+                  <ul class="cart_items js-cart_items clearfix">
+                    {% for item in cart.items %}
+                      <li class="cart_item clearfix">
+                        <a href="{{ item.url }}">
+                          {% if item.image %}
+                            <div class="cart_image">
+                              <img src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" />
+                            </div>
+                          {% endif %}
+
+                          {% comment %} Add Sale / Before Price - Edited by Adam - 2/9/18 {% endcomment %}
+                          <!-- TESTT -->
+                          <strong class="right price">
+                            <span class="money">{{ item.variant.price | money }}</span>
+                            <span class="was_price">
+                              {% if variant.price < variant.compare_at_price and variant.available %}
+                                <span class="money">{{ variant.compare_at_price | money }}</span>
+                              {% endif %}
+                            </span>
+                          </strong>
+                          <div class="item_title">
+                            {{ item.product.title }}
+                            {% unless item.variant.title contains "Title" %}
+                              -
+                              {% for option in item.product.options %}
+                                {{ item.variant.options[forloop.index0] }} {% unless forloop.last %}/{% endunless %}
+                              {% endfor %}
+                            {% endunless %}
+                          </div>
+                        </a>
+                        <div class="left product-quantity-box">
+                          <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
+                          <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" />
+                          <span class="ss-icon product-plus js-change-quantity" data-func="plus"><span class="icon-plus"></span></span>
+                        </div>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  <hr />
+                  <ul>
+                    <li class="cart_subtotal js-cart_subtotal">
+                      <span class="right">
+                        <span class="money">{{ cart.total_price | money }}</span>
+                      </span>
+                      <span>{{ 'layout.general.subtotal' | t }}</span>
+                    </li>
+                    <li>
+                      {% if settings.display_special_instructions and settings.go_to_checkout %}
+                        <textarea id="note" name="note" rows="2" placeholder="{{ 'layout.general.cart_note' | t }}" class="clearfix">{{ cart.note }}</textarea>
+                      {% endif %}
+
+                      {% if settings.display_tos_checkbox and settings.go_to_checkout %}
+                        <p class="tos">
+                          <input type="checkbox" class="tos_agree" id="sliding_agree" required />
+                            <label class="tos_label">
+                              {{ 'cart.general.agree_to_terms_html' | t }}
+                            </label>
+                            {% if settings.tos_page != blank %}
+                              <a href="{{ pages[settings.tos_page].url }}" target="_blank" class="tos_icon">{{ 'cart.general.view_terms' | t }}</a>
+                            {% endif %}
+                        </p>
+                      {% endif %}
+
+                      {% if settings.cart_message != blank %}
+                        <div class="cart_text">
+                          {{ settings.cart_message }}
+                        </div>
+                      {% endif %}
+
+                      <input type="submit" class="action_button" value="{% if settings.go_to_checkout %}{{ 'layout.general.checkout' | t }}{% else %}{{ 'layout.general.go_to_cart' | t }}{% endif %}" />
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            {% endunless %}
+          </div>
+        
+        </div>
+
+
+      {% endif %}
 
 
     </div>
