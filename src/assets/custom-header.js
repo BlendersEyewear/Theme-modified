@@ -105,14 +105,16 @@ const removeHeightOffset = () => {
 
 const mobMenuToggle = () => {
   navToggle.addEventListener("click", () => {
-    // console.log("clicked");
+    console.log("clicked");
+    
     navToggle.classList.toggle("custom-header-mobile__menu-toggle--open");
     mobMenu.classList.toggle("custom-header-mobile__menu--open");
     mobHeader.classList.toggle("custom-header-mobile--open");
+    body.classList.toggle("custom-header-mobile-stop-scrolling");
 
     // Close mini cart if its open
     miniCart.classList.contains(activeCartClass)
-      ? miniCart.classList.remove(activeCartClass)
+      ? (miniCart.classList.remove(activeCartClass))
       : "";
   });
 };
@@ -225,7 +227,13 @@ const stickyNavDesktopFunc = () => {
 // ----------------------------------------
 $(function() {
   console.log("custom header js loaded");
+
+  // Make Mobile Menu Work
+  // -------------------------
   mobMenuToggle();
+  // body.addEventListener('touchmove', (e) =>{
+  //   e.preventDefault();
+  // });
 
   // Creating vertical window offset to compensate for fixed header
   let headerHeight = mobHeader.offsetHeight;

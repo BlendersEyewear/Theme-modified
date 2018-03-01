@@ -8686,14 +8686,19 @@ img.currency-arrow {
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 3;
+  z-index: 99999;
 }
 
 .custom-header-mobile--open{
   height: 100vh;
   position: fixed;
-  z-index: 3;
+  z-index: 99999;
   background: rgba(0,0,0, 0.15);
+}
+
+.custom-header-mobile-stop-scrolling{
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .custom-header-mobile-offset{
@@ -8724,8 +8729,7 @@ img.currency-arrow {
   position: relative;
   z-index: 999;
 
-  @include flex(1 0 auto);
-  flex: 1 0 auto;
+  @include flex(0 0 auto);
   max-height: -webkit-max-content;
   max-height: max-content;
   background: white;
@@ -9064,6 +9068,7 @@ span.custom-header-mobile__cart-count{
   left: 0;
 
   height: 100vh;
+  // height: 100%;
 
   transform: translateX(-100%);
   transition: all .25s ease-in-out;
