@@ -217,7 +217,7 @@ const stickyNavDesktopFunc = () => {
       windowOffset > stickyHeight ? makeSticky() : makeunSticky();
     };
 
-    window.addEventListener("scroll", throttle(stickyNavFunc, 350));
+    window.addEventListener("scroll", throttle(stickyNavFunc, 50));
   }
 }
 
@@ -277,16 +277,6 @@ $(function() {
 
     $(miniCartDesktopContainer).on("mouseleave", function(e) {
       $(miniCartDesktop).removeClass("active_link");
-    });
-
-    // Close Desktop Mini Cart by click outside of it
-    $("html").on("click", function(event) {
-      if (
-        !$(event.target).closest(".custom-header__mini_cart").length &&
-        $(".cart_content").is(":visible")
-      ) {
-        $(miniCartDesktop).removeClass("active_link");
-      }
     });
 
     $(".dropdown_link").on("mouseenter", function() {
