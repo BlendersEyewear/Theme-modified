@@ -50,6 +50,7 @@ const collectionMenuItems = document.querySelectorAll(
 // WINDOW SIZES
 const desktopScreenSize = 960;
 
+
 // --------------------------------------
 // Utilities 
 // --------------------------------------
@@ -65,6 +66,7 @@ const throttle = (fn, wait) => {
 }
 
 // Height offset for mobile menu
+// --------------------------------
 const addHeightOffset = headerHeight => {
   document.body.contains(pageContent)
     ? ((pageContent.style.paddingBottom = `${headerHeight}px`),
@@ -115,6 +117,8 @@ const mobMenuToggle = () => {
   });
 };
 
+// Making Promo Banner Close
+// --------------------------------
 const bannerClose = (banner, className) => {
   let bannerDiv = document.getElementById(banner);
   let closeButton = document.getElementById(`${banner.id}Close`);
@@ -129,6 +133,7 @@ const bannerClose = (banner, className) => {
 };
 
 // Making mobile menu dropdowns work
+// --------------------------------
 const subMenuDropdown = () => {
   for (let Menu of mobMenuCategoryHeader) {
     let subMenu = Menu.nextElementSibling;
@@ -143,6 +148,7 @@ const subMenuDropdown = () => {
 };
 
 // Making Desktop Colelction Hover change background to current collection image
+// -----------------------------------------------------------------------------
 const menuCollectionHover = () => {
   // Set initial background using first collection;
   MenuImg.style.backgroundImage = `url('${
@@ -160,6 +166,7 @@ const menuCollectionHover = () => {
 };
 
 // Mini Cart Header Function
+// --------------------------------
 const miniCartFunctions = () => {
   console.log("mini cart loaded");
 
@@ -187,6 +194,32 @@ const miniCartFunctions = () => {
     miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
   });
 };
+
+// Sticky Header on Desktop
+// --------------------------------
+const stickyNavDesktopFunc = () => {
+  if (window.innerWidth >= desktopScreenSize) {
+    let stickyHeight = 850;
+    let stickyClass = "custom-header-sticky-nav--sticky";
+    // customStickyNav.classList.
+
+    let stickyNavFunc = () => {
+      let windowOffset = window.pageYOffset;
+
+      let makeSticky = () => {
+        customStickyNav.classList.contains(stickyClass) ? "" : customStickyNav.classList.add(stickyClass);
+      };
+
+      let makeunSticky = () => {
+        customStickyNav.classList.contains(stickyClass) ? customStickyNav.classList.remove(stickyClass) : "";
+      };
+
+      windowOffset > stickyHeight ? makeSticky() : makeunSticky();
+    };
+
+    window.addEventListener("scroll", throttle(stickyNavFunc, 350));
+  }
+}
 
 // Doc Ready
 // ----------------------------------------
@@ -227,19 +260,23 @@ $(function() {
   // Mini Cart Functions for Header
   if (window.innerWidth >= desktopScreenSize) {
     console.log("desktop");
+
+    var miniCartDesktopContainer = $(".custom-header__cart_container--desktop");
     var miniCartDesktop = $(".custom-header__mini_cart");
+
     $(miniCartDesktop).removeClass("active_link");
 
     $(".dropdown_link").on("click", function(e) {
       e.preventDefault();
     });
 
-    $(miniCartDesktop).on("mouseenter", function(e) {
-      $(this).addClass("active_link");
+    $(miniCartDesktopContainer).on("mouseenter", function(e) {
+      $(this).find(miniCartDesktop).addClass("active_link");
+    });
 
-      if ($(this).hasClass("active_link")) {
-        console.log("its active");
-      }
+
+    $(miniCartDesktopContainer).on("mouseleave", function(e) {
+      $(miniCartDesktop).removeClass("active_link");
     });
 
     // Close Desktop Mini Cart by click outside of it
@@ -275,18 +312,9 @@ $(function() {
   }
 
   // Sticky Header on Scroll on Dekstop
-  if (window.innerWidth >= desktopScreenSize) {
+  // --------------------------------------
+  stickyNavDesktopFunc();
 
-    let stickyHeight = 800;    
-
-    let scrollPositionFunc = () =>{
-      let windowOffset = window.pageYOffset;
-      windowOffset > stickyHeight ? (console.log('header should pop out')) : '';
-    }
-    
-    window.addEventListener("scroll", throttle(scrollPositionFunc, 300));
-  
-  }
 
   // --------------------------------------
   // Currency Selector

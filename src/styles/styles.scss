@@ -9224,6 +9224,8 @@ a.custom-header-mobile__refer{
   padding: .5rem 1.5rem;
   -webkit-clip-path: polygon(8% 0, 100% 0%, 87% 100%, 3% 100%);
   clip-path: polygon(4% 0, 100% 0%, 96% 100%, 0% 100%);
+
+  
 }
 
 
@@ -9298,9 +9300,11 @@ a.custom-header-mobile__refer{
 @media screen and (min-width: $headerTabletUp){
   .custom-header-mobile__social{
     margin: auto 0 1.75rem;
+    padding: 0;
   }
   .custom-header-mobile__bottom{
-    margin: 2rem 0;
+    margin: 1rem 0 2rem;
+    padding: 0;
   }
 
   .mobile-bottom-nav__item{
@@ -9668,20 +9672,22 @@ a.custom-header-desktop__refer{
   margin: .25rem 1rem 0;
   font-size: 0.75rem;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 600;
   width: 5.75rem;
+  font-variant-caps: all-small-caps;
   padding: .25rem .5rem;
   -webkit-clip-path: polygon(8% 0, 100% 0%, 87% 100%, 3% 100%);
   clip-path: polygon(4% 0, 100% 0%, 96% 100%, 0% 100%);
   transition: all .15s ease-in-out;
   @include align-self(center);
+    
 
   &:hover, &:focus{
     background: adjust-hue($color-accent-secondary, 7%);
   }
 
   @media screen and (min-width: $headerDesktopLargeUp){
-    font-size: 1rem;
+    // font-size: 1rem;
     font-weight: 600;
     letter-spacing: 2px;
     padding: .35rem .75rem;
