@@ -172,29 +172,11 @@
         <ul class="custom-header-mobile__list">
         {% for link in linklists.mobile-menu.links %}
 
-            {%if link.handle == 'snow-goggles' %}
 
-              <li class="custom-header-mobile__link custom-header-mobile__link--icon">
-                <a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" alt="snow goggles icon" class="mobile-category-icon">{{ link.title }}</a>
-              </li>
             
-            {% elsif link.links == blank %}
+            {% if link.links == blank %}
 
                 <li class="custom-header-mobile__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
-
-            {% elsif link.handle == "sunglasses" %}
-
-                <li class="custom-header-mobile__sublink custom-header-mobile__sublink--icon">
-                    <p class="custom-header-mobile__category custom-header-mobile__category--icon" data-no-instant href="{{ link.url }}">
-                      <img src="{{'icon-sunglasses.svg' | asset_url}}" alt="sunglasses icon" class="mobile-category-icon">{{ link.title }}<span class="right icon-down-arrow arrow"></span>
-                    </p>
-                    
-                    <ul class="submenu">
-                      {% for link in linklists[link.handle].links %}
-                        <li><a {%if link.active %}class="active"{% endif %} href="{{ link.url }}">{{ link.title }}</a></li>
-                      {% endfor %}
-                    </ul>
-                </li>
 
             {% else %}
 

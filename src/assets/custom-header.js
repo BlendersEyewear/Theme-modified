@@ -73,6 +73,7 @@ const throttle = (fn, wait) => {
 const addHeightOffset = headerHeight => {
   document.body.contains(pageContent)
     ? ((pageContent.style.paddingBottom = `${headerHeight}px`),
+      console.log('whooop'),
       (pageContent.style.display = "block"))
     : "";
 
@@ -103,7 +104,7 @@ const addHeightOffset = headerHeight => {
 const removeHeightOffset = () => {
   pageContent.style.paddingBottom = `0px`;
   pageContent.style.display = "none";
-  // mobMenu.style.paddingTop = `${headerHeight}px`;
+  mobMenu.style.paddingTop = `${headerHeight}px`;
 };
 
 const mobMenuToggle = () => {
@@ -124,18 +125,23 @@ const mobMenuToggle = () => {
 
 // Making Promo Banner Close
 // --------------------------------
-const bannerClose = (banner, className) => {
+const bannerClose = (banner, className, height) => {
   let bannerDiv = document.getElementById(banner);
   let closeButton = document.getElementById(`${banner.id}Close`);
-  // console.log(closeButton);
 
   closeButton.addEventListener("click", () => {
-    // console.log("clicked");
-    banner.classList.add(className);
-    let headerHeightShort = mobHeader.offsetHeight;
-    addHeightOffset(headerHeightShort);
+    console.log("clicked");
+    // banner.classList.add(className);
+    banner.style.display = 'none';
+
+    let offsetHeight = mobHeader.offsetHeight;
+    addHeightOffset(offsetHeight);
+    console.log(offsetHeight);
+
+    // setTimeout(() => {
+    // }, 250);
   });
-};
+}
 
 // Making mobile menu dropdowns work
 // --------------------------------
@@ -234,9 +240,6 @@ $(function() {
   // Make Mobile Menu Work
   // -------------------------
   mobMenuToggle();
-  // body.addEventListener('touchmove', (e) =>{
-  //   e.preventDefault();
-  // });
 
   // Close MobMenu if Friendbuy is clicked
   if (window.innerWidth <= desktopScreenSize){
@@ -263,14 +266,24 @@ $(function() {
     $(this).toggleClass("custom-header-mobile__category--open");
   });
 
-  // Banner Close on Desktop
+  // Promo Banner Close on Desktop / Mobile
   window.innerWidth >= desktopScreenSize
-    ? (mobHeader.classList.remove("custom-header-mobile--is-mobile"),
+    ? (
+      // Desktop
+      mobHeader.classList.remove("custom-header-mobile--is-mobile", headerHeight),
       bannerClose(promoBannerDesktop, "promo_banner_hide"),
-      addHeightOffset(headerHeight))
-    : (bannerClose(promoBanner, "promo_banner_hide"),
+      console.log(headerHeight)
+      // addHeightOffset(headerHeight)
+    )
+    
+    : (
+      // Mobile
       addHeightOffset(headerHeight),
-      console.log("this is mobile"));
+      bannerClose(promoBanner, "promo_banner_hide", headerHeight),
+      // let headerHeight = mobHeader.offsetHeight,
+      console.log(headerHeight),
+      console.log("this is mobile")
+      );
 
   menuCollectionHover();
 

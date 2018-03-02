@@ -4586,11 +4586,12 @@ $promoBannerHeight: 30px;
     outline: 0;
     background: transparent;
     z-index: 1000;
+
     // Added by adam - 2/15
     padding: 4px 8px;
     height: 15px;
     width: 15px;
-    top: 2px;
+    top: 0;
     right: 15px;
 
     transition: all .15s ease-in-out;
@@ -8746,8 +8747,26 @@ img.currency-arrow {
   width: 100%;
   flex: 100%;
   @include flex(100%);
-  height: auto;
+  // height: auto;
+  height: $promoBannerHeight;
   font-weight: bold;
+
+  @include flexbox();
+  @include justify-content(center);
+  @include align-items(center);
+
+  .promo_banner-close{
+    padding: 4px 8px;
+    height: 15px;
+    width: 15px;
+    top: 25%;
+    right: 15px;
+
+    &:before{
+      font-size: 24px;
+      line-height: 1;
+    }
+  }
 
   .promo_banner-close:after{
     color: red;
@@ -8791,7 +8810,7 @@ img.currency-arrow {
     
     &:before{
       font-size: 1rem;
-      opacity: 0.5;
+      opacity: 0.45;
       font-weight: bold;
     }
   }
@@ -8807,6 +8826,7 @@ input.custom-header-mobile__search-terms{
   color: black;
   margin-bottom: 0;
   min-height: none;
+  text-align: left !important;
 
   &:focus{
     border: none;
@@ -8996,6 +9016,10 @@ a.custom-header-desktop__cart{
   .custom-header-desktop__cart.active_link+.cart_content{
     display: block;
     min-width: 360px;
+
+    .js-cart_content__form{
+      font-size: initial;
+    }
   }
 }
 
@@ -9151,8 +9175,6 @@ span.custom-header-mobile__cart-count{
       &:first-of-type{box-shadow: none}
 
       a{
-        // display: block;
-        // color: black;
         padding: 16px 40px;
         @include DropdownMenuLink(black, white);
         font-size: 18px;
@@ -9163,10 +9185,20 @@ span.custom-header-mobile__cart-count{
 
       a.active {
           font-weight: 600;
-          box-shadow: inset 2px 0 0 0 $color-accent;
-      }
+          position:relative;
 
+          &:before{
+              content: '';
+              position: absolute;
+              left: 16px;
+              height: 2px;
+              top: 24px;
+              width: 12px;
+              background: black;
+          }
+      }
     }
+
   }
 }
 
