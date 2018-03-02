@@ -572,7 +572,7 @@
             <img
               src="{{ section.settings.logo | img_url: '400x' }}"
               alt="{{ shop.name | escape }}" 
-              class="custom-header-desktop__logo"
+              class="custom-header-desktop__logo custom-header-desktop__logo--sticky-nav"
               />
         {% elsif section.settings.mobile_logo != nil %}
             <img src="{{ section.settings.mobile_logo | img_url: '640x' }}" alt="{{ shop.name | escape }}"  class="custom-header-desktop__logo"/>

@@ -25,6 +25,9 @@ const mobHeader = document.getElementById("customHeaderMobile");
 const navToggle = document.getElementById("mobileNavToggle");
 const customStickyNav = document.getElementById("customStickyNav");
 
+// Menu things
+const friendBuy = document.querySelector(".Friendbuy");
+
 // Cart
 const miniCart = document.querySelector(".custom-header__mini_cart");
 const cartContainer = document.querySelector(".custom-header__cart_container");
@@ -49,7 +52,7 @@ const collectionMenuItems = document.querySelectorAll(
 
 // WINDOW SIZES
 const desktopScreenSize = 960;
-
+const tabletScreenSize = 620;
 
 // --------------------------------------
 // Utilities 
@@ -235,6 +238,16 @@ $(function() {
   //   e.preventDefault();
   // });
 
+  // Close MobMenu if Friendbuy is clicked
+  if (window.innerWidth <= desktopScreenSize){
+    friendBuy.addEventListener("click", ()=>{
+      navToggle.classList.toggle("custom-header-mobile__menu-toggle--open");
+      mobMenu.classList.toggle("custom-header-mobile__menu--open");
+      mobHeader.classList.toggle("custom-header-mobile--open");
+      body.classList.toggle("custom-header-mobile-stop-scrolling");
+    });
+  }
+
   // Creating vertical window offset to compensate for fixed header
   let headerHeight = mobHeader.offsetHeight;
   // mobHeader.classList.contains("custom-header-mobile--is-mobile")
@@ -253,7 +266,6 @@ $(function() {
   // Banner Close on Desktop
   window.innerWidth >= desktopScreenSize
     ? (mobHeader.classList.remove("custom-header-mobile--is-mobile"),
-      console.log("desktop"),
       bannerClose(promoBannerDesktop, "promo_banner_hide"),
       addHeightOffset(headerHeight))
     : (bannerClose(promoBanner, "promo_banner_hide"),
@@ -267,7 +279,6 @@ $(function() {
 
   // Mini Cart Functions for Header
   if (window.innerWidth >= desktopScreenSize) {
-    console.log("desktop");
 
     var miniCartDesktopContainer = $(".custom-header__cart_container--desktop");
     var miniCartDesktop = $(".custom-header__mini_cart");
