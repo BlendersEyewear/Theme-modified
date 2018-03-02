@@ -9487,7 +9487,7 @@ a.custom-header-mobile__refer{
 
 .custom-header-desktop__link > a, .custom-header-desktop__category{
   font-size: 0.875rem;
-  line-height: 1;
+  // line-height: 1;
 
   @media screen and (min-width: $headerDesktopLargeUp){
     font-size: 1rem;
@@ -9511,7 +9511,7 @@ a.custom-header-mobile__refer{
 
 .custom-header-desktop__link > a, .custom-header-desktop__sublink{
   transition: all .15s ease-in-out;
-  padding: .5rem .75rem;
+  padding: .5rem .75rem .5rem .25rem;
 
   &:hover{
     box-shadow: inset 0 -2px 0 0 black;
@@ -9575,7 +9575,7 @@ a.custom-header-mobile__refer{
   }
 
   .custom-header__menu-arrow--sunglasses{
-    transform: translateY(1px);
+    transform: translateY(-1px);
     margin-left: 4px;
   }
 
