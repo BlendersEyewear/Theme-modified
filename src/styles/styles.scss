@@ -9396,7 +9396,8 @@ a.custom-header-mobile__refer{
   @include flexbox();
   @include flex-flow(row nowrap);
   @include justify-content(space-between);
-  @include align-items(center);
+  // @include align-items(center);
+  @include align-items(stretch);
   padding: 0 10px !important;
 
   position: relative;
@@ -9485,7 +9486,8 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__link > a, .custom-header-desktop__category{
-  font-size: 0.825rem;
+  font-size: 0.875rem;
+  line-height: 1;
 
   @media screen and (min-width: $headerDesktopLargeUp){
     font-size: 1rem;
@@ -9501,10 +9503,9 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-desktop__link--snow{
-  min-width: 10.25rem;
 
   @media screen and (min-width: $headerDesktopLargeUp){
-    min-width: 210px;
+    min-width: 170px;
   }
 }
 
@@ -9521,10 +9522,19 @@ a.custom-header-mobile__refer{
   }
 }
 
+.custom-header-desktop__link, .custom-header-desktop__link > a, .custom-header-desktop__sublink{
+  height: 100%;
+  @include flexbox();
+  @include justify-content(center);
+  @include flex-flow(row nowrap);
+  @include align-items(center);
+}
+
+
+
 .custom-header-desktop__sublink{
   position: relative;
   cursor: pointer;
-  transform: translateY(-3px);
 
   &:hover, &:focus{
     .custom-header-desktop__submenu{
@@ -9536,15 +9546,11 @@ a.custom-header-mobile__refer{
   }
 
   @media screen and (min-width: $headerDesktopLargeUp){
-    transform: translateY(-1px);
+    transform: translateY(0);
   }
 }
 
 .custom-header-desktop__sublink--collection{
-
-  &:first-of-type{
-    padding-left: 0;
-  }
 
   &:hover, &:focus{
     .custom-header-desktop__submenu--collection{
@@ -9569,14 +9575,14 @@ a.custom-header-mobile__refer{
   }
 
   .custom-header__menu-arrow--sunglasses{
-    transform: translateY(0);
+    transform: translateY(1px);
     margin-left: 4px;
   }
 
-  @media screen and (min-width: $headerDesktopLargeUp){
-    min-width: 150px;
-    width: 160px;
-  }
+  // @media screen and (min-width: $headerDesktopLargeUp){
+  //   min-width: 150px;
+  //   width: 160px;
+  // }
 }
 
 .custom-header-desktop__category--icon, .custom-header-desktop__link--icon > a{
@@ -9585,14 +9591,14 @@ a.custom-header-mobile__refer{
   @include align-items(center);
 }
 
-.custom-header-desktop__category--sunglasses{
-  width: 8.25rem;
-  transform: translateY(4px);
+// .custom-header-desktop__category--sunglasses{
+  // width: 8.25rem;
+  // transform: translateY(4px);
 
-  @media screen and (min-width: $headerDesktopLargeUp){
-    min-width: 168px;
-  }
-}
+  // @media screen and (min-width: $headerDesktopLargeUp){
+  //   // min-width: 168px;
+  // }
+// }
 
 .custom-header-desktop__submenu{
   position: absolute;
@@ -9690,7 +9696,7 @@ a.custom-header-mobile__refer{
 
   & > li > a.active{
     font-weight: 600;
-    box-shadow: inset 2px 0 0 0 $color-accent;
+    // box-shadow: inset 2px 0 0 0 $color-accent;
   }
 }
 
@@ -9750,6 +9756,7 @@ a.custom-header-desktop__refer{
 
 .custom-header-desktop__search{
   margin-left: auto;
+  @include align-self(center);
   
   .search-submit{
     position: static;
@@ -9833,6 +9840,26 @@ input.custom-header-desktop__search-input{
 
 .custom-header-sticky-nav--sticky{
   transform: translateY(-0%);
+
+  .container{
+    @include align-items(stretch);
+
+    .custom-header-desktop__link, .custom-header-desktop__link > a, .custom-header-desktop__sublink{
+      height: 100%;
+      @include flexbox();
+      @include justify-content(center);
+      @include flex-flow(row nowrap);
+      @include align-items(center);
+    }
+
+    .custom-header-desktop__top-banner-link--cart{
+      @include align-self(center);
+    }
+
+    .custom-header-desktop__sublink{
+      transform: translateY(0);
+    }
+  }
 }
 
 

@@ -437,14 +437,14 @@
         {% endif %}
       </a>
 
-      {% comment %} MENU {% endcomment %}
+      {% comment %} Header MENU {% endcomment %}
       <div class="custom-header-desktop__menu">
 
         {% for link in linklists.mobile-menu.links %}
 
             {%if link.handle == 'snow-goggles' %}
               <li class="custom-header-desktop__link custom-header-desktop__link--icon custom-header-desktop__link--snow">
-                <a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders {{ link.title }} Icon" />{{ link.title }}</a>
+                <a href="{{ link.url }}">{{ link.title }}</a>
               </li>
 
 
@@ -458,7 +458,7 @@
 
                 <li class="custom-header-desktop__sublink custom-header-desktop__sublink--collection custom-header-desktop__sublink--icon">
 
-                    <p class="custom-header-desktop__category custom-header-desktop__category--icon custom-header-desktop__category--sunglasses" data-no-instant href="{{ link.url }}"><img src="{{'icon-sunglasses.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders Sunglasses Icon" /> {{link.title}} <img class="custom-header__menu-arrow custom-header__menu-arrow--sunglasses" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></span></p>
+                    <p class="custom-header-desktop__category custom-header-desktop__category--icon custom-header-desktop__category--sunglasses" data-no-instant href="{{ link.url }}">{{link.title}}<img class="custom-header__menu-arrow custom-header__menu-arrow--sunglasses" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></span></p>
                     
                     <div class="submenu custom-header-desktop__submenu custom-header-desktop__submenu--collection">
 
@@ -570,7 +570,7 @@
 
             {%if link.handle == 'snow-goggles' %}
               <li class="custom-header-desktop__link custom-header-desktop__link--icon custom-header-desktop__link--snow">
-                <a href="{{ link.url }}"><img src="{{'icon-snow-goggles.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders {{ link.title }} Icon" />{{ link.title }}</a>
+                <a href="{{ link.url }}">{{ link.title }}</a>
               </li>
 
 
@@ -584,7 +584,7 @@
 
                 <li class="custom-header-desktop__sublink custom-header-desktop__sublink--icon">
 
-                    <p class="custom-header-desktop__category custom-header-desktop__category--icon custom-header-desktop__category--sunglasses" data-no-instant href="{{ link.url }}"><img src="{{'icon-sunglasses.svg' | asset_url}}" class="custom-header-desktop__menu-icon" alt="Blenders Sunglasses Icon" /> {{link.title}} <img class="custom-header__menu-arrow custom-header__menu-arrow--sunglasses" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></span></p>
+                    <p class="custom-header-desktop__category custom-header-desktop__category--sunglasses" data-no-instant href="{{ link.url }}">{{link.title}} <img class="custom-header__menu-arrow custom-header__menu-arrow--sunglasses" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></span></p>
                     
                       <ul class="submenu custom-header-desktop__submenu">
                         {% for link in linklists[link.handle].links %}
@@ -600,7 +600,7 @@
             {% else %} {% comment %} if not sunglasses  {% endcomment %}
 
                 <li class="sublink custom-header-desktop__sublink">
-                  <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{% if link.handle == "snow-goggles" %}<img src="" alt="" />{% endif%}{{ link.title }} <img class="custom-header__menu-arrow" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></p>
+                  <p class="custom-header-desktop__category" data-no-instant href="{{ link.url }}">{{ link.title }} <img class="custom-header__menu-arrow" src="{{'icon-arrow-down.svg' | asset_url}}" alt=""></p>
                   <ul class="submenu custom-header-desktop__submenu">
 
                       {% for link in linklists[link.handle].links %}
