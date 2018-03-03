@@ -176,27 +176,27 @@
             
             {% if link.links == blank %}
 
-                <li class="custom-header-mobile__link"><a href="{{ link.url }}">{{ link.title }}</a></li>
+                <li class="custom-header-mobile__link"><a {% if link.active %}class="active" {% endif %}href="{{ link.url }}">{{ link.title }}</a></li>
 
             {% else %}
 
                 <li class="sublink custom-header-mobile__sublink">
                   <p class="custom-header-mobile__category" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
-                  <ul class="submenu nst-content">
+                  <ul class="submenu">
 
                       {% for link in linklists[link.handle].links %}
 
                           {% if linklists[link.handle] == empty %}
 
-                              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                              <li><a {% if link.active %}class="active" {% endif %}href="{{ link.url }}">{{ link.title }}</a></li>
 
                           {% else %}
 
                           <li class="sublink custom-header-mobile__sublink nst-toggle">
                               <p class="custom-header-mobile__category" class="" data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow arrow"></span></p>
-                              <ul class="nst-content">
+                              <ul>
                               {% for link in linklists[link.handle].links %}
-                                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                  <li><a {% if link.active %}class="active" {% endif %}href="{{ link.url }}">{{ link.title }}</a></li>
                               {% endfor %}
                               </ul>
                           </li>
