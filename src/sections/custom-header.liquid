@@ -171,8 +171,6 @@
         {% comment %} First Menu {% endcomment %}
         <ul class="custom-header-mobile__list">
         {% for link in linklists.mobile-menu.links %}
-
-
             
             {% if link.links == blank %}
 
@@ -188,7 +186,7 @@
 
                           {% if linklists[link.handle] == empty %}
 
-                              <li><a {% if link.active %}class="active" {% endif %}href="{{ link.url }}">{{ link.title }}</a></li>
+                              <li><a ontouchstart="" {% if link.active %}class="active" {% endif %}href="{{ link.url }}">{{ link.title }}</a></li>
 
                           {% else %}
 
@@ -254,6 +252,9 @@
             </div>
           {% endif %}
         </div>
+
+        {% comment %} Bottom Nav Border {% endcomment %}
+        <div class="custom-header-mobile__bottom-border"></div>
     </div>
 </header>
 

@@ -73,7 +73,7 @@ const throttle = (fn, wait) => {
 const addHeightOffset = headerHeight => {
   document.body.contains(pageContent)
     ? ((pageContent.style.paddingBottom = `${headerHeight}px`),
-      console.log('whooop'),
+      // console.log('whooop'),
       (pageContent.style.display = "block"))
     : "";
 
@@ -109,7 +109,7 @@ const removeHeightOffset = () => {
 
 const mobMenuToggle = () => {
   navToggle.addEventListener("click", () => {
-    console.log("clicked");
+    // console.log("clicked");
     
     navToggle.classList.toggle("custom-header-mobile__menu-toggle--open");
     mobMenu.classList.toggle("custom-header-mobile__menu--open");
@@ -123,6 +123,8 @@ const mobMenuToggle = () => {
   });
 };
 
+
+
 // Making Promo Banner Close
 // --------------------------------
 const bannerClose = (banner, className, height) => {
@@ -130,13 +132,13 @@ const bannerClose = (banner, className, height) => {
   let closeButton = document.getElementById(`${banner.id}Close`);
 
   closeButton.addEventListener("click", () => {
-    console.log("clicked");
+    // console.log("clicked");
     // banner.classList.add(className);
     banner.style.display = 'none';
 
     let offsetHeight = mobHeader.offsetHeight;
     addHeightOffset(offsetHeight);
-    console.log(offsetHeight);
+    // console.log(offsetHeight);
 
     // setTimeout(() => {
     // }, 250);
@@ -158,7 +160,7 @@ const subMenuDropdown = () => {
   }
 };
 
-// Making Desktop Colelction Hover change background to current collection image
+// Making Desktop Collection Hover change background to current collection image
 // -----------------------------------------------------------------------------
 const menuCollectionHover = () => {
   // Set initial background using first collection;
@@ -200,7 +202,7 @@ const miniCartFunctions = () => {
 
   miniCart.addEventListener("click", e => {
     e.preventDefault();
-    console.log("clicking");
+    // console.log("clicking");
     let container = miniCart.parentElement;
     miniCart.classList.contains(activeCartClass) ? closeCart() : openCart();
   });
@@ -241,6 +243,22 @@ $(function() {
   // -------------------------
   mobMenuToggle();
 
+  // Preventing body scroll if mobile menu is open
+  if (window.innerWidth <= desktopScreenSize){
+    document.addEventListener("touchmove", (e)=>{
+      mobMenu.classList.contains("custom-header-mobile__menu--open") ? e.preventDefault() : '';
+    });
+  }
+
+  // Making Mobile Nav submenus works
+  subMenuDropdown();
+  $(".custom-header-mobile__category").click(function() {
+    $(this)
+      .next()
+      .slideToggle(250, "swing");
+    $(this).toggleClass("custom-header-mobile__category--open");
+  });
+
   // Close MobMenu if Friendbuy is clicked
   if (window.innerWidth <= desktopScreenSize){
     friendBuy.addEventListener("click", ()=>{
@@ -257,22 +275,14 @@ $(function() {
   //   ? addHeightOffset(headerHeight)
   //   : console.log("mobheader isnt mobile");
 
-  // Making Mobile Nav submenus works
-  subMenuDropdown();
-  $(".custom-header-mobile__category").click(function() {
-    $(this)
-      .next()
-      .slideToggle(250, "swing");
-    $(this).toggleClass("custom-header-mobile__category--open");
-  });
 
   // Promo Banner Close on Desktop / Mobile
   window.innerWidth >= desktopScreenSize
     ? (
       // Desktop
       mobHeader.classList.remove("custom-header-mobile--is-mobile", headerHeight),
-      bannerClose(promoBannerDesktop, "promo_banner_hide"),
-      console.log(headerHeight)
+      bannerClose(promoBannerDesktop, "promo_banner_hide")
+      // console.log(headerHeight)
       // addHeightOffset(headerHeight)
     )
     
@@ -281,7 +291,7 @@ $(function() {
       addHeightOffset(headerHeight),
       bannerClose(promoBanner, "promo_banner_hide", headerHeight),
       // let headerHeight = mobHeader.offsetHeight,
-      console.log(headerHeight),
+      // console.log(headerHeight),
       console.log("this is mobile")
       );
 
