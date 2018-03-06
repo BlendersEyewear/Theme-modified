@@ -109,7 +109,7 @@ const removeHeightOffset = () => {
 
 const mobMenuToggle = () => {
   navToggle.addEventListener("click", () => {
-    // console.log("clicked");
+    console.log("clicked");
     
     navToggle.classList.toggle("custom-header-mobile__menu-toggle--open");
     mobMenu.classList.toggle("custom-header-mobile__menu--open");
@@ -120,10 +120,21 @@ const mobMenuToggle = () => {
     miniCart.classList.contains(activeCartClass)
       ? (miniCart.classList.remove(activeCartClass))
       : "";
+    
   });
-
-  mobMenu.classList.contains("custom-header-mobile__menu--open") ? mobMenu.focus() : '' ;
 };
+
+const freezeVp = (e) => {
+  e.preventDefault();
+}
+
+const stopBodyScroll = () => {
+  if(boolean == true){
+    body.addEventListener("touchmove", freezeVp, false);
+  } else {
+    body.removeEventListener("touchmove", freezeVp, false);
+  }
+}
 
 
 
@@ -236,6 +247,7 @@ const stickyNavDesktopFunc = () => {
   }
 }
 
+
 // Doc Ready
 // ----------------------------------------
 $(function() {
@@ -247,14 +259,14 @@ $(function() {
 
   // Preventing body scroll if mobile menu is open
   if (window.innerWidth <= desktopScreenSize){
-    mobMenu.classList.contains("custom-header-mobile__menu--open") ?
-    (
-      mobMenu.addEventListener("blur", ()=>{
-        setTimeout(() => {mobMenu.focus();}, 25);
-      })
-    )
-    : "";
+    // if(body.classList.contains("custom-header-mobile-stop-scrolling")){
+    //   stopBodyScroll(true);
+    // } else {
+    //   stopBodyScroll(false);
+    // }
   }
+
+  // preventBodyScroll();
 
   // Making Mobile Nav submenus works
   subMenuDropdown();
@@ -288,17 +300,15 @@ $(function() {
       // Desktop
       mobHeader.classList.remove("custom-header-mobile--is-mobile", headerHeight),
       bannerClose(promoBannerDesktop, "promo_banner_hide")
-      // console.log(headerHeight)
-      // addHeightOffset(headerHeight)
     )
     
     : (
       // Mobile
       addHeightOffset(headerHeight),
-      bannerClose(promoBanner, "promo_banner_hide", headerHeight),
+      bannerClose(promoBanner, "promo_banner_hide", headerHeight)
       // let headerHeight = mobHeader.offsetHeight,
       // console.log(headerHeight),
-      console.log("this is mobile")
+      // console.log("this is mobile")
       );
 
   menuCollectionHover();
