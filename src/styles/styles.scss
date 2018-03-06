@@ -8702,8 +8702,10 @@ img.currency-arrow {
 }
 
 .custom-header-mobile-stop-scrolling{
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden !important;
+  height: 100% !important;
+  position: relative;
+  // -webkit-overflow-scrolling: 
 }
 
 .custom-header-mobile-offset #pagecontent{
@@ -8898,6 +8900,12 @@ input.custom-header-mobile__search-terms:-moz-placeholder {
 
 .custom-header-mobile__menu-toggle:hover{
   border: none;
+  background: white;
+}
+
+.custom-header-mobile__menu-toggle:focus{
+  border: none;
+  box-shadow: inset 0 0 1px black;
   background: white;
 }
 
@@ -9110,8 +9118,8 @@ span.custom-header-mobile__cart-count{
   // max-width: 100%;
   transform: translateX(0);
   // height: 100%;
-  // overflow-y: scroll;
-  // -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .custom-header-mobile__list{
@@ -9279,12 +9287,22 @@ a.custom-header-mobile__refer{
 }
 
 .custom-header-mobile__bottom{
-  margin: auto 0  0;
+  margin: auto 0  4rem;
   padding: 0 0 2rem;
 
   @include flexbox();
   @include justify-content(center);
   @include align-items(stretch);
+}
+
+.custom-header-mobile__bottom:after{
+  @include flex(0 0 8rem);
+  content:'';
+  display: block;
+  margin: 0 auto;
+  height: 1px;
+  width: 8rem;
+  background: red;
 }
 
 .mobile-bottom-nav__item{
@@ -9313,10 +9331,9 @@ a.custom-header-mobile__refer{
 .custom-header-mobile__bottom-border{
   width: 100%;
   background: white;
-  box-shadow: inset 0 -2px 0 0 black;
-  height: 40px;
-  @include flex(0 0 40px);
-  margin: 1.875rem 0 0;
+  @include flex(0 0 auto);
+  margin: 1rem 0;
+  text-align: center;
 }
 
 @media screen and (min-width: $headerTabletUp){
@@ -9331,6 +9348,10 @@ a.custom-header-mobile__refer{
 
   .mobile-bottom-nav__item{
     padding: 0 .5rem;
+  }
+
+  .custom-header-mobile__bottom-border{
+    display: none;
   }
 }
 

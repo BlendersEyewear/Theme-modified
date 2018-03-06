@@ -24,6 +24,7 @@ const ribbonContainer = document.getElementById("56d9-a3be_ribbon_container");
 const mobHeader = document.getElementById("customHeaderMobile");
 const navToggle = document.getElementById("mobileNavToggle");
 const customStickyNav = document.getElementById("customStickyNav");
+const mobMenu = document.getElementById("mobileMenu");
 
 // Menu things
 const friendBuy = document.querySelector(".Friendbuy");
@@ -36,7 +37,6 @@ const headerMiniCart = document.querySelector("#headerCart");
 // Class to show its open
 const activeCartClass = "cart-is-active";
 
-const mobMenu = document.getElementById("mobileMenu");
 
 const mobMenuCategory = document.querySelectorAll(
   ".custom-header-mobile__sublink"
@@ -121,6 +121,8 @@ const mobMenuToggle = () => {
       ? (miniCart.classList.remove(activeCartClass))
       : "";
   });
+
+  mobMenu.classList.contains("custom-header-mobile__menu--open") ? mobMenu.focus() : '' ;
 };
 
 
@@ -245,9 +247,13 @@ $(function() {
 
   // Preventing body scroll if mobile menu is open
   if (window.innerWidth <= desktopScreenSize){
-    document.addEventListener("touchmove", (e)=>{
-      mobMenu.classList.contains("custom-header-mobile__menu--open") ? e.preventDefault() : '';
-    });
+    mobMenu.classList.contains("custom-header-mobile__menu--open") ?
+    (
+      mobMenu.addEventListener("blur", ()=>{
+        setTimeout(() => {mobMenu.focus();}, 25);
+      })
+    )
+    : "";
   }
 
   // Making Mobile Nav submenus works
