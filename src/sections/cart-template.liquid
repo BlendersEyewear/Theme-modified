@@ -1,17 +1,19 @@
 <a name="pagecontent" id="pagecontent"></a>
-<div id="saso-notifications"></div>
+{% comment %} <div id="saso-notifications" class="mobile-only saso-notifications--mobile"></div> {% endcomment %}
 
     <div class="section clearfix">
       <div class="sixteen columns">
         <h1 class="cart-title">{{ 'cart.general.title' | t }}</h1>
         	
-          {% comment %} <div class="shippingmessage">
+        	
+          <div class="shippingmessage">
         	    {% if cart.total_price >= 4000 %}
-     		        <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping..</div>
+     		        <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping…</div>
  			        {% elsif cart.total_price < 4000 %}
        		      <div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
 			        {% endif %}
-          </div> {% endcomment %}
+          </div>
+        
           <form action="/cart" method="post" id="cart_form">
             <div class="top-cart-checkout">
               {% if cart.item_count > 0 %}
@@ -21,7 +23,7 @@
     </form>
          <div class="feature_divider"></div>
 
-<!-- Start Cart Mobile Upsell -->
+{% comment %} <!-- Start Cart Mobile Upsell --> {% endcomment %}
     <div class="mobile-upsell">  
       
     {% for item in cart.items %}
@@ -41,7 +43,7 @@
     {% endif %}
 
     </div>
-<!-- End Cart Mobile Upsell --> 
+{% comment %} <!-- End Cart Mobile Upsell --> {% endcomment %}
        
     </div>
 </div>
@@ -194,9 +196,8 @@
 
             <div class="saso-summary test-1"></div>
 
-            <div class="saso-cart-offers test-2"></div>
-
-            <div class="saso-cart-total test-3"></div>
+            <div class="saso-cart-total"></div>
+			<!--       {{cart.total_price}}       -->
 
             {% if settings.show_multiple_currencies %}
               <p>

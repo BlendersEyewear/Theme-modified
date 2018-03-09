@@ -36,15 +36,18 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="robots" content="index,follow">
 
-
     <!-- Custom Fonts -->
     {% if settings.logo_font contains 'Google' or settings.headline_font contains 'Google' or settings.nav_font contains 'Google' or settings.slideshow_subtitle_font contains 'Google' or settings.regular_font contains 'Google' %}
       <link href="//fonts.googleapis.com/css?family=.|{% if settings.logo_font contains 'Google' %}{{ settings.logo_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.headline_font contains 'Google' %}{{ settings.headline_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.nav_font contains 'Google' %}{{ settings.nav_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.slideshow_subtitle_font contains 'Google' %}{{ settings.slideshow_subtitle_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.regular_font contains 'Google' %}{{ settings.regular_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold{% endif %}" rel="stylesheet" type="text/css" />
     {% endif %}
+    
 
+	{% comment %} Added by Adam - 2/7/2018{% endcomment %}    
     <!-- typekit fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/pcu3zqp.css">
 
+	<!--   updated - 2/13/2018   -->
+    
     <!-- Stylesheets for Turbo 2.0.9 -->
     {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
     
@@ -91,8 +94,9 @@
     {% endif %}
     {{ content_for_header }}
 
-{% comment %} Excluded by Adam - 2/9 {% endcomment %}
-{% comment %} {% include 'bacon-menu' %} {% endcomment %}
+    {% comment%} - edited out by adam 2/9
+		{% include 'bacon-menu' %}
+    {% endcomment %}
 
           <script>
           window['friendbuy'] = window['friendbuy'] || [];
@@ -193,7 +197,10 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
   <body class="{{ template | replace: '.', '-' | handle }}">
 
+    
     {% section 'header' %}
+
+    {% if template == 'cart'%} <div id="saso-notifications" class="saso-notifications--cart"></div> {% endif %}
 
     {% unless feature_image %}
     
@@ -225,6 +232,11 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% endif %}
 
     <script src="{{ 'app.js' | asset_url }}"></script>
+    {% comment %} Custom Ultimate Special Offers App js {% endcomment %}
+    <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script>
+    
+    {% comment %} AJAX CArt {% endcomment %}
+    <script src="{{ 'ajaxcart.js' | asset_url }}" defer></script>
 
     {% if settings.show_multiple_currencies %}
       {% include 'currencies' %}

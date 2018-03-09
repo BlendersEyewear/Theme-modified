@@ -148,6 +148,144 @@ $xlarge: 1400px;
   word-break: break-word;
 }
 
+// --------------------------------------------------
+// Flexbox SASS mixins
+// The spec: http://www.w3.org/TR/css3-flexbox
+// --------------------------------------------------
+
+// Flexbox display
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+// The 'flex' shorthand
+// - applies to: flex items
+// <positive-number>, initial, auto, or none
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+     -moz-box-flex: $values;
+      -webkit-flex: $values;
+  	  -ms-flex: $values;
+  	      flex: $values;
+}
+
+// Flex Flow Direction
+// - applies to: flex containers
+// row | row-reverse | column | column-reverse
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+     -moz-flex-direction: $direction;
+      -ms-flex-direction: $direction;
+          flex-direction: $direction;
+}
+
+// Flex Line Wrapping
+// - applies to: flex containers
+// nowrap | wrap | wrap-reverse
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+     -moz-flex-wrap: $wrap;
+      -ms-flex-wrap: $wrap;
+          flex-wrap: $wrap;
+}
+
+// Flex Direction and Wrap
+// - applies to: flex containers
+// <flex-direction> || <flex-wrap>
+@mixin flex-flow($flow) {
+  -webkit-flex-flow: $flow;
+     -moz-flex-flow: $flow;
+      -ms-flex-flow: $flow;
+          flex-flow: $flow;
+}
+
+// Display Order
+// - applies to: flex items
+// <integer>
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+     -moz-box-ordinal-group: $val;     
+  	     -ms-flex-order: $val;     
+  	      -webkit-order: $val;  
+  		      order: $val;
+}
+
+// Flex grow factor
+// - applies to: flex items
+// <number>
+@mixin flex-grow($grow) {
+  -webkit-flex-grow: $grow;
+     -moz-flex-grow: $grow;
+      -ms-flex-grow: $grow;
+          flex-grow: $grow;
+}
+
+// Flex shrink
+// - applies to: flex item shrink factor
+// <number> 
+@mixin flex-shrink($shrink) {
+  -webkit-flex-shrink: $shrink;
+     -moz-flex-shrink: $shrink;
+      -ms-flex-shrink: $shrink;
+          flex-shrink: $shrink;
+}
+
+// Flex basis
+// - the initial main size of the flex item
+// - applies to: flex itemsnitial main size of the flex item
+// <width> 
+@mixin flex-basis($width) {
+  -webkit-flex-basis: $width;
+     -moz-flex-basis: $width;
+      -ms-flex-basis: $width;
+          flex-basis: $width;
+}
+
+// Axis Alignment
+// - applies to: flex containers
+// flex-start | flex-end | center | space-between | space-around 
+@mixin justify-content($justify) {
+  -webkit-justify-content: $justify;
+     -moz-justify-content: $justify;
+      -ms-justify-content: $justify;
+          justify-content: $justify;
+            -ms-flex-pack: $justify;
+}
+
+// Packing Flex Lines
+// - applies to: multi-line flex containers
+// flex-start | flex-end | center | space-between | space-around | stretch 
+@mixin align-content($align) {
+  -webkit-align-content: $align;
+     -moz-align-content: $align;
+      -ms-align-content: $align;
+          align-content: $align;
+}
+
+// Cross-axis Alignment
+// - applies to: flex containers
+// flex-start | flex-end | center | baseline | stretch 
+@mixin align-items($align) {
+  -webkit-align-items: $align;
+     -moz-align-items: $align;
+      -ms-align-items: $align;
+          align-items: $align;
+}
+
+// Cross-axis Alignment
+// - applies to: flex items
+// auto | flex-start | flex-end | center | baseline | stretch 
+@mixin align-self($align) {
+  -webkit-align-self: $align;
+     -moz-align-self: $align;
+      -ms-align-self: $align;
+          align-self: $align;
+}
+
 /* #Functions
 ================================================== */
 @function set-text-color($color) {
@@ -884,8 +1022,7 @@ body.is-active {
           transform: translateY(0%);
 }
 
-.sticky_nav--unstick {
-}
+// .sticky_nav--unstick {}
 
 .sticky_nav ul.menu, .sticky_nav .mini_cart {
   padding-bottom: 0 !important;
@@ -1267,9 +1404,9 @@ input[type="submit"].guest_button:hover {
   color: #000000;
 }
 
-.sticky_nav div.logo img {
- /* width: 60%;*/
-}
+// .sticky_nav div.logo img {
+//  /* width: 60%;*/
+// }
 
 .dropdown_container {
   clear: both;
@@ -8044,11 +8181,11 @@ p.modal_price {
   
   /* Special Offers Custom */
   
-	@media (max-width: 960px) {
-		.saso-notification-x {
-    	// margin: -8px 8px 0px 0px!important;
-	}
-  }
+	// @media (max-width: 960px) {
+	// 	.saso-notification-x {
+  //   	// margin: -8px 8px 0px 0px!important;
+	// }
+  // }
   
   
     
@@ -8072,14 +8209,14 @@ img.collection_banner_img{
   }
 }
   
-  @media (max-width: 960px) {
-.saso-notification {
-    //  Edited out by Adam - 2/13/18
-    // padding: 10px 0px !important;
-    // font-size: 110% !important;
-    // padding-top: 20px!important;
-}
-  }
+//   @media (max-width: 960px) {
+// .saso-notification {
+//     //  Edited out by Adam - 2/13/18
+//     // padding: 10px 0px !important;
+//     // font-size: 110% !important;
+//     // padding-top: 20px!important;
+// }
+//   }
   
     /* Hides Sale Banner */
 
@@ -8523,9 +8660,7 @@ $transparent: rgba(0,0,0,0.0);
     height: auto;
   }
 
-  .product-hero--first:after{
-    
-  }
+  // .product-hero--first:after{}
   
   .product-hero--plum:after, .product-hero--first:after{
     content: '';
@@ -8737,9 +8872,9 @@ $transparent: rgba(0,0,0,0.0);
       margin-bottom: 0;
       max-width: 40%;
     }
-    &:nth-child(4){
-      // padding: 1rem;
-    }
+    // &:nth-child(4){
+    //   // padding: 1rem;
+    // }
     &:nth-child(5){
       padding: 0;
       max-width: 60%;
@@ -9004,9 +9139,9 @@ $transparent: rgba(0,0,0,0.0);
                   flex: 30%;
       margin: 0 2rem 2rem 0
     }
-    &:nth-child(4){
-      // padding: 1rem;
-    }
+    // &:nth-child(4){
+    //   // padding: 1rem;
+    // }
     &:nth-child(5){
       height: 390px;
       max-width: 58%;
@@ -9043,9 +9178,90 @@ $transparent: rgba(0,0,0,0.0);
   }
 }
 
-/*    BUG FIXES */
+  // ========================================
+// Bug Fixes
+// ========================================
+
   .quick_shops.desktop {
     #shopmessage-checkbox{
     	display: none !important;
     }
   }
+
+
+// ========================================
+// Collection Features Imprvement
+// ========================================
+// CUSTOM HEADER VARS --------------------
+$mobItemPadding: 20px 16px;
+$mobItemPaddingVert: 20px 0;
+$color-accent: #00A3F0;
+$color-accent-secondary: #F7615C;
+$color-light: hsla(192, 6%, 98%, 1);
+$color-border-light: rgb(200, 202, 202);
+$color-background-light: #F7F9FA;
+$btnColor: lightgray;
+
+$headerTabletDown: 619px;
+$headerTabletUp: 620px;
+$headerDesktopUp: 960px;
+$headerDesktopLargeUp: 1280px;
+
+
+// On Home page
+.index.promo-per-row-2.clearfix{
+  &:before, &:after{
+    display: none !important;
+  }
+}
+
+.index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix, .featured-promotions.promo-per-row-2.clearfix{
+  padding: 0 30px !important;
+  @include flexbox();
+  @include justify-content(center);
+  @include align-items(flex-start);
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
+  margin: -25px auto 0;
+
+  &:before, &:after {
+    display: none;
+  }
+
+}
+
+.index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix.feature-section, .index.featured-promotions.promo-per-row-2.clearfix.feature-section{
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 0 15px !important;
+    display: block;
+}
+
+@media screen and (max-width: $headerTabletDown){
+  .featured-promotions.promo-per-row-2, .featured-promotions.promo-per-row-2.clearfix{
+    padding: 0 30px !important;
+  }
+}
+
+@media screen and (min-width: $headerTabletUp){
+  .featured-promotions.promo-per-row-2, .featured-promotions.promo-per-row-2.clearfix{
+    padding: 0 10px !important;
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(flex-end);
+    @include flex-direction(row);
+    @include flex-wrap(nowrap);
+    margin: -20px auto 0;
+
+    .feature-section {
+        max-width: calc(50% - 15px) !important;
+        margin: 0;
+        display: block;
+    }
+
+    .feature-section.section-1.promo-1, .feature-section.section-2.promo-2{
+      max-width: calc(50% - 15px)  !important;
+    }
+  }
+}
+

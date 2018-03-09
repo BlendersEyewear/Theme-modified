@@ -61,6 +61,8 @@
   margin: 20px auto;
   text-align: center;
   text-transform: none;
+/*  edited by Adam - 3/7   */
+  max-width: 74rem;
 
   .saso-products-container {
     display: block;
@@ -295,6 +297,19 @@
 
 /* mobile */
 @media (max-width: 960px) {
+  
+  .saso-notifications--cart{
+    margin-top: 86px;
+    margin-bottom: -40px;
+    transition: all .3s linear;
+  }
+
+
+  .saso-notifications--cart.saso-no-promo{
+    margin-top: 56px;
+    margin-bottom: -40px;
+  }
+
 
   .saso-notification{
     // z-index: 1;
@@ -354,12 +369,103 @@
   
 }
 
+
 @media (max-width: 768px){
-  #saso-notifications{
-    // margin-top: 2.5rem;
-  }
 
   .saso-notifications--below-header{
     margin-top: -40px;
   }
+  
+  .saso-use-discount-instead-container{
+  	margin-top: 30px;
+  }
+  
+  .saso-summary{
+  	font-size: 1rem;
+	line-height: 1;
+    margin-bottom: 20px;
+  }
+}
+
+/*  Custom Button for Cart Desktop Popup */
+a.btn.saso-custom-btn {
+    max-width: max-content;
+    display: block;
+    margin: 1rem auto 0;
+/*   	opacity: 0.75; */
+  	font-weight: bold;
+    text-transform: uppercase;
+}
+
+a.btn.saso-custom-btn:hover {
+/*   	color: black; */
+/*     background: #eaeaea; */
+}
+
+.saso-hide-when-embedded {
+    margin-bottom: 2rem;
+}
+
+
+$headeHeight: 30px;
+$promoBannerHeight: 30px;
+
+.saso-notification {
+    padding: .5rem 0 !important;
+    max-width: 100%;
+    margin: 0 !important;
+}
+
+span.saso-notifications-message {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.saso-summary{
+	font-size: 1rem;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+span.saso-summary-line-buyxgety {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    font-variant-caps: all-small-caps;
+    display: block;
+    letter-spacing: .05em;
+}
+
+
+.saso-cross-sell-popup a.saso-close{
+	opacity: 0.5;
+  	margin: 0.25rem 0 0;
+}
+
+
+
+.saso-use-discount-instead-container{
+	margin-top: 35px;
+	margin-bottom: 25px;
+}
+
+.saso-notification-x{
+	margin-right: 0;
+	top: 6px;
+	right: 25px;
+}
+
+.saso-price{
+  margin-left: -0.5rem;
+  font-weight: 600;
+}
+
+span.saso-cart-original-total {
+    margin-bottom: -10px;
+    display: block;
+}
+
+.saso-cart-total{
+	margin: 10px 0 30px;
 }
