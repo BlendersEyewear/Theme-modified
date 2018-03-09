@@ -9188,6 +9188,12 @@ $transparent: rgba(0,0,0,0.0);
     }
   }
 
+  @media screen and (max-width: 768px){
+    .five.columns.offset-by-one.side-cart-area {
+        margin-left: 0;
+        width: 97% !important;
+    }
+  }
 
 // ========================================
 // Collection Features Imprvement
