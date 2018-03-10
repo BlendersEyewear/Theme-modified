@@ -13,7 +13,7 @@ const shippingMsgContainer = $(".shippingmessage");
 const shippingMsg = $(".shipping-notice");
 
 
-let shippingMessages = {
+const shippingMessages = {
   free: "Sweet! You scored Free Shipping…",
   addMore: "Add more items to get Free Shipping! <br>All orders over $40 ship Free"
 };
