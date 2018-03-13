@@ -4537,9 +4537,7 @@ img.footer-logo {
 $promoBannerHeight: 30px;
 
 .promo_banner {
-  // Edited for Vday - 2/14/18
-  // background-color: #000000;
-  background-color: #ff71d6;
+  background-color: #000000;
   text-align: center;
   color: #ffffff;
   font-size: 12px;
@@ -9236,7 +9234,8 @@ $headerDesktopLargeUp: 1280px;
 
 }
 
-.index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix.feature-section, .index.featured-promotions.promo-per-row-2.clearfix.feature-section{
+.index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix.feature-section,
+.index.featured-promotions.promo-per-row-2.clearfix.feature-section{
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 0 15px !important;
@@ -9267,16 +9266,155 @@ $headerDesktopLargeUp: 1280px;
 
     .feature-section.section-1.promo-1, .feature-section.section-2.promo-2{
       max-width: calc(50% - 15px)  !important;
+      margin: 30px 0 0;
+      position: relative;
+    }
+
+
+    .feature-section.section-1.promo-1 > a,
+    .feature-section.section-2.promo-2 > a{
+      position: static;
+    }
+
+    // Featured Promotions 'buttons'
+    .feature-section.section-1.promo-1 h2.title.title-below,
+    .feature-section.section-2.promo-2 h2.title.title-below{
+      position: absolute;
+      z-index: 3;
+      bottom: 0.75rem;
+      left: 1.25rem;
+      width: 11rem;
+      color: white;
+      border: 1px solid white;
+      padding: 8px;
+      line-height: 1;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+    }
+
+    // 'NEW' Tag
+    .feature-section.section-1.promo-1 h2.title.title-below:after,
+    .feature-section.section-2.promo-2 h2.title.title-below:after{
+      content: 'New';
+      position: absolute;
+      display: inline-block;
+      color: white;
+      background: tomato;
+      font-size: 0.825rem;
+      font-weight: 600;
+      font-variant-caps: all-small-caps;
+      text-align: center;
+      padding: 2px 5px;
+      letter-spacing: .1em;
+      width: auto;
+      z-index: 3;
+      top: -1.5rem;
+      left: 0;
     }
   }
+}
+
+@media screen and (max-width: 480px){
+  .index.feature-section.section-.promo-1.title-overlay-false, 
+  .index.feature-section.section-2.promo-2.title-overlay-false{
+    width: 100% !important;
+    padding: 0 !important;
+  } 
+}
+
+
+.container.promotions-grid-full_width {
+  width: 100%;
+  padding-top: 0;
+
+  .featured-promotions.promo-per-row-2 {
+    .feature-section {
+      // width: 50%;
+      // margin: 0;
+      @include respond-to('small'){
+        width: 100%;
+        margin: 0 0 20px;
+        position: relative;
+      }
+
+      .feature-wrap .title{
+        @include respond-to('medium'){
+              display: block !important;
+              color: white;
+              position: absolute;
+              width: auto;
+              border: 1px solid white;
+              padding: 2px 10px;
+              font-size: 1rem;
+              letter-spacing: .1em;
+              font-variant-caps: all-petite-caps;
+              font-weight: 600;
+              text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+
+              bottom: 0.5rem;
+              left: 1rem;
+        }
+      }
+
+      .feature-wrap .title:after{
+        @include respond-to('medium'){
+          content: 'New';
+          position: absolute;
+          display: inline-block;
+          color: white;
+          background: tomato;
+          font-size: 0.75rem;
+          font-weight: 600;
+          font-variant-caps: all-small-caps;
+          text-align: center;
+          padding: 1px 5px 2px;
+          letter-spacing: .1em;
+          line-height: 1;
+          width: auto;
+          z-index: 3;
+          text-shadow: none;
+          top: -1.5rem;
+          left: 0;
+        }
+      }
+
+      .feature-wrap .feature-details{
+        @include respond-to('small'){
+          display: none !important;
+        }
+      }
+    }
+  }
+  // .featured-promotions.promo-per-row-3 {
+  //   .feature-section {
+  //     width: 33.333333%;
+  //     margin: 0;
+  //     @include respond-to('medium'){
+  //       width: calc(100% - 40px);
+  //       margin: 10px 20px;
+  //     }
+  //   }
+  // }
+
+}
+
+@include respond-to('medium'){
+  .container.promotions-grid-full_width.featured-promotions.promo-per-row-2.feature-section{
+    position: relative;
+  }
+
+  div#shopify-section-1520870244952 {
+    margin-top: -10px;
+  }
+}
+
+.index .featured-promotions .promo-per-row-2 .feature-section.title-overlay-false .feature-wrap .title {
+    display: block !important;
 }
 
 // FourSixty Resizing
 #foursixty-homepage-container {
     max-width: 95%;
     margin: 0 auto;
-}
-
-body{
-  background: pink;
 }

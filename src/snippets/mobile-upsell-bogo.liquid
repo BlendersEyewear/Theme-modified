@@ -1,0 +1,21 @@
+{% comment %} <!-- Start Cart Mobile Upsell --> {% endcomment %}
+    <div class="mobile-upsell">  
+      
+    {% for item in cart.items %}
+	    {% if item.product.type == "Sunglasses" %}
+        {% assign sunglasses_in_cart = true %}
+  	  {% endif %}
+    {% endfor %}
+      
+    {% for item in cart.items %}
+	    {% if item.product.type == "Soft Pouches" %}
+        {% assign sunglasses_in_cart = false %}
+  	  {% endif %}
+    {% endfor %}
+
+		{% if sunglasses_in_cart %}
+		  {% include 'mobile-upsell' %}
+    {% endif %}
+
+    </div>
+{% comment %} <!-- End Cart Mobile Upsell --> {% endcomment %}

@@ -24,7 +24,7 @@
          <div class="feature_divider"></div>
 
 {% comment %} <!-- Start Cart Mobile Upsell --> {% endcomment %}
-    <div class="mobile-upsell">  
+   <div class="mobile-upsell">  
       
     {% for item in cart.items %}
 	    {% if item.product.type == "Sunglasses" %}
@@ -32,11 +32,12 @@
   	  {% endif %}
     {% endfor %}
       
-    {% for item in cart.items %}
+      {% comment %} Commented out for BOGO {% endcomment %}
+    {% comment %} {% for item in cart.items %}
 	    {% if item.product.type == "Soft Pouches" %}
         {% assign sunglasses_in_cart = false %}
   	  {% endif %}
-    {% endfor %}
+    {% endfor %} {% endcomment %}
 
 		{% if sunglasses_in_cart %}
 		  {% include 'mobile-upsell' %}
@@ -44,6 +45,9 @@
 
     </div>
 {% comment %} <!-- End Cart Mobile Upsell --> {% endcomment %}
+
+{% comment %} Included Statis Mobile Upsell for BOGO {% endcomment %}
+{% comment %} {% include 'mobile-upsell' %} {% endcomment %}
        
     </div>
 </div>
@@ -154,6 +158,7 @@
                 {% endif %}
               </p>
 
+              {% comment %} Quanity Changer {% endcomment %}
               <div class="product-quantity-box left">
                 <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
                 <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" />
@@ -163,7 +168,6 @@
           </div>
         {% endfor %}
       </div>
-
       <div class="five columns offset-by-one side-cart-area">
         <div class="section clearfix">
           <div class="subtotal">
@@ -348,15 +352,19 @@
 }
   
   @media only screen and (min-width: 736px) {
-.container .offset-by-five {
-    padding-left: 32% !important;
-}
-    
-         .mobile-upsell {
-    display: none!important;
-} 
+    .container .offset-by-five {
+        padding-left: 32% !important;
+    }
+    .mobile-upsell{
+        display: none!important;
+    } 
   }
   
+@media only screen and (max-width: 736px){
+  .pouch-upsell{
+    display: none;
+  }
+}
   
 .shippingmessage {
     text-align: center;
@@ -391,6 +399,11 @@
     line-height: 22px;
 }
     }
+
+input.hidden{
+  display: hidden;
+  font-size: 0.5rem;
+}
   
 
 </style>

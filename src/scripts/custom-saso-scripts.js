@@ -12,7 +12,6 @@ const headerHeight = $("#header").height();
 const shippingMsgContainer = $(".shippingmessage");
 const shippingMsg = $(".shipping-notice");
 
-
 const shippingMessages = {
   free: "Sweet! You scored Free Shipping…",
   addMore: "Add more items to get Free Shipping! <br>All orders over $40 ship Free"
@@ -73,11 +72,8 @@ const getPrice = function(element) {
   return $(innerMoneyRaw);
 };
 
-// Doc Ready
-$(function() {
-  // make sure ppadding is flush with header
-  promoHeightChange();
-
+// saso Price Updates Function
+const sasoPriceUpdate = function(){
   if ($($sasoSummary).length) {
     // Wait a sec for stuff to load
     setTimeout(function() {
@@ -86,35 +82,51 @@ $(function() {
 
       let sasoPrice = getPrice(".saso-cart-total");
 
-      // console.log(sasoPrice);
-
       const $sasoCartCont = $(".saso-cart-total");
       const $sasoCart = $sasoCartCont.find("money");
-      const $sasoCartTotalRaw = parseInt(
-        $(".saso-cart-total")
+      const $sasoCartTotalRaw = parseInt($(".saso-cart-total")
           .find(".money")
           .text()
-          .replace(/[^\d\.]/g, "") * 100
-      );
-      // const $sasoCartTotal = parseInt($sasoCartTotalRaw);
+          .replace(/[^\d\.]/g, "") * 100);
 
       if ($sasoCartCont.html()) {
         // Remove free shipping message if USO cart total is present
         console.log("removed free shipping message");
         $(shippingMsg).detach();
-        // $(shippingMsgContainer).append($(shippingMsgEncourage));
 
         console.log($sasoCartTotalRaw);
 
         if ($sasoCartTotalRaw >= freeShippingThreshold) {
           showFreeShippingMsg();
         } else {
-          console.log('no free shipping for you');
-          $(shippingMsgContainer).append($(shippingMsg)).html(shippingMessages.addMore);
+          console.log("no free shipping for you");
+          $(shippingMsgContainer)
+            .append($(shippingMsg))
+            .html(shippingMessages.addMore);
         }
       }
     }, timeOutTime);
   }
+}
+
+// Remove Shipping Message
+const removeShippingMsg = function(){
+  if($sasoSummary.length){
+    if($(shippingMsgContainer).length){
+      $(shippingMsgContainer).remove();
+    }
+  }
+}
+
+// Doc Ready
+$(function() {
+  // make sure ppadding is flush with header
+  promoHeightChange();
+  
+  // Add saso price update?
+  // Remove Shipping Message
+  removeShippingMsg();  
+
 });
 
 // jQuery.get('/cart.js', function(data){
