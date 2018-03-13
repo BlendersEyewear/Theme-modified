@@ -9206,8 +9206,8 @@ $color-border-light: rgb(200, 202, 202);
 $color-background-light: #F7F9FA;
 $btnColor: lightgray;
 
-$headerTabletDown: 619px;
-$headerTabletUp: 620px;
+$headerTabletDown: 768px;
+$headerTabletUp: calc($headerTabletDown + 1);
 $headerDesktopUp: 960px;
 $headerDesktopLargeUp: 1280px;
 
@@ -9325,7 +9325,7 @@ $headerDesktopLargeUp: 1280px;
 
 
 .container.promotions-grid-full_width {
-  width: 100%;
+  // width: 100%;
   padding-top: 0;
 
   .featured-promotions.promo-per-row-2 {
@@ -9413,8 +9413,39 @@ $headerDesktopLargeUp: 1280px;
     display: block !important;
 }
 
+
+// ==============================================================
+// Make first three featured promos on Home page square on mobile
+// ==============================================================
+@include respond-to('medium'){
+
+  // Top Promotions
+  .js-featured-promotions.featured-promotions.promo-per-row-3 {
+
+    figure.feature-section.section-1.promo-1.title-overlay-true,
+    figure.feature-section.section-2.promo-2.title-overlay-true,
+    figure.feature-section.section-3.promo-3.title-overlay-true {
+        max-height: calc(100vw - 60px);
+        padding: 0;
+
+        .feature-inner.feature-style--square {
+            max-height: inherit;
+        }
+    }
+  }
+
+  // Lower 2 Promotions
+  .featured-promotions.promo-per-row-2, .featured-promotions.promo-per-row-2.clearfix {
+    padding: 0 20px !important;
+  }
+  
+}
+
+
+
 // FourSixty Resizing
 #foursixty-homepage-container {
     max-width: 95%;
     margin: 0 auto;
+    padding: 0 10px;
 }

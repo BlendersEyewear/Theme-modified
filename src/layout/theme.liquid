@@ -195,7 +195,7 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% assign feature_image = false %}
   {% endif %}
 
-  <body class="{{ template | replace: '.', '-' | handle }}">
+  <body class="{{ template | replace: '.', '-' | handle }}" data-money-format="{{ shop.money_format }}">
 
     
     {% section 'header' %}
