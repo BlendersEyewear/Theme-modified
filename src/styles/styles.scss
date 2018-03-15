@@ -3,6 +3,8 @@ Theme Name: Turbo 2.0.9
 Theme URI: https://outofthesandbox.com/collections/turbo-theme/products/turbo-theme-portland
 Author: Out of the Sandbox (https://outofthesandbox.com)
 Description: Shopify Theme (https://www.shopify.com/?ref=out-of-the-sandbox)
+
+Last edited 3/14 - Adam - importing changes from other themes
 ******************************************************************/
 /* Table of Contents
 ==================================================
@@ -4606,6 +4608,14 @@ $topMenuHeight: 40px;
 
 @include respond-to('medium'){
 
+  .blog {
+    #pagecontent{
+      display: none !important;		
+      padding-bottom: 0 !important;		
+      margin-bottom: -40px;		
+     }		
+  }		
+
   .mobile_nav-fixed--true {
     #pagecontent {
       display: block;
@@ -7704,7 +7714,8 @@ input[type="button"].highlight-false--dark {
       @include respond-to('medium') {
         position: static;
         width: 100%;
-        padding: 0 1rem;
+        padding: 0 2rem;
+        // padding: 0; //trying out left sided buttons
         
       }
     }
@@ -7735,17 +7746,22 @@ input[type="button"].highlight-false--dark {
         @include respond-to('medium') {
           margin-top: 0;
           width: 100%;
-          // background: linear-gradient(to right, #ff5f6d, #ffc371);
-          // color: green;
-          background: linear-gradient(to left, #ff5f6d, #ffc371);
+          background: white;
+          color: black;
+          font-weight: 600;
           border: none;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); // removed material design shadow
           display: block;
           font-size: 1.125rem;
           line-height: 1;
-          padding: 10px;
+          padding: 10px 5px;
           min-height: auto;
           -webkit-appearance: none;
+
+          // Trying out left sided button
+          // max-width: fit-content;
+          // padding: 10px 15px;
+          // margin: 0 0 0 1rem;
           
         }
       }
@@ -8207,16 +8223,7 @@ img.collection_banner_img{
   }
 }
   
-//   @media (max-width: 960px) {
-// .saso-notification {
-//     //  Edited out by Adam - 2/13/18
-//     // padding: 10px 0px !important;
-//     // font-size: 110% !important;
-//     // padding-top: 20px!important;
-// }
-//   }
-  
-    /* Hides Sale Banner */
+/* Hides Sale Banner */
 
 .sale_banner.thumbnail_banner {
   display: none;
@@ -8657,8 +8664,6 @@ $transparent: rgba(0,0,0,0.0);
     width: 100%;
     height: auto;
   }
-
-  // .product-hero--first:after{}
   
   .product-hero--plum:after, .product-hero--first:after{
     content: '';
@@ -8870,9 +8875,7 @@ $transparent: rgba(0,0,0,0.0);
       margin-bottom: 0;
       max-width: 40%;
     }
-    // &:nth-child(4){
-    //   // padding: 1rem;
-    // }
+
     &:nth-child(5){
       padding: 0;
       max-width: 60%;
@@ -9137,9 +9140,7 @@ $transparent: rgba(0,0,0,0.0);
                   flex: 30%;
       margin: 0 2rem 2rem 0
     }
-    // &:nth-child(4){
-    //   // padding: 1rem;
-    // }
+
     &:nth-child(5){
       height: 390px;
       max-width: 58%;
@@ -9193,9 +9194,15 @@ $transparent: rgba(0,0,0,0.0);
     }
   }
 
-// ========================================
+  // Remove facebook messenger checkbox widget from showing
+  .index-sections{
+    #shopmessage-checkbox{display: none !important}
+  }
+
+/// ========================================
 // Collection Features Imprvement
-// ========================================
+// =========================================
+
 // CUSTOM HEADER VARS --------------------
 $mobItemPadding: 20px 16px;
 $mobItemPaddingVert: 20px 0;
@@ -9207,7 +9214,7 @@ $color-background-light: #F7F9FA;
 $btnColor: lightgray;
 
 $headerTabletDown: 768px;
-$headerTabletUp: calc($headerTabletDown + 1);
+$headerTabletUp: 769px;
 $headerDesktopUp: 960px;
 $headerDesktopLargeUp: 1280px;
 
@@ -9283,7 +9290,10 @@ $headerDesktopLargeUp: 1280px;
       z-index: 3;
       bottom: 0.75rem;
       left: 1.25rem;
-      width: 11rem;
+      width: 100%;
+      max-width: max-content;
+      min-width: 12rem;
+
       color: white;
       border: 1px solid white;
       padding: 8px;
@@ -9293,49 +9303,60 @@ $headerDesktopLargeUp: 1280px;
       letter-spacing: .1em;
     }
 
-    // 'NEW' Tag
+    // 'NEW' Tag - Desktop
     .feature-section.section-1.promo-1 h2.title.title-below:after,
     .feature-section.section-2.promo-2 h2.title.title-below:after{
       content: 'New';
       position: absolute;
       display: inline-block;
-      color: white;
-      background: tomato;
-      font-size: 0.825rem;
+      color: black;
+      background: white;
+      font-size: 1rem;
       font-weight: 600;
       font-variant-caps: all-small-caps;
       text-align: center;
-      padding: 2px 5px;
+      padding: 4px 5px;
       letter-spacing: .1em;
       width: auto;
       z-index: 3;
-      top: -1.5rem;
-      left: 0;
+      top: -32px;
+      left: -1px;
     }
   }
 }
 
-@media screen and (max-width: 480px){
+// Make them collapse on Tablet
+@include respond-to('medium'){
   .index.feature-section.section-.promo-1.title-overlay-false, 
   .index.feature-section.section-2.promo-2.title-overlay-false{
     width: 100% !important;
     padding: 0 !important;
-  } 
+  }
 }
+// @media screen and (max-width: 480px){
+//   .index.feature-section.section-.promo-1.title-overlay-false, 
+//   .index.feature-section.section-2.promo-2.title-overlay-false{
+//     width: 100% !important;
+//     padding: 0 !important;
+//   } 
+// } 
 
 
 .container.promotions-grid-full_width {
-  // width: 100%;
+/*   width: 100%; */
   padding-top: 0;
 
   .featured-promotions.promo-per-row-2 {
     .feature-section {
-      // width: 50%;
-      // margin: 0;
-      @include respond-to('small'){
+
+      // Make FPs stack on Tablet down
+      @include respond-to('medium'){
         width: 100%;
         margin: 0 0 20px;
         position: relative;
+
+        // Make sure the actual buttons don't show
+        .feature-details{display: none !important}
       }
 
       .feature-wrap .title{
@@ -9345,7 +9366,7 @@ $headerDesktopLargeUp: 1280px;
               position: absolute;
               width: auto;
               border: 1px solid white;
-              padding: 2px 10px;
+              padding: 2px 10px 4px;
               font-size: 1rem;
               letter-spacing: .1em;
               font-variant-caps: all-petite-caps;
@@ -9362,19 +9383,19 @@ $headerDesktopLargeUp: 1280px;
           content: 'New';
           position: absolute;
           display: inline-block;
-          color: white;
-          background: tomato;
-          font-size: 0.75rem;
+          color: black;
+          background: white;
+          font-size: 0.875rem;
           font-weight: 600;
           font-variant-caps: all-small-caps;
           text-align: center;
-          padding: 1px 5px 2px;
+          padding: 2px 5px 2px;
           letter-spacing: .1em;
           line-height: 1;
           width: auto;
           z-index: 3;
           text-shadow: none;
-          top: -1.5rem;
+          top: -24px;
           left: 0;
         }
       }
@@ -9404,8 +9425,15 @@ $headerDesktopLargeUp: 1280px;
     position: relative;
   }
 
-  div#shopify-section-1520870244952 {
+  div#shopify-section-1520870244952,
+  div#shopify-section-1520532192291 {
     margin-top: -10px;
+  }
+  
+  .container.homepage_content.section.center.title{
+	font-size: 1rem;
+    letter-spacing: .1em;
+    line-height: 1.5;
   }
 }
 
@@ -9441,9 +9469,50 @@ $headerDesktopLargeUp: 1280px;
   
 }
 
+// ==============================================================
+// 'founded on fun' section
+// ==============================================================
+.homepage_content.section.center{
+  .featured_text{
+    margin-bottom: 3rem;
+  }
+
+  .feature_divider {
+    max-width: 49rem;
+    margin: 1.5rem auto 1rem;
+  }
+
+  a.action_button {
+    border: none;
+    background: linear-gradient(10deg, #9126e9, #30b0ec);
+    transition: all .25s ease-in-out;
+
+    padding: 10px 30px;
+    height: auto;
+    min-height: auto;
+    line-height: 1;
+
+  }
+
+  a.action_button:hover {
+    background: linear-gradient(10deg, #9d48e2, #4abaee);
+  }
+}
 
 
+// ==============================================================
+// 'Shop Our Instagram' title section
+// ==============================================================
+.logo-bar-section.container h2{
+  border: none !important;
+  padding: 2rem 0 0;
+  margin: 0 auto;
+}
+
+
+// ==============================================================
 // FourSixty Resizing
+// ==============================================================
 #foursixty-homepage-container {
     max-width: 95%;
     margin: 0 auto;

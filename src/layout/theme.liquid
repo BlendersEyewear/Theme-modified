@@ -232,6 +232,8 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% endif %}
 
     <script src="{{ 'app.js' | asset_url }}"></script>
+    {% comment %} Custom Javascript {% endcomment %}
+    <script defer src="{{ 'custom.js' | asset_url }}"></script>
     {% comment %} Custom Ultimate Special Offers App js {% endcomment %}
     <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script>
     
