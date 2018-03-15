@@ -125,17 +125,6 @@ $(function() {
   
   // Add saso price update?
   // Remove Shipping Message
-  removeShippingMsg();  
+  // removeShippingMsg();  //Commented Out when 
 
 });
-
-// jQuery.get('/cart.js', function(data){
-//     console.log(data).responseText;
-// });
-
-// const cartData = jQuery.get("/cart.js").responseText;
-
-// $.getJSON("/cart.js", function(data){
-//     const totalPrice = data.total_price;
-//     console.log(totalPrice, 'old price');
-// });

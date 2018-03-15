@@ -4,7 +4,7 @@ Theme URI: https://outofthesandbox.com/collections/turbo-theme/products/turbo-th
 Author: Out of the Sandbox (https://outofthesandbox.com)
 Description: Shopify Theme (https://www.shopify.com/?ref=out-of-the-sandbox)
 
-Last edited 3/14 - Adam - importing changes from other themes
+Last edited 3/15 - Adam - importing changes from other themes
 ******************************************************************/
 /* Table of Contents
 ==================================================
@@ -4605,7 +4605,6 @@ $promoBannerHeight: 30px;
 $topMenuHeight: 40px;
 
 
-
 @include respond-to('medium'){
 
   .blog {
@@ -7715,7 +7714,6 @@ input[type="button"].highlight-false--dark {
         position: static;
         width: 100%;
         padding: 0 2rem;
-        // padding: 0; //trying out left sided buttons
         
       }
     }
@@ -7736,8 +7734,6 @@ input[type="button"].highlight-false--dark {
         height: auto;
         line-height: 1.25;
         padding: 10px 20px;
-        // font-variant-caps: all-small-caps;
-        // letter-spacing: .05em;
         font-size: 16px;
         font-weight: bold;
         border: 1px solid white;
@@ -7757,11 +7753,6 @@ input[type="button"].highlight-false--dark {
           padding: 10px 5px;
           min-height: auto;
           -webkit-appearance: none;
-
-          // Trying out left sided button
-          // max-width: fit-content;
-          // padding: 10px 15px;
-          // margin: 0 0 0 1rem;
           
         }
       }
@@ -8190,17 +8181,7 @@ p.modal_price {
 
 .fs-image-container a {
  	position: static !important; 
-}
-  
-  
-  /* Special Offers Custom */
-  
-	// @media (max-width: 960px) {
-	// 	.saso-notification-x {
-  //   	// margin: -8px 8px 0px 0px!important;
-	// }
-  // }
-  
+} 
   
     
 .collection_banner {
@@ -8411,7 +8392,6 @@ img.collection_banner_img{
 }
 
   .saso-notifications-message {
-    // font-size: 120%;
     line-height: 3;
 }
   
@@ -9359,6 +9339,7 @@ $headerDesktopLargeUp: 1280px;
         .feature-details{display: none !important}
       }
 
+      // Buttons
       .feature-wrap .title{
         @include respond-to('medium'){
               display: block !important;
@@ -9372,8 +9353,9 @@ $headerDesktopLargeUp: 1280px;
               font-variant-caps: all-petite-caps;
               font-weight: 600;
               text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+              margin: 0;
 
-              bottom: 0.5rem;
+              bottom: 1rem;
               left: 1rem;
         }
       }
@@ -9456,10 +9438,38 @@ $headerDesktopLargeUp: 1280px;
         max-height: calc(100vw - 60px);
         padding: 0;
 
+        // Inner Div
         .feature-inner.feature-style--square {
             max-height: inherit;
         }
+        
+        // Image
+        .feature-inner.feature-style--square > img {
+            transform: translateY(-2rem);
+        }
     }
+
+    // Moving Images on specific promos in mobile
+    // Image 1
+    figure.feature-section.section-1.promo-1.title-overlay-true{
+      .feature-inner.feature-style--square > img{
+        transform: translateY(-3.5rem);
+      }
+    }
+    // Image 2
+    figure.feature-section.section-2.promo-2.title-overlay-true{
+      .feature-inner.feature-style--square > img{
+        transform: translateY(-4rem);
+      }
+    }
+
+    // Image 3
+    figure.feature-section.section-3.promo-3.title-overlay-true{
+      .feature-inner.feature-style--square > img{
+        transform: translateY(-7rem);
+      }
+    }
+
   }
 
   // Lower 2 Promotions
@@ -9505,7 +9515,7 @@ $headerDesktopLargeUp: 1280px;
 // ==============================================================
 .logo-bar-section.container h2{
   border: none !important;
-  padding: 2rem 0 0;
+  padding: 2.25rem 0 0;
   margin: 0 auto;
 }
 
