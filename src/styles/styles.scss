@@ -9161,7 +9161,8 @@ $transparent: rgba(0,0,0,0.0);
 // Bug Fixes
 // ========================================
 
-  .quick_shops.desktop {
+  .index.quick_shops.desktop,
+  .collection.quick_shops.desktop {
     #shopmessage-checkbox{
     	display: none !important;
     }
