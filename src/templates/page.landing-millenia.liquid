@@ -1,14 +1,53 @@
 <a name="pagecontent" id="pagecontent"></a>
 
 <div class="page landing-page landing-page--millenia clearfix">
-  <h1>
-    {{ page.title }}
-  </h1>
-  <div class="feature_divider"></div>
 
-  </div></div>{% include 'hypervisual' %}<div class="container"><div class="sixteen columns page clearfix">
+    <div class="landing__hero" 
+        style="background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url({{ '' | asset_img_url: '1920x' }}); background-size: cover; background-position: center;">
+        <h1 class="landing__hero-title">{{ page.title }}</h1>
+    </div>
 
-  <div>
-    {% include 'page-multi-column', content: page.content %}
-  </div>
+    {% comment %} First big section {% endcomment %}
+    <section class="section section--dark">
+
+        {% comment %} Grid of Six Products {% endcomment %}
+        <div class="container product-grid">
+
+            <div class="product">
+                <a href="" class="product__link">
+                    <img src="" alt="" class="product_img">
+                </a>
+                <p class="product__title">
+                    <a href="" class="product__link">Product Title Goes Here</a>
+                </p>
+
+                <p class="product_teaser">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque doloribus perspiciatis officia. Excepturi, facilis cum quasi cumque pariatur numquam.
+                </p>
+
+                <a href="" class="btn btn--dark">Add to Cart</a>
+            </div>
+        </div>
+
+        {% comment %} Need Mobile for below product-grid grid layout {% endcomment %}
+    </section>
+
+    <section class="section">
+        <div class="container"></div>
+    </section>
+
+    <section class="section section--dark">
+        <div class="container grid-container lifestyle-grid">
+            <h2 class="millenia-title millenia-title--first">The Millenia Collection</h2>
+
+            {% comment %} Six lifestyle images {% endcomment %}
+            <div class="lifestyle-grid__item">
+                <img src="" alt="" class="lifestyle-img">
+            </div>
+
+            <h2 class="millenia-title millenia-title--second">The Millenia Collection</h2>
+        </div>
+    </section>
+
+    <div class="landing__footer"></div>
 </div>

@@ -200,11 +200,12 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     
     {% section 'header' %}
 
+    {% comment %} Add Ultimate Special Offers Notification if on Cart page {% endcomment %}
     {% if template == 'cart'%} <div id="saso-notifications" class="saso-notifications--cart"></div> {% endif %}
 
     {% unless feature_image %}
     
-      <div class="container main content {% if template == 'page.landing' or template == 'page.landing-sunset-kid-spirit-wind' %}landing-page-container{% endif%}">
+      <div class="container main content {% if template == 'page.landing' or template == 'page.landing-sunset-kid-spirit-wind' or template == 'page.landing-millenia' %}landing-page-container{% endif%}">
     {% endunless %}
 
       {{ content_for_layout }}
