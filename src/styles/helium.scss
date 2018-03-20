@@ -178,13 +178,41 @@ div.fs-text-container .fs-entry-title {
 
 }
 
-.collection_banner_title, .collection_banner_description{
+// Added by Adam
+.collection_banner--join-the-team{
+  .collection_banner_img{
+  	display: block;
+    margin: -20px auto 45px;
+    position: static;
+  }
+
+}
+
+@media screen and (max-width: 768px){
+  
+  .collection_banner--join-the-team{
+  	margin: 0 0 0 !important
+  }
+  
+  .collection_banner--join-the-team > .collection_banner_img{
+  	margin: 0 auto;
+    padding: 10px 0 0;
+  }
+}
+
+.collection_banner--has-image{
+	padding: 0;
+}
+
+.collection_banner_title, .collection_banner_description, .collection_banner_top_heading{
   font-family: "proxima-nova";
   font-weight: bold;
   line-height: 1;
   letter-spacing: .05em;
   color: white;
   text-align: center;
+  margin: 0;
+  padding: 0;
 
   text-shadow: 0px 0px 16px rgba(0, 0, 0, 0.45);
 }
@@ -192,27 +220,28 @@ div.fs-text-container .fs-entry-title {
 .collection_banner_title {
   font-size: 4.25rem;
   font-weight: 800;
-  margin: 0;
-  padding: 0;
+  margin: .5rem 0;
 }
 
 .collection_banner_description{
   font-size: 1.25rem;
   font-weight: 600;
   font-style: italic;
-  margin: 0;
-  padding: 0;
+}
+
+.collection_banner_top_heading {
+  color: white;
+  // font-variant-caps: all-small-caps;
+  font-weight: 600;
+  letter-spacing: .1em;
+  font-size: 1.25rem;
 }
 
 .collection_banner .ghost {
   display: none;
 }
-.collection_banner img {
-  // width: 100%;
-  // height: auto;
-}
 
-@media(max-width: 860px){
+@media (max-width: 860px){
   .collection_banner_title{
     font-size: 3.5rem;
   }
@@ -223,19 +252,30 @@ div.fs-text-container .fs-entry-title {
 
 @media(max-width:700px) {
   .collection_banner .ghost {
-    // display: block;
-    // position: relative;
-    // width: 100%;
-    // height: auto;
     display: none;
   }
 
+  .collection_banner_top_heading{
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+  
   .collection_banner_title{
     font-size: 4rem;
+    line-height: 1;
+    margin: 0 0 5px;
   }
 
   .collection_banner_description{
     font-size: 1rem;
+    line-height: 1.25;
+  }
+
+
+  // Added by Adam
+  .collection_banner--blog{
+    margin-top: 88px !important;
+    margin-bottom: 0;
   }
 
   // .collection_banner img {
@@ -252,7 +292,7 @@ div.fs-text-container .fs-entry-title {
   // }
 }
 
-@media(screen and max-width: 560px){
+@media screen and (max-width: 560px){
   .collection_banner{
     padding: 2rem 1rem;
   }
@@ -262,6 +302,10 @@ div.fs-text-container .fs-entry-title {
     font-kerning: normal;
     letter-spacing: 0.1em;
     line-height: 1.1;
+  }
+
+  .blog.mobile_nav--fixed--true {
+    #pagecontent {padding: 0 !important}
   }
 }
 

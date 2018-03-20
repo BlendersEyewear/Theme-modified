@@ -1,0 +1,85 @@
+<a name="pagecontent" id="pagecontent"></a>
+
+
+{% comment %}
+  If heading text is filled out, show collection banner with text overlay, if not, show original image with '--has-image' collection banner
+{% endcomment %}
+{%if section.settings.heading != '' %}
+  <div class="collection_banner collection_banner--reatil" style="background-image:url('{{ section.settings.marquee | img_url: '2600x' }}');">
+    <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
+
+    {%if section.settings.top_heading != '' %}
+      <h4 class="collection_banner_top_heading">{{ section.settings.top_heading }}</h4>
+    {% endif %}
+
+    <h1 class="collection_banner_title">{{ section.settings.heading }}</h1>
+
+    {%if section.settings.subheading != '' %}
+      <h4 class="collection_banner_description">{{ section.settings.subheading }}</h4>
+    {% endif %}
+  </div>
+{% else %}
+
+  <div class="collection_banner collection_banner--has-image collection_banner--reatil">
+    <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
+    <img class="collection_banner_img" src="{{ section.settings.marquee | img_url: '2600x' }}" />
+  </div>
+{% endif %}
+
+{% comment %} {% include 'hypervisual' %} {% endcomment %}
+
+<div class="container main collection_banner_below">
+  <div class="nine columns center-page">
+    <p>{{ page.content }}</p>
+
+    <div id="wufoo-q1aqkb9207s2s7h">
+      Fill out my <a href="https://blenders.wufoo.com/forms/q1aqkb9207s2s7h">online form</a>.
+    </div>
+    <script type="text/javascript">var q1aqkb9207s2s7h;(function(d, t) {
+  var s = d.createElement(t), options = {
+    'userName':'blenders',
+    'formHash':'q1aqkb9207s2s7h',
+    'autoResize':true,
+    'height':'885',
+    'async':true,
+    'host':'wufoo.com',
+    'header':'hide',
+    'ssl':true};
+  s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+  s.onload = s.onreadystatechange = function() {
+    var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+    try { q1aqkb9207s2s7h = new WufooForm();q1aqkb9207s2s7h.initialize(options);q1aqkb9207s2s7h.display(); } catch (e) {}};
+  var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');</script>
+  </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Become a Retailer",
+    "class": "Become a Retailer",
+    "settings": [
+        {
+            "type": "text",
+            "id": "top_heading",
+            "label": "Page Top Heading"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Page Title"
+        },
+        {
+            "type": "text",
+            "id": "subheading",
+            "label": "Page Subheading"
+        },
+        {
+            "type": "image_picker",
+            "id": "marquee",
+            "label": "Marquee Image"
+        }
+    ]
+}
+{% endschema %}

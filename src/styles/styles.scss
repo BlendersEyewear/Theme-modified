@@ -9529,3 +9529,47 @@ $headerDesktopLargeUp: 1280px;
     margin: 0 auto;
     padding: 0 10px;
 }
+
+
+// ==============================================================
+// Make Header Items Spaced Out
+// ==============================================================
+  
+  @media only screen and (min-width: 960px){
+  	.nav > .menu > li {
+        padding: 0 15px;
+    }
+    
+    .nav > .menu > li.search_container{
+    	padding: 0 5px;
+    }
+  }
+
+// ==============================================================
+// Blog Header - Remove Blog header on Desktop
+// ==============================================================
+.blog .blog-header{
+  display: none !important;
+  @include respond-to('medium'){
+    display: block !important;
+  }
+}
+
+
+// Join the Team Page 3/20
+// ==============================================================
+.page-join-the-team, .page-retail{
+    .content{
+      padding: 0;
+    }
+    .container{
+      padding: 0;
+    }
+}
+
+.collection_banner.collection_banner--join-the-team{
+  margin: 0 0 1.25rem;
+  @include respond-to('small'){
+    margin: 0;
+  }
+}

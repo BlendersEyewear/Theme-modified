@@ -30,6 +30,7 @@
 <div class="container main content">
 
 {% paginate blog.articles by section.settings.blog_posts_per_page %}
+  {% comment %} Removed blog-header by Adam - 3/20/2018 {% endcomment %}
   <div class="blog-header clearfix">
     {% unless section.settings.image != nil %}
       <div class="eight columns">
