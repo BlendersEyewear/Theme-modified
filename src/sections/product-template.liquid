@@ -725,6 +725,56 @@ h1 {
     margin-top: 10px;
   }
 }
+
+/*  Mobile Changes  */
+@media only screen and (max-width: 736px){
+  /* Make Recomatic Buttons Static on mobile, and other rec */
+  button.btn.recomatic-add-to-cart {
+    visibility: visible;
+    font-size: 1rem;
+    padding: 5px;
+    height: auto;
+    min-height: unset;
+    font-variant-caps: all-petite-caps;
+    max-width: 10rem;
+    margin: 0 auto 10px;
+  }
+
+  .recomatic-title {
+    line-height: 1.5 !important;
+    margin: 0 auto 5px !important;
+  }
+
+  .recomatic-subtitle {
+    font-variant-caps: all-small-caps !important;
+    opacity: 0.8;
+  }
+
+  /*  Disable Hover effects on Mobile    */
+  .recomatic-wrap a:hover .alternate-recomatic-image{
+    opacity: 0;
+  }
+
+  .recomatic-wrap a:hover .main-recomatic-image{
+    opacity: 1;
+  }
+
+  /*   'xxxxx reviews' span */
+  .recomatic-reviews-wrap .text-m {
+    display: block !important;
+    margin-top: 5px;
+  }
+
+  /*   Make Checkout buttons more narrow   */
+  .top-cart-checkout {
+    padding: 0 6px;
+  }
+
+  .checkout-button-container{
+    padding: 0 10px;
+  }
+}
+  
   
   
   
