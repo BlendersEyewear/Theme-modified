@@ -1,7 +1,64 @@
 {% section 'page-dealers' %}
 
 <style>
-  h1 {
+
+#storemapper, #storemapper[style] {max-width: 100% !important }
+
+#storemapper-list {margin: 25px 0 0 0}
+
+#storemapper-form {padding-right: 25px; }
+
+#storemapper-right .btn {
+  background: #00bfff;
+  color: #ffffff;
+  border: 0;
+  padding: 6px 12px 7px;
+  text-align: center;
+  cursor: pointer;
+  font-family: "proxima-nova", 'Helvetica', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  font-variant-caps: all-small-caps;
+  letter-spacing: .05em;
+  display: inline-block;
+  -webkit-transition: all 200ms ease 0s;
+  -moz-transition: all 200ms ease 0s;
+  -ms-transition: all 200ms ease 0s;
+  -o-transition: all 200ms ease 0s;
+  transition: all 200ms ease 0s;
+  -webkit-appearance: none;
+  -webkit-box-shadow: inset 0 -3px rgba(0,0,0,0.1);
+  -moz-box-shadow: inset 0 -3px rgba(0,0,0,0.1);
+  box-shadow: inset 0 -3px rgba(0,0,0,0.1);
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#storemapper-right p {
+  font-family: 'proxima-nova', 'roboto', helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  margin-bottom: 7px;
+  color: rgb(68, 68, 68);
+}
+
+#storemapper-right a {
+  font-family: 'proxima-nova', 'roboto', 'helvetica', sans-serif;
+  font-size: 14px;
+}
+
+#storemapper-right { width:63%; }
+
+#storemapper-left {
+  width:37%;
+  padding-left:55px;
+}
+
+
+h1 {
     margin-top: 50px;
 }
   
@@ -26,6 +83,10 @@
     font-size: 13px;
 }
   
+#storemapper-list{
+    font-family: 'proxima-nova', 'Roboto', helvetica, sans-serif;
+}
+
   #storemapper-list li h4 {
     margin-bottom: 0px;
 }
@@ -51,4 +112,42 @@
     font-weight: bold;
     margin-bottom: 0px;
 }
+
+  /* added by adam */
+  h4.storemapper-popup-name {
+      font-weight: bold;
+      line-height: 1;
+      margin: 5px 0 10px;
+      padding: 0;
+  }
+
+  #storemapper-right .storemapper-popup-address{
+    line-height: 1.25;
+  }
+
+  #storemapper .btn{
+    transition: all .15s ease-in-out;
+  }
+
+  #storemapper .btn:hover, #storemapper .btn:focus {
+    color: white;
+    background: #38cdff;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 768px){
+    #storemapper #storemapper-go{
+      background: #e2e2e2;
+      border: none;
+    }
+
+    #storemapper label{
+      letter-spacing: .05em;
+      font-variant: all-petite-caps;
+    }
+
+    #storemapper-list li p {
+      margin-bottom: 5px;
+    }
+  }
 </style>

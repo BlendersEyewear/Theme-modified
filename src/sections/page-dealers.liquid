@@ -22,9 +22,11 @@
 {% endif %}
 
 <div class="sixteen columns page clearfix">
-  <h1>
-    STORE LOCATOR
-  </h1>
+  {%if section.settings.heading == '' %}
+    <h1>
+      STORE LOCATOR
+    </h1>
+  {% endif %}
 
   </div></div>{% include 'hypervisual' %}<div class="container"><div class="sixteen columns page clearfix">
 
