@@ -9574,7 +9574,20 @@ $headerDesktopLargeUp: 1280px;
   }
 }
 
-// Dealers Page - Remove Duplicate Footer 3/21
+// Wufoo Popup fixes
+.page-join-the-team{
+}
+@include respond-to('small'){
+  form.wufoo{
+    padding: 0 !important;
+  }
+
+  #form4{
+    padding: 0;
+  }
+}
+
+// Dealers Page - 3/21
 // ==============================================================
 
 // Remove Extra Padding
@@ -9588,8 +9601,23 @@ $headerDesktopLargeUp: 1280px;
 // Remove Duplicate Footer
 .page-dealers .footer-menu-wrap .sixteen.columns {
   display: none !important;
-
+  
   @include respond-to('medium'){
     display: block !important;
   }
 }
+
+
+// Retail Page - 3/21
+// ==============================================================
+.page-retail{
+  .collection_banner_below{
+    margin: 3rem auto 0;
+  }
+  @include respond-to('medium'){
+    .collection_banner_below{
+      margin: -10px auto 0;
+    }
+  }
+}
+

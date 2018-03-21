@@ -353,7 +353,8 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </script>
     <!-- End of Yotpo JS -->
     
-{% include 'geolizr-redirect' %}</body>
+  {% include 'geolizr-redirect' %}
+</body>
 </html>
 {% endcapture %}
 {% assign content = content | replace_first: '<!DOCTYPE', '!DOCTYPE' | split: "<" %}

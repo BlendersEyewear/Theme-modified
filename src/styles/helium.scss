@@ -263,12 +263,14 @@ div.fs-text-container .fs-entry-title {
   .collection_banner_title{
     font-size: 4rem;
     line-height: 1;
-    margin: 0 0 5px;
+    margin: 0;
   }
 
   .collection_banner_description{
     font-size: 1rem;
     line-height: 1.25;
+    padding: 0 .5rem;
+    margin: 5px 0 0;
   }
 
 
@@ -294,7 +296,7 @@ div.fs-text-container .fs-entry-title {
 
 @media screen and (max-width: 560px){
   .collection_banner{
-    padding: 2rem 1rem;
+    padding: 2rem 0.75rem;
   }
 
   .collection_banner_title{

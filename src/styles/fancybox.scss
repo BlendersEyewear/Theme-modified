@@ -273,3 +273,33 @@
   background: #000;
   background: rgba(0, 0, 0, .8);
 }
+
+
+// Changes by Adam - 3/21
+// ==============================================================
+
+// Create X on modal - 3/21
+.fancybox-close {
+    background-position: center 7px;
+    background-image: url(https://cdn.shopify.com/s/files/1/0148/9585/files/icon-close-dark.svg?2391718052696168319);
+    background-repeat: no-repeat;
+}
+
+.fancybox-close:hover, .fancybox-close:focus{
+    background-position: center 7px;
+}
+
+// overflow fix
+@media sreen and (max-width: 560px){
+    .fancybox-wrap.fancybox-desktop.fancybox-type-inline.fancybox-opened {
+        width: calc(100% - 30px) !important;
+        top: 15px !important;
+        left: 15px !important;
+        overflow-x: hidden;
+    }
+
+    // prevent iOS button styles
+    #saveForm{
+        -webkit-appearance: none;
+    }
+}
