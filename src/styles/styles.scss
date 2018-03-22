@@ -9181,7 +9181,7 @@ $transparent: rgba(0,0,0,0.0);
   }
 
 /// ========================================
-// Collection Features Imprvement
+// Below Fold Collection Features Imprvement
 // =========================================
 
 // CUSTOM HEADER VARS --------------------
@@ -9271,8 +9271,8 @@ $headerDesktopLargeUp: 1280px;
       z-index: 3;
       bottom: 0.75rem;
       left: 1.25rem;
-      width: 100%;
-      max-width: max-content;
+      width: auto;
+      max-width: 100%;
       min-width: 12rem;
 
       color: white;
@@ -9490,7 +9490,7 @@ $headerDesktopLargeUp: 1280px;
 
   .feature_divider {
     max-width: 49rem;
-    margin: 1.5rem auto 1rem;
+    margin: 1.5rem auto .5rem;
   }
 
   a.action_button {
@@ -9502,6 +9502,7 @@ $headerDesktopLargeUp: 1280px;
     height: auto;
     min-height: auto;
     line-height: 1;
+    margin: 0.5rem auto 0;
 
   }
 
