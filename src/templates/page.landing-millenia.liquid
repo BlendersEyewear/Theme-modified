@@ -2,52 +2,194 @@
 
 <div class="page landing-page landing-page--millenia clearfix">
 
-    <div class="landing__hero" 
-        style="background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url({{ '' | asset_img_url: '1920x' }}); background-size: cover; background-position: center;">
-        <h1 class="landing__hero-title">{{ page.title }}</h1>
-    </div>
+    <section class="hero" 
+        style="background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url('{{ 'millenia-hero.jpg' | asset_img_url: '1920x' }}'); background-size: cover; background-position: center;">
+        <h1 class="hero__title">Hero Title Goes Here</h1>
+        <p class="hero__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aut alias adipisci.</p>
+        <img src="{{ 'icon-arrow-down-white.svg' | asset_url }}" alt="down arrow" class="hero__arrow">
 
-    {% comment %} First big section {% endcomment %}
-    <section class="section section--dark">
+    </section>
+
+    {% comment %} Description {% endcomment %}
+    <section class="section section--dark title-section">
+        <div class="container title-section__content">
+            <h1 class="title-section__title">MODERN. SLEEK. CONTEMPORARY AF.</h1>
+            <p class="title-section__desc">
+                The coolest, sexiest and most progressive frameless collection you've ever seen is finally here.
+                Available in 6 vibrant colorways and equipped with Superflash Polarized Lenses. Welcome to the Future.
+            </p>
+        </div>
+
+    </section>
+
+    {% assign jenna_cartel = all_products.jenna-cartel %}
+    {% assign autumn_fire = all_products.autumn-fire %}
+    {% assign berry_loud = all_products.berry-loud %}
+
+    {% comment %} First Product Grid {% endcomment %}
+    <section class="section product-grid-section">
 
         {% comment %} Grid of Six Products {% endcomment %}
-        <div class="container product-grid">
+        <div class="container product-grid grid pg-1">
 
-            <div class="product">
-                <a href="" class="product__link">
-                    <img src="" alt="" class="product_img">
+            {% assign blue_phoenix = all_products.blue-phoenix %}
+            {% assign kiwi_ice = all_products.kiwi-ice %}
+            {% assign nocturnal = all_products.nocturnal-q %}
+
+
+            {% comment %} BLUE PHOENIX Image {% endcomment %}
+            <div class="image-wrapper pg-img pg-bp-ls">
+                <img src="{{'millenia-lifestyle-blue-phoenix.jpg' | asset_img_url: '800x' }}" alt="Blue Phoenix" class="image__img">
+            </div>
+
+            {% comment %} BLUE PHOENIX Product {% endcomment %}
+            <div class="product pg-product pg-bp">
+                <a href="{{ blue_phoenix.url }}" class="product__link">
+                    <img
+                        src="{{ blue_phoenix.featured_image | img_url: '640x'}}"
+                        alt="{{ blue_phoenix.title }}"
+                        class="lazyload blur product__img pg-product__img"
+                        data-sizes="auto"
+                        data-src="{{ blue_phoenix.featured_image | product_img_url: '900x' }}"
+                        data-srcset=" {{ blue_phoenix.featured_image | product_img_url: '300x' }} 300w,
+                                        {{ blue_phoenix.featured_image | product_img_url: '400x' }} 400w,
+                                        {{ blue_phoenix.featured_image | product_img_url: '500x' }} 500w,
+                                        {{ blue_phoenix.featured_image | product_img_url: '600x' }} 600w,
+                                        {{ blue_phoenix.featured_image | product_img_url: '700x' }} 700w,
+                                        {{ blue_phoenix.featured_image | product_img_url: '800x' }} 800w,
+                                        {{ blue_phoenix.featured_image | product_img_url: '900x' }} 900w"
+                    >
                 </a>
                 <p class="product__title">
-                    <a href="" class="product__link">Product Title Goes Here</a>
+                    <a href="{{ blue_phoenix.url }}" class="product__link">{{ blue_phoenix.title }}</a>
                 </p>
 
-                <p class="product_teaser">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque doloribus perspiciatis officia. Excepturi, facilis cum quasi cumque pariatur numquam.
+                <p class="product_price">
+                    <span class="money">{{blue_phoenix.price | money }}</span>
                 </p>
 
                 <a href="" class="btn btn--dark">Add to Cart</a>
             </div>
+
+            {% comment %} KIWI ICE Image {% endcomment %}
+            <div class="image-wrapper pg-img pg-ki-ls">
+                <img src="{{'millenia-lifestyle-kiwi-ice.jpg' | asset_img_url: '800x' }}" alt="" class="image__img">
+            </div>
+
+            {% comment %} KIWI ICE Product {% endcomment %}
+            <div class="product pg-product pg-ki">
+                <a href="{{ kiwi_ice.url }}" class="product__link">
+                    <img
+                        src="{{ kiwi_ice.featured_image | img_url: '640x'}}"
+                        alt="{{ kiwi_ice.title }}"
+                        class="lazyload blur product__img pg-product__img"
+                        data-sizes="auto"
+                        data-src="{{ kiwi_ice.featured_image | product_img_url: '900x' }}"
+                        data-srcset=" {{ kiwi_ice.featured_image | product_img_url: '300x' }} 300w,
+                                        {{ kiwi_ice.featured_image | product_img_url: '400x' }} 400w,
+                                        {{ kiwi_ice.featured_image | product_img_url: '500x' }} 500w,
+                                        {{ kiwi_ice.featured_image | product_img_url: '600x' }} 600w,
+                                        {{ kiwi_ice.featured_image | product_img_url: '700x' }} 700w,
+                                        {{ kiwi_ice.featured_image | product_img_url: '800x' }} 800w,
+                                        {{ kiwi_ice.featured_image | product_img_url: '900x' }} 900w"
+                    >
+                </a>
+                <p class="product__title">
+                    <a href="{{ kiwi_ice.url }}" class="product__link">{{ kiwi_ice.title }}</a>
+                </p>
+
+                <p class="product_price">{{ kiwi_ice.price | money }}
+                </p>
+
+                <a href="" class="btn btn--dark">Add to Cart</a>
+            </div>
+
+            <div class="image-wrapper pg-noc-ls">
+                <img src="{{'millenia-lifestyle-nocturnal.jpg' | asset_img_url: '800x' }}" alt="" class="image__img">
+            </div>
+
+            <div class="product pg-product pg-noc">
+                <a href="{{ nocturnal.url }}" class="product__link">
+                    <img
+                        src="{{ nocturnal.featured_image | img_url: '640x'}}"
+                        alt="{{ nocturnal.title }}"
+                        class="lazyload blur product__img pg-product__img"
+                        data-sizes="auto"
+                        data-src="{{ nocturnal.featured_image | product_img_url: '900x' }}"
+                        data-srcset=" {{ nocturnal.featured_image | product_img_url: '300x' }} 300w,
+                                        {{ nocturnal.featured_image | product_img_url: '400x' }} 400w,
+                                        {{ nocturnal.featured_image | product_img_url: '500x' }} 500w,
+                                        {{ nocturnal.featured_image | product_img_url: '600x' }} 600w,
+                                        {{ nocturnal.featured_image | product_img_url: '700x' }} 700w,
+                                        {{ nocturnal.featured_image | product_img_url: '800x' }} 800w,
+                                        {{ nocturnal.featured_image | product_img_url: '900x' }} 900w"
+                    >
+                </a>
+                <p class="product__title">
+                    <a href="{{ nocturnal.url }}" class="product__link">{{ nocturnal.title }}</a>
+                </p>
+
+                <p class="product_price">
+                    <span class="money">{{nocturnal.price | money }}</span>
+                </p>
+
+                <a href="" class="btn btn--dark">Add to Cart</a>
+            </div>
+
         </div>
 
         {% comment %} Need Mobile for below product-grid grid layout {% endcomment %}
     </section>
 
-    <section class="section">
-        <div class="container"></div>
-    </section>
-
+    {% comment %} Lifestyle Grid {% endcomment %}
     <section class="section section--dark">
-        <div class="container grid-container lifestyle-grid">
-            <h2 class="millenia-title millenia-title--first">The Millenia Collection</h2>
+        <div class="container grid lifestyle-grid lifestyle-grid--1 ls-grid-1">
 
             {% comment %} Six lifestyle images {% endcomment %}
-            <div class="lifestyle-grid__item">
-                <img src="" alt="" class="lifestyle-img">
+            <h2 class="lifestyle__title grid__title ls-grid-1__title">The Future has Arrived</h2>
+
+            <h3 class="lifestyle__subtitle grid__subtitle ls-grid-1__subtitle">Progressive</h3>
+
+            <div class="grid__img-container ls-grid-1__illo">
+                <img src="{{'Millenia_TiltedView.svg' | asset_url }}" alt="Blenders Eyewear Millenia Kiwi Ice" class="grid__img">
+            </div>
+            
+            <div class="grid__img-container ls-grid-1__noc-2">
+                <img src="{{'millenia-lifestyle-nocturnal-2.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Kiwi Ice" class="grid__img">
             </div>
 
-            <h2 class="millenia-title millenia-title--second">The Millenia Collection</h2>
-        </div>
-    </section>
+            <div class="grid__img-container ls-grid-1__ki-2">
+                <img src="{{'millenia-lifestyle-kiwi-ice-02.jpg' | asset_img_url: '640x'}}" alt="Blenders Eyewear Millenia Kiwi Ice" class="grid__img">
+            </div>
 
-    <div class="landing__footer"></div>
+            <div class="grid__img-container ls-grid-1__bp-2">
+                <img src="{{'millenia-lifestyle-blue-phoenix-02.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Blue Phoenix" class="grid__img">
+            </div>
+
+
+            <div class="grid__img-container ls-grid-1__noc-3">
+                <img src="{{'millenia-lifestyle-nocturnal-3.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Kiwi Ice" class="grid__img">
+            </div>
+
+            <div class="grid__img-container ls-grid-1__bp-3">
+                <img src="{{'millenia-lifestyle-blue-phoenix-3.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Kiwi Ice" class="grid__img">
+            </div>
+
+            <div class="grid__img-container ls-grid-1__bp-1">
+                <img src="{{'millenia-hero-blue-phoenix-1.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Kiwi Ice" class="grid__img">
+            </div>
+
+            <div class="grid__img-container ls-grid-1__illo-2">
+                <img src="{{'Millenia_SideArmView.svg' | asset_url}}" alt="Blenders Millenia Kiwi Ice" class="grid__img">
+            </div>
+
+            
+
+        </div>
+    </section> 
+    
+
+    <div class="landing__footer">
+        <img src="{{ 'millenia-hero-catalog.jpg' | asset_url }}" alt="" class="landing__foter-img">
+    </div>
 </div>

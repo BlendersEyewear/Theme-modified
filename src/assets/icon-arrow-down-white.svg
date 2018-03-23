@@ -1,0 +1,16 @@
+<svg width="16" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>icon-arrow-down-white</title>
+<g id="Canvas" transform="translate(118 -201)">
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M -118 201L -102 201L -102 217L -118 217L -118 201Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="icon-arrow-down-white" clip-path="url(#clip-0)">
+<g id="Vector">
+<use xlink:href="#path0_stroke" transform="matrix(-1 -8.74228e-08 8.74228e-08 -1 -103 212)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 7 0L 7.3254 -0.379628L 7 -0.658539L 6.6746 -0.379628L 7 0ZM 0.325396 6.37963L 7.3254 0.379628L 6.6746 -0.379628L -0.325396 5.62037L 0.325396 6.37963ZM 6.6746 0.379628L 13.6746 6.37963L 14.3254 5.62037L 7.3254 -0.379628L 6.6746 0.379628Z"/>
+</defs>
+</svg>

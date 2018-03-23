@@ -50,6 +50,12 @@
     
     <!-- Stylesheets for Turbo 2.0.9 -->
     {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
+
+    <!-- Stylesheets for Landing Pages -->
+    {%if template == 'page.landing-millenia' %}
+      <!-- wohoooo, this is millenia -->
+      {{ 'millenia.css' | asset_url | stylesheet_tag }}
+    {% endif %}
     
 
     <!-- Helium Stylesheet and JS-->
@@ -233,8 +239,10 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% endif %}
 
     <script src="{{ 'app.js' | asset_url }}"></script>
+
     {% comment %} Custom Javascript {% endcomment %}
     <script defer src="{{ 'custom.js' | asset_url }}"></script>
+    
     {% comment %} Custom Ultimate Special Offers App js {% endcomment %}
     <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script>
     
