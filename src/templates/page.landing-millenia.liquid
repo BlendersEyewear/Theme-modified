@@ -4,8 +4,8 @@
 
     <section class="hero" 
         style="background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url('{{ 'millenia-hero.jpg' | asset_img_url: '1920x' }}'); background-size: cover; background-position: center;">
-        <h1 class="hero__title">Hero Title Goes Here</h1>
-        <p class="hero__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aut alias adipisci.</p>
+        <h1 class="hero__title">{{page.title}}</h1>
+        <p class="hero__desc">{{page.content}}</p>
         <img src="{{ 'icon-arrow-down-white.svg' | asset_url }}" alt="down arrow" class="hero__arrow">
 
     </section>
@@ -13,7 +13,7 @@
     {% comment %} Description {% endcomment %}
     <section class="section section--dark title-section">
         <div class="container title-section__content">
-            <h1 class="title-section__title">MODERN. SLEEK. CONTEMPORARY AF.</h1>
+            <h2 class="title-section__title">MODERN. SLEEK. CONTEMPORARY AF.</h2>
             <p class="title-section__desc">
                 The coolest, sexiest and most progressive frameless collection you've ever seen is finally here.
                 Available in 6 vibrant colorways and equipped with Superflash Polarized Lenses. Welcome to the Future.
@@ -22,14 +22,9 @@
 
     </section>
 
-    {% assign jenna_cartel = all_products.jenna-cartel %}
-    {% assign autumn_fire = all_products.autumn-fire %}
-    {% assign berry_loud = all_products.berry-loud %}
-
     {% comment %} First Product Grid {% endcomment %}
     <section class="section product-grid-section">
 
-        {% comment %} Grid of Six Products {% endcomment %}
         <div class="container product-grid grid pg-1">
 
             {% assign blue_phoenix = all_products.blue-phoenix %}
@@ -68,7 +63,12 @@
                     <span class="money">{{blue_phoenix.price | money }}</span>
                 </p>
 
-                <a href="" class="btn btn--dark">Add to Cart</a>
+                <form action="/cart/add">
+                    <input type="hidden" name="id" value="{{ blue_phoenix.variants.first.id }}">
+                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                    {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                </form>
             </div>
 
             {% comment %} KIWI ICE Image {% endcomment %}
@@ -101,7 +101,12 @@
                 <p class="product_price">{{ kiwi_ice.price | money }}
                 </p>
 
-                <a href="" class="btn btn--dark">Add to Cart</a>
+                <form action="/cart/add">
+                    <input type="hidden" name="id" value="{{ kiwi_ice.variants.first.id }}">
+                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                    {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                </form>
             </div>
 
             <div class="image-wrapper pg-noc-ls">
@@ -133,7 +138,12 @@
                     <span class="money">{{nocturnal.price | money }}</span>
                 </p>
 
-                <a href="" class="btn btn--dark">Add to Cart</a>
+                <form action="/cart/add">
+                    <input type="hidden" name="id" value="{{ nocturnal.variants.first.id }}">
+                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                    {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                </form>
             </div>
 
         </div>
@@ -146,7 +156,7 @@
         <div class="container grid lifestyle-grid lifestyle-grid--1 ls-grid-1">
 
             {% comment %} Six lifestyle images {% endcomment %}
-            <h2 class="lifestyle__title grid__title ls-grid-1__title">The Future has Arrived</h2>
+            <h2 class="lifestyle__title grid__title ls-grid-1__title">The <span class="bold">Future</span> has Arrived</h2>
 
             <h3 class="lifestyle__subtitle grid__subtitle ls-grid-1__subtitle">Progressive</h3>
 
@@ -186,10 +196,203 @@
             
 
         </div>
-    </section> 
+    </section>
+
+
+    {% comment %} Second Product Grid {% endcomment %}
+    <section class="section product-grid-section">
+
+        <div class="container product-grid grid pg-1">
+
+            {% assign jenna_cartel = all_products.jenna-cartel %}
+            {% assign autumn_fire = all_products.autumn-fire %}
+            {% assign berry_loud = all_products.berry-loud %}
+
+
+            {% comment %} Jenna Cartel Image {% endcomment %}
+            <div class="image-wrapper pg-img pg-jc-ls">
+                <img src="{{'millenia-lifestyle-jenna-cartel-1.jpg' | asset_img_url: '800x' }}" alt="Blue Phoenix" class="image__img">
+            </div>
+
+            {% comment %} Jenna Cartel Product {% endcomment %}
+            <div class="product pg-product pg-bp">
+                <a href="{{ jenna_cartel.url }}" class="product__link">
+                    <img
+                        src="{{ jenna_cartel.featured_image | img_url: '640x'}}"
+                        alt="{{ jenna_cartel.title }}"
+                        class="lazyload blur product__img pg-product__img"
+                        data-sizes="auto"
+                        data-src="{{ jenna_cartel.featured_image | product_img_url: '900x' }}"
+                        data-srcset=" {{ jenna_cartel.featured_image | product_img_url: '300x' }} 300w,
+                                        {{ jenna_cartel.featured_image | product_img_url: '400x' }} 400w,
+                                        {{ jenna_cartel.featured_image | product_img_url: '500x' }} 500w,
+                                        {{ jenna_cartel.featured_image | product_img_url: '600x' }} 600w,
+                                        {{ jenna_cartel.featured_image | product_img_url: '700x' }} 700w,
+                                        {{ jenna_cartel.featured_image | product_img_url: '800x' }} 800w,
+                                        {{ jenna_cartel.featured_image | product_img_url: '900x' }} 900w"
+                    >
+                </a>
+                <p class="product__title">
+                    <a href="{{ jenna_cartel.url }}" class="product__link">{{ jenna_cartel.title }}</a>
+                </p>
+
+                <p class="product_price">
+                    <span class="money">{{jenna_cartel.price | money }}</span>
+                </p>
+
+                <form action="/cart/add">
+                    <input type="hidden" name="id" value="{{ jenna_cartel.variants.first.id }}">
+                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                    {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                </form>
+            </div>
+
+            {% comment %} Autumn Fire Image {% endcomment %}
+            <div class="image-wrapper pg-img pg-af-ls">
+                <img src="{{'millenia-lifestyle-autumn-fire-1.jpg' | asset_img_url: '800x' }}" alt="" class="image__img">
+            </div>
+
+            {% comment %} Autumn Fire Product {% endcomment %}
+            <div class="product pg-product pg-ki">
+                <a href="{{ autumn_fire.url }}" class="product__link">
+                    <img
+                        src="{{ autumn_fire.featured_image | img_url: '640x'}}"
+                        alt="{{ autumn_fire.title }}"
+                        class="lazyload blur product__img pg-product__img"
+                        data-sizes="auto"
+                        data-src="{{ autumn_fire.featured_image | product_img_url: '900x' }}"
+                        data-srcset=" {{ autumn_fire.featured_image | product_img_url: '300x' }} 300w,
+                                        {{ autumn_fire.featured_image | product_img_url: '400x' }} 400w,
+                                        {{ autumn_fire.featured_image | product_img_url: '500x' }} 500w,
+                                        {{ autumn_fire.featured_image | product_img_url: '600x' }} 600w,
+                                        {{ autumn_fire.featured_image | product_img_url: '700x' }} 700w,
+                                        {{ autumn_fire.featured_image | product_img_url: '800x' }} 800w,
+                                        {{ autumn_fire.featured_image | product_img_url: '900x' }} 900w"
+                    >
+                </a>
+                <p class="product__title">
+                    <a href="{{ autumn_fire.url }}" class="product__link">{{ autumn_fire.title }}</a>
+                </p>
+
+                <p class="product_price">{{ autumn_fire.price | money }}
+                </p>
+
+                <form action="/cart/add">
+                    <input type="hidden" name="id" value="{{ autumn_fire.variants.first.id }}">
+                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                    {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                </form>
+            </div>
+
+            {% comment %} Berry Loud Image {% endcomment %}
+            <div class="image-wrapper pg-img pg-bl-ls">
+                <img src="{{'millenia-lifestyle-berry-loud-3.jpg' | asset_img_url: '800x' }}" alt="" class="image__img">
+            </div>
+
+            {% comment %} Berry Loud Product {% endcomment %}
+            <div class="product pg-product pg-bl">
+                <a href="{{ berry_loud.url }}" class="product__link">
+                    <img
+                        src="{{ berry_loud.featured_image | img_url: '640x'}}"
+                        alt="{{ berry_loud.title }}"
+                        class="lazyload blur product__img pg-product__img"
+                        data-sizes="auto"
+                        data-src="{{ berry_loud.featured_image | product_img_url: '900x' }}"
+                        data-srcset=" {{ berry_loud.featured_image | product_img_url: '300x' }} 300w,
+                                        {{ berry_loud.featured_image | product_img_url: '400x' }} 400w,
+                                        {{ berry_loud.featured_image | product_img_url: '500x' }} 500w,
+                                        {{ berry_loud.featured_image | product_img_url: '600x' }} 600w,
+                                        {{ berry_loud.featured_image | product_img_url: '700x' }} 700w,
+                                        {{ berry_loud.featured_image | product_img_url: '800x' }} 800w,
+                                        {{ berry_loud.featured_image | product_img_url: '900x' }} 900w"
+                    >
+                </a>
+                <p class="product__title">
+                    <a href="{{ berry_loud.url }}" class="product__link">{{ berry_loud.title }}</a>
+                </p>
+
+                <p class="product_price">
+                    <span class="money">{{berry_loud.price | money }}</span>
+                </p>
+
+                <form action="/cart/add">
+                    <input type="hidden" name="id" value="{{ berry_loud.variants.first.id }}">
+                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                    {{ 'products.product.add_to_cart' | t }}
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        {% comment %} Need Mobile for below product-grid grid layout {% endcomment %}
+    </section>
+
+
+    {% comment %} Lifestyle Grid 2 {% endcomment %}
+    <section class="section section--dark">
+        <div class="container grid lifestyle-grid lifestyle-grid--2 ls-grid-2">
+
+            {% comment %} Six lifestyle images {% endcomment %}
+            
+            <div class="grid__img-container ls-grid-2__af">
+                <img src="{{'millenia-hero-autumn-fire-1.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia" class="grid__img">
+            </div>
+            
+            <h2 class="lifestyle__title grid__title ls-grid-2__title">Unapologetically <span class="bold">Bold</span></h2>
+
+
+            <div class="grid__img-container ls-grid-2__illo-front">
+                <img src="{{'Millenia_FrontLensView.svg' | asset_url }}" alt="Blenders Eyewear Millenia" class="grid__img">
+            </div>
+            
+            <div class="grid__img-container ls-grid-2__illo-top">
+                <img src="{{'Millenia_TopdownView.svg' | asset_url }}" alt="Blenders Eyewear Millenia" class="grid__img">
+            </div>
+            
+
+            <div class="grid__img-container ls-grid-2__af-ls">
+                <img src="{{'millenia-lifestyle-autumn-fire-2.jpg' | asset_img_url: '640x'}}" alt="Blenders Eyewear Millenia" class="grid__img">
+            </div>
+
+            <div class="grid__img-container ls-grid-2__jc-1">
+                <img src="{{'millenia-hero-jenna-cartel-1.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Blue Phoenix" class="grid__img">
+            </div>
+
+
+            <div class="grid__img-container ls-grid-2__bl-1">
+                <img src="{{'millenia-hero-berry-loud-1.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia" class="grid__img">
+            </div>
+
+            <div class="grid__img-container ls-grid-2__bl-ls">
+                <img src="{{'millenia-lifestyle-berry-loud-1.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Berry Loud" class="grid__img">
+            </div>
+
+            <h3 class="lifestyle__subtitle grid__subtitle ls-grid-2__subtitle">Reflective Mirror Finish</h3>
+
+            <div class="grid__img-container ls-grid-2__jc-2">
+                <img src="{{'millenia-hero-jenna-cartel-2.jpg' | asset_img_url: '640x'}}" alt="Blenders Millenia Jenna Cartel" class="grid__img">
+            </div>
+
+        </div>
+    </section>
+
+    {% comment %} Video Section {% endcomment %}
+    <section class="section">
+        <div class="container">
+            <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/Gn2O8hd2ECo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </section>
     
 
-    <div class="landing__footer">
-        <img src="{{ 'millenia-hero-catalog.jpg' | asset_url }}" alt="" class="landing__foter-img">
+    <div class="landing__footer"
+        style="background:linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)), url('{{ 'millenia-hero-catalog.jpg' | asset_img_url: '1920x' }}'); background-size: cover; background-position: center;"
+    >
+        <p class="footer__desc">
+            One of these Millenia Collection styles is absolutely bound to be a part of your future—after all, they’re like nothing you’ve seen yet everything you can’t leave behind.
+        </p>
+        <a href="{{shop.url}}/collections/millenia" class="btn btn--cta">SHOP THE MILLENIA COLLECTION</a>
     </div>
 </div>
