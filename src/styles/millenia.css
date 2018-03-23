@@ -21,6 +21,7 @@
     --font-family-heading: 'Simplifica', 'proxima-nova', 'roboto', sans-serif;
     --font-family-body: 'proxima-nova', 'roboto', sans-serif;
 }
+/* }Mobile breakpoint: 678px */
 
 body{
     background: var(--body-bg-light);
@@ -49,6 +50,11 @@ body{
     max-height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+
+.container{
+    padding: 0;
 }
 
 
@@ -115,8 +121,12 @@ body{
             justify-content: center;
 }
 
-.product_link{
+.product__link{
     display: block;
+}
+
+.product__link:hover{
+    color: black !important;
 }
 
 .product__title{
@@ -124,10 +134,7 @@ body{
     font-weight: 600;
     letter-spacing: .05em;
     margin: 0 0 .25rem;
-}
-
-a.prouct__link:hover, a.product__link:focus{
-    color: black;
+    text-align: center;
 }
 
 .product__title:hover, .product__title:focus{
@@ -139,14 +146,22 @@ p.product_price {
     font-size: 1rem;
     letter-spacing: .05em;
     opacity: 0.85;
+    margin: 0;
 }
 
 .product__img{
     max-width: 14rem !important;
 }
+@media screen and (max-width: 768px){
+    max-width: unset !important;
+}
 
 .product > form {
     margin: 0;
+}
+
+.add-to-cart{
+    margin: 0 auto;
 }
 
 /* ===================================
@@ -216,6 +231,13 @@ p.product_price {
     margin: 0 auto .25rem;
 }
 
+@media screen and (max-width: 758px){
+    .title-section__title{
+        font-size: 2.75rem;
+        line-height: 1.25;
+    }
+}
+
 .title-section__desc{
     max-width: 30rem;
     margin: 0 auto;
@@ -264,7 +286,6 @@ p.product_price {
     grid-auto-flow: column;
 }
 
-
 .pg-bp-ls, .pg-jc-ls {
     grid-row: 1/3;
     grid-column: 1/2;
@@ -305,6 +326,98 @@ p.product_price {
     height: 100%;
     /* clip-path: polygon(0 0, 100% 34%, 100% 100%, 0 68%);  */
     /* Clip path to radness */
+}
+
+
+/* ----- mobile styles for product grid 1 ----- */
+@media screen and (max-width: 768px){
+    .pg-1{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, minmax(auto, 14rem));
+        grid-column-gap: 16px;
+    }
+
+    .pg-bp {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    .pg-bp-ls {
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+
+    .pg-ki-ls {
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+
+    .pg-ki {
+        grid-column: 2/3;
+        grid-row: 2/3;
+    }
+
+    .pg-noc{
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+
+    .pg-noc-ls {
+        grid-column: 2/3;
+        grid-row: 3/4;
+    }
+
+
+    .pg-img{
+        height: 100%;
+    }
+
+    .pg-1 .pg-img{
+        height: 100%;
+    }
+
+}
+
+
+
+/* -----------Mobile Styles for Product Grid 2------------------ */
+/* ------------------------------------------------------------- */
+@media screen and (max-width: 768px){
+    .pg-2{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, minmax(auto, 14rem));
+        grid-column-gap: 16px;
+    }
+
+    .pg-jc-ls{
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    .pg-jc{
+        grid-column: 2/3;
+        grid-row: 1/2;
+    }
+
+    .pg-af{
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+
+    .pg-af-ls{
+        grid-column: 2/3;
+        grid-row: 2/3;
+    }
+
+    .pg-bl-ls{
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+
+    .pg-bl{
+        grid-column: 2/3;
+        grid-row: 3/4;
+    }
 }
 
 /* ------ Lifestyle Grid 1 ------ */

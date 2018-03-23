@@ -109,10 +109,12 @@
                 </form>
             </div>
 
-            <div class="image-wrapper pg-noc-ls">
+            {% comment %} Nocturnal Image {% endcomment %}
+            <div class="image-wrapper pg-img pg-noc-ls">
                 <img src="{{'millenia-lifestyle-nocturnal.jpg' | asset_img_url: '800x' }}" alt="" class="image__img">
             </div>
 
+            {% comment %} Nocturnal Product {% endcomment %}
             <div class="product pg-product pg-noc">
                 <a href="{{ nocturnal.url }}" class="product__link">
                     <img
@@ -215,7 +217,7 @@
             </div>
 
             {% comment %} Jenna Cartel Product {% endcomment %}
-            <div class="product pg-product pg-bp">
+            <div class="product pg-product pg-jc">
                 <a href="{{ jenna_cartel.url }}" class="product__link">
                     <img
                         src="{{ jenna_cartel.featured_image | img_url: '640x'}}"
@@ -254,7 +256,7 @@
             </div>
 
             {% comment %} Autumn Fire Product {% endcomment %}
-            <div class="product pg-product pg-ki">
+            <div class="product pg-product pg-af">
                 <a href="{{ autumn_fire.url }}" class="product__link">
                     <img
                         src="{{ autumn_fire.featured_image | img_url: '640x'}}"
@@ -380,7 +382,7 @@
     </section>
 
     {% comment %} Video Section {% endcomment %}
-    <section class="section">
+    <section class="section section--video">
         <div class="container">
             <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/Gn2O8hd2ECo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
