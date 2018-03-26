@@ -3,7 +3,7 @@
 <div class="page landing-page landing-page--millenia clearfix">
 
     <section class="hero" 
-        style="background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url('{{ 'millenia-hero.jpg' | asset_img_url: '1920x' }}'); background-size: cover; background-position: center;">
+        style="background:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url('{{ 'millenia-hero.jpg' | asset_img_url: '1920x' }}'); background-size: cover;">
         <h1 class="hero__title">{{page.title}}</h1>
         <p class="hero__desc">{{page.content}}</p>
         <img src="{{ 'icon-arrow-down-white.svg' | asset_url }}" alt="down arrow" class="hero__arrow">
@@ -30,7 +30,6 @@
             {% assign blue_phoenix = all_products.blue-phoenix %}
             {% assign kiwi_ice = all_products.kiwi-ice %}
             {% assign nocturnal = all_products.nocturnal-q %}
-
 
             {% comment %} BLUE PHOENIX Image {% endcomment %}
             <div class="image-wrapper pg-img pg-bp-ls">
@@ -63,12 +62,17 @@
                     <span class="money">{{blue_phoenix.price | money }}</span>
                 </p>
 
-                <form action="/cart/add">
-                    <input type="hidden" name="id" value="{{ blue_phoenix.variants.first.id }}">
-                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
-                    {{ 'products.product.add_to_cart' | t }}
-                    </button>
-                </form>
+
+                {%if blue_phoenix.available %}
+                    <form action="/cart/add">
+                        <input type="hidden" name="id" value="{{ blue_phoenix.variants.first.id }}">
+                        <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                        {{ 'products.product.add_to_cart' | t }}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="btn btn--add-to-class">Sold Out</p>
+                {% endif %}
             </div>
 
             {% comment %} KIWI ICE Image {% endcomment %}
@@ -101,12 +105,18 @@
                 <p class="product_price">{{ kiwi_ice.price | money }}
                 </p>
 
-                <form action="/cart/add">
-                    <input type="hidden" name="id" value="{{ kiwi_ice.variants.first.id }}">
-                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
-                    {{ 'products.product.add_to_cart' | t }}
-                    </button>
-                </form>
+
+                {%if kiwi_ice.available %}
+                    <form action="/cart/add">
+                        <input type="hidden" name="id" value="{{ kiwi_ice.variants.first.id }}">
+                        <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                        {{ 'products.product.add_to_cart' | t }}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="btn btn--add-to-class">Sold Out</p>
+                {% endif %}
+
             </div>
 
             {% comment %} Nocturnal Image {% endcomment %}
@@ -140,12 +150,18 @@
                     <span class="money">{{nocturnal.price | money }}</span>
                 </p>
 
-                <form action="/cart/add">
-                    <input type="hidden" name="id" value="{{ nocturnal.variants.first.id }}">
-                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
-                    {{ 'products.product.add_to_cart' | t }}
-                    </button>
-                </form>
+
+                {%if nocturnal.available %}
+                    <form action="/cart/add">
+                        <input type="hidden" name="id" value="{{ nocturnal.variants.first.id }}">
+                        <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                        {{ 'products.product.add_to_cart' | t }}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="btn btn--add-to-class">Sold Out</p>
+                {% endif %}
+
             </div>
 
         </div>
@@ -242,12 +258,18 @@
                     <span class="money">{{jenna_cartel.price | money }}</span>
                 </p>
 
-                <form action="/cart/add">
-                    <input type="hidden" name="id" value="{{ jenna_cartel.variants.first.id }}">
-                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
-                    {{ 'products.product.add_to_cart' | t }}
-                    </button>
-                </form>
+
+                {%if jenna_cartel.available %}
+                    <form action="/cart/add">
+                        <input type="hidden" name="id" value="{{ jenna_cartel.variants.first.id }}">
+                        <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                        {{ 'products.product.add_to_cart' | t }}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="btn btn--add-to-class">Sold Out</p>
+                {% endif %}
+
             </div>
 
             {% comment %} Autumn Fire Image {% endcomment %}
@@ -280,12 +302,17 @@
                 <p class="product_price">{{ autumn_fire.price | money }}
                 </p>
 
-                <form action="/cart/add">
-                    <input type="hidden" name="id" value="{{ autumn_fire.variants.first.id }}">
-                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
-                    {{ 'products.product.add_to_cart' | t }}
-                    </button>
-                </form>
+
+                {%if autumn_fire.available %}
+                    <form action="/cart/add">
+                        <input type="hidden" name="id" value="{{ autumn_fire.variants.first.id }}">
+                        <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                        {{ 'products.product.add_to_cart' | t }}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="btn btn--add-to-class">Sold Out</p>
+                {% endif %}
             </div>
 
             {% comment %} Berry Loud Image {% endcomment %}
@@ -319,12 +346,16 @@
                     <span class="money">{{berry_loud.price | money }}</span>
                 </p>
 
-                <form action="/cart/add">
-                    <input type="hidden" name="id" value="{{ berry_loud.variants.first.id }}">
-                    <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
-                    {{ 'products.product.add_to_cart' | t }}
-                    </button>
-                </form>
+                {%if berry_loud.available %}
+                    <form action="/cart/add">
+                        <input type="hidden" name="id" value="{{ berry_loud.variants.first.id }}">
+                        <button type="submit" name="add" class="action_button add_to_cart product-info__add btn btn--dark add-to-cart" data-label={{ add_to_cart_label | json }}>
+                        {{ 'products.product.add_to_cart' | t }}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="btn btn--add-to-class">Sold Out</p>
+                {% endif %}
             </div>
 
         </div>
@@ -392,9 +423,6 @@
     <div class="landing__footer"
         style="background:linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)), url('{{ 'millenia-hero-catalog.jpg' | asset_img_url: '1920x' }}'); background-size: cover; background-position: center;"
     >
-        <p class="footer__desc">
-            One of these Millenia Collection styles is absolutely bound to be a part of your future—after all, they’re like nothing you’ve seen yet everything you can’t leave behind.
-        </p>
         <a href="{{shop.url}}/collections/millenia" class="btn btn--cta">SHOP THE MILLENIA COLLECTION</a>
     </div>
 </div>
