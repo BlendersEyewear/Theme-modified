@@ -9575,9 +9575,7 @@ $headerDesktopLargeUp: 1280px;
   }
 }
 
-// Wufoo Popup fixes
-.page-join-the-team{
-}
+
 @include respond-to('small'){
   form.wufoo{
     padding: 0 !important;
@@ -9622,3 +9620,91 @@ $headerDesktopLargeUp: 1280px;
   }
 }
 
+// Cart Page - 4/19
+// ==============================================================
+.cart{
+
+  // Spacing out cart items
+  .cart-item{
+    margin: 10px 0 17px;
+  }
+
+
+  //  Continue Shopping Button
+  .featured-links > a.secondary_button {
+    font-size: 0.75rem;
+    font-weight: normal;
+    letter-spacing: .1em;
+    border-bottom: none;
+    border-top: none;
+    padding: .5rem;
+    line-height: 1;
+    margin: 0;
+    height: auto;
+  }
+
+  // Cart Product Titles
+  .cart_content_info h3 {
+    margin: 0 0 2px;
+    padding: 7px 0 0;
+  }
+
+  .bogo-free-item-message,
+  span.cart-message-bogo,
+  span.bogo-message-add-pair,
+  span.bogo-message-add-pair-mobile,
+  span.cart-message-bogo{
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  // Bogo Free Item Message
+  .bogo-free-item-message,
+  span.cart-message-bogo {
+    color: #44bd32;
+  }
+
+  // Add pait msg - BOGO
+  span.bogo-message-add-pair {
+    display: block;
+    text-align: center;
+    color: #656565;
+    line-height: 1;
+    margin: 1rem 0 0;
+  }
+
+  span.cart-message-bogo {
+    display: block;
+    text-align: center;
+    line-height: 1.25;
+    margin: 1rem 0;
+  }
+}
+
+.bogo-message-add-pair-mobile{
+  text-align: center;
+  background: #f1f1f1;
+  margin: 1rem 0 2rem;
+  display: none;
+}
+
+@include respond-to('small'){
+  // Fix padding for free BOGO cart item message
+  .cart span.bogo-free-item-message {
+    display: block;
+    margin: 0 0 -10px;
+  }
+
+  // Cart you 'scored X free items!' msg
+  .cart span.cart-message-bogo {
+    margin: 1rem 0 0;
+    padding: 0 0 5px;
+  }
+
+  // Remove junk padding from checkout button on mobile
+  .cart p.checkout-button-container {
+    padding: 0;
+    margin: 0;
+  }
+
+}

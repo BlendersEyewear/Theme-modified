@@ -244,10 +244,7 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     <script defer src="{{ 'custom.js' | asset_url }}"></script>
     
     {% comment %} Custom Ultimate Special Offers App js {% endcomment %}
-    <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script>
-    
-    {% comment %} AJAX CArt {% endcomment %}
-    {% comment %} <script src="{{ 'ajaxcart.js' | asset_url }}" defer></script> {% endcomment %}
+    {% comment %} <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script> {% endcomment %}
 
     {% if settings.show_multiple_currencies %}
       {% include 'currencies' %}

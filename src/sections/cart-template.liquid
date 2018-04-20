@@ -1,30 +1,33 @@
 <a name="pagecontent" id="pagecontent"></a>
-{% comment %} <div id="saso-notifications" class="mobile-only saso-notifications--mobile"></div> {% endcomment %}
 
     <div class="section clearfix">
       <div class="sixteen columns">
         <h1 class="cart-title">{{ 'cart.general.title' | t }}</h1>
         	
-        	
+          {% comment %} Shipping Message {% endcomment %}
           <div class="shippingmessage">
-        	    {% if cart.total_price >= 4000 %}
-     		        <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping…</div>
- 			        {% elsif cart.total_price < 4000 %}
-       		      <div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
-			        {% endif %}
+            {% if cart.total_price >= 4000 %}
+              <div class="shipping-notice shipping-notice--free">BOOM. You scored FREE Shipping!</div>
+            {% elsif cart.total_price < 4000 %}
+              <div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
+            {% endif %}
           </div>
+
         
           <form action="/cart" method="post" id="cart_form">
             <div class="top-cart-checkout">
               {% if cart.item_count > 0 %}
-          <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
-        {% endif %}
+                <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
+              {% endif %}
             </div>
-    </form>
-         <div class="feature_divider"></div>
+          </form>
+          <div class="feature_divider"></div>
 
-{% comment %} <!-- Start Cart Mobile Upsell --> {% endcomment %}
-   <div class="mobile-upsell">  
+
+
+
+<!-- Start Cart Mobile Upsell -->
+    <div class="mobile-upsell">  
       
     {% for item in cart.items %}
 	    {% if item.product.type == "Sunglasses" %}
@@ -32,22 +35,25 @@
   	  {% endif %}
     {% endfor %}
       
+      
+      
+      
     {% for item in cart.items %}
 	    {% if item.product.type == "Soft Pouches" %}
         {% assign sunglasses_in_cart = false %}
   	  {% endif %}
     {% endfor %}
+      
 
 		{% if sunglasses_in_cart %}
 		  {% include 'mobile-upsell' %}
     {% endif %}
 
     </div>
-{% comment %} <!-- End Cart Mobile Upsell --> {% endcomment %}
+<!-- End Cart Mobile Upsell --> 
        
     </div>
 </div>
-{% comment %} End section {% endcomment %}
 
     {% if cart.item_count == 0 %}
       <div class="sixteen columns">
@@ -66,14 +72,16 @@
     <div class="section clearfix">
 
     {% comment %} Create Savings Variable - Added by Adam - 2/8/18 {% endcomment %}
+      
       <div class="ten columns">
+        
         {% assign total_saving = 0 %}
         {% for item in cart.items %}
         {% if item.variant.compare_at_price > item.variant.price %}
           {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
             {% assign total_saving = saving | plus: total_saving %}
           {% endif %}
-          <div class="section clearfix">
+          <div class="section clearfix cart-item">
             <div class="three columns alpha">
               <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">
                 <img  src="{{ item | img_url: '100x' }}"
@@ -92,10 +100,6 @@
               <h3>
                 <a href="{{ item.url }}">{{ item.product.title }}</a>
               </h3>
-              <p class="cart-item-saso">
-                <span class="saso-cart-item-discount-notes" data-key="{{item.key}}"></span>
-                <span class="saso-cart-item-upsell-notes" data-key="{{item.key}}"></span>
-              </p>
 
               {% unless item.variant.title contains "Title" %}
                 <p class="meta">
@@ -105,40 +109,21 @@
                 </p>
               {% endunless %}
 
-              {% if item.properties %}
-                <p>
-                  {% for p in item.properties %}
-                    {% unless p.last == blank %}
-                      {% if p.last contains '/uploads/' %}
-                        <div>
-                          {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a>
-                        </div>
-                      {% else %}
-                        <div>
-                          {{ p.first }}: {{ p.last }}
-                        </div>
-                      {% endif %}
-                    {% endunless %}
-                  {% endfor %}
-                </p>
-              {% endif %}
-
-
-              {% comment %}
-              <p class="modal_price">
-                {% if item.price > 0 %}
-                  <span class="money">
-                    <span class="saso-cart-item-price" data-key="{{item.key}}">{{ item.price | money }}</span>
-                  </span>
-                {% else %}
-                  {{ settings.free_price_text }}
-                {% endif %}
-              </p>
-              {% endcomment %}
-
               {% comment %} Show new price and old price - Added by Adam - 2/8/18 {% endcomment %}
               <p class="modal_price modal_price_cart">
-                {% if item.price > 0 %}
+
+                {% if item.total_discount == item.original_line_price %}
+                
+                	{%if item.quantity == 1 %}
+                	    {% comment %} Single Item {% endcomment %}
+                      <span class="bogo-free-item-message">This is FREE!</span>
+
+                    {% elsif item.quantity > 1 %}
+                      {% comment %} Multiple Items {% endcomment %}
+                      <span class="bogo-free-item-message">These are FREE!</span>
+                    {% endif %}
+                
+                {% elsif item.price > 0 %} 
 
                   <span class="money {% if item.price < item.variant.compare_at_price %}sale{% endif %}">{{ item.price | money }}</span>
                 
@@ -148,14 +133,13 @@
 
                 {% endif %}
 
-                {% if item.price < item.variant.compare_at_price %}
+                {% if item.total_discount == 0 and item.original_line_price < item.variant.compare_at_price %}
                 
                   <span class="money was_price">{{ item.variant.compare_at_price | money }}</span>
                   <span class="sale savings">{{ item.variant.compare_at_price | minus: item.price | times: 100 | divided_by: item.variant.compare_at_price }}% Off</span>
                 {% endif %}
               </p>
 
-              {% comment %} Quanity Changer {% endcomment %}
               <div class="product-quantity-box left">
                 <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
                 <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" />
@@ -165,6 +149,7 @@
           </div>
         {% endfor %}
       </div>
+
       <div class="five columns offset-by-one side-cart-area">
         <div class="section clearfix">
           <div class="subtotal">
@@ -173,31 +158,58 @@
             </h2>
 
             {% comment %} edited by Adam - 2/13/18 {% endcomment %}
+            {% assign total_script_price = cart.orginal_total_price %}
             <p class="subtotal_amount_p">
-              <span class="subtotal_amount">
-                <span class="money">
-                  <span class="saso-cart-original-total">{{ cart.total_price | money }}</span>
+              
+              {% comment %} Regular {% endcomment %}
+              {%if cart.total_discount == 0 %}
+                <span class="subtotal_amount">
+                  {{ cart.total_price | money }}
                 </span>
+
+
+              <!-- BOGO - Reminder to add free pair --> 
+              {% for item in cart.items %}
+                {% if item.product.tags contains "BOGO" and cart.total_discount == 0 %}
+                  <span class="bogo-message-add-pair">Make Sure to Add Your FREE Pair!</span>
+                {% endif %}
+              {% endfor %}
+              
+              {% comment %} BOGO Discount {% endcomment %}
+              {% else %}
+
+              <span class="subtotal_amount was_price">
+                {{ cart.original_total_price | money }}
               </span>
-              {% comment %}
-              <small id="estimated-shipping" style="display:none">
-                + <em>
-                <span class="money">{{ 0 | money }}</span> {{ 'cart.shipping_calculator.estimated_shipping' | t }}
-              </em></small>
-              {% endcomment %}
-            </p>
+              
+              
 
-            <!-- need to comment out -->
-            {% comment %} <p class="cart_savings sale">
-              {% if total_saving > 0 %}
-                <span>Total Savings: </span>
-                <span class="money">{{ total_saving | money }}</span>
+              <span class="subtotal_amount new_subtotal_price">
+                {{ cart.total_price | money}}
+              </span>
+              
+              {% assign bogo_count = 0%}
+              {% for item in cart.items %}
+                  {% if item.product.tags contains "BOGO" and item.total_discount > 0 %}
+
+
+
+                      {% capture raw_free_count %} {{bogo_count | plus: item.quantity }} {% endcapture %}
+                  {% endif %}
+              {% endfor %}
+              
+              {% assign free_count = raw_free_count | times: 1 %}
+              
+              {% comment %} Bogo Item Counter Messages {% endcomment %}
+
+              {% if free_count > 1%}
+              	<span class="cart-message-bogo">Ya Mon' You Scored {{ free_count }} free pairs!</span>
+              {% elsif free_count == 1%}
+              	<span class="cart-message-bogo">Ya Mon' You Scored a free pair!</span>
               {% endif %}
-            </p> {% endcomment %}
 
-            <div class="saso-summary"></div>
-
-            <div class="saso-cart-total"></div>
+              {% endif %}
+            </p>
 
             {% if settings.show_multiple_currencies %}
               <p>
@@ -230,7 +242,7 @@
               </div>
             {% endif %}
 
-            <p>
+            <p class="checkout-button-container">
               <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
             </p>
 
@@ -349,19 +361,15 @@
 }
   
   @media only screen and (min-width: 736px) {
-    .container .offset-by-five {
-        padding-left: 32% !important;
-    }
-    .mobile-upsell{
-        display: none!important;
-    } 
+.container .offset-by-five {
+    padding-left: 32% !important;
+}
+    
+         .mobile-upsell {
+    display: none!important;
+} 
   }
   
-@media only screen and (max-width: 736px){
-  .pouch-upsell{
-    display: none;
-  }
-}
   
 .shippingmessage {
     text-align: center;
@@ -396,11 +404,56 @@
     line-height: 22px;
 }
     }
+  
 
-input.hidden{
-  display: hidden;
-  font-size: 0.5rem;
-}
+	/*  Mobile Changes  */
+  @media only screen and (max-width: 736px){
+    /* Make Recomatic Buttons Static on mobile, and other rec */
+  	button.btn.recomatic-add-to-cart {
+      visibility: visible;
+      font-size: 1rem;
+      padding: 5px;
+      height: auto;
+      min-height: unset;
+      font-variant-caps: all-petite-caps;
+      max-width: 10rem;
+      margin: 0 auto 10px;
+	}
+    
+    .recomatic-title {
+        line-height: 1.5 !important;
+        margin: 0 auto 5px !important;
+    }
+    
+    .recomatic-subtitle {
+        font-variant-caps: all-small-caps !important;
+        opacity: 0.8;
+    }
+    
+	/*  Disable Hover effects on Mobile    */
+    .recomatic-wrap a:hover .alternate-recomatic-image{
+    	opacity: 0;
+    }
+    
+    .recomatic-wrap a:hover .main-recomatic-image{
+    	opacity: 1;
+    }
+    
+	/*   'xxxxx reviews' span */
+    span.text-m {
+        display: block !important;
+        margin-top: 5px;
+    }
+    
+	/*   Make Checkout buttons more narrow   */
+    .top-cart-checkout {
+        padding: 0 6px;
+    }
+    
+    .checkout-button-container{
+    	padding: 0 10px;
+    }
+  }
   
 
 </style>

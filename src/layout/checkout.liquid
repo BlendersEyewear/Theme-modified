@@ -54,14 +54,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+// SMS optin app
 if($("#checkout_accept_sms").length<1){		
-			$('<div class="checkbox-wrapper"><div class="checkbox__input"><input id="checkout_notes" type="hidden" name="checkout[note]" value="SMS:True"><input class="input-checkbox" type="checkbox" value="1" checked="checked" id="checkout_accept_sms"></div><label class="checkbox__label" for="checkout_accept_sms">Receive support and offers via text message</label></div>').insertBefore($(".checkbox-wrapper").eq(1));
-        }
-        $("#checkout_accept_sms").on("change",function(){
-          if($(this).prop('checked')){
-            $("#checkout_notes").val("SMS:True");
-          } else{
-            $("#checkout_notes").val("SMS:False");
-          }
-        })
+  $('<div class="checkbox-wrapper"><div class="checkbox__input"><input id="checkout_notes" type="hidden" name="checkout[note]" value="SMS:True"><input class="input-checkbox" type="checkbox" value="1" checked="checked" id="checkout_accept_sms"></div><label class="checkbox__label" for="checkout_accept_sms">Receive support and offers via text message</label></div>').insertBefore($(".checkbox-wrapper").eq(1));
+}
+$("#checkout_accept_sms").on("change",function(){
+  if($(this).prop('checked')){
+    $("#checkout_notes").val("SMS:True");
+  } else{
+    $("#checkout_notes").val("SMS:False");
+  }
+})
+
+const discountDiv = $('.order-summary__section--discount');
+
+console.log($(discountDiv));
+
 </script>
