@@ -1,12 +1,9 @@
 <p class="pouch-upsell">Want a NEW Soft Pouch with that?</p>
 
 {% for product in collections.pouch-upsell.products limit:4 %}
-
-<div itemtype="http://schema.org/ItemList" class="product-list collection-matrix clearfix">
-
-{% include 'product-thumbnail-2', sidebar: sidebar %}
-</div>
-
+  <div itemtype="http://schema.org/ItemList" class="product-list collection-matrix clearfix mobile-upsell-container">
+    {% include 'product-thumbnail-upsell', sidebar: sidebar %}
+  </div>
 {% endfor %}
 
 <style>
@@ -20,7 +17,8 @@
   
   p.pouch-upsell {
     text-align: center;
-    font-size: 18px;
+    /*font-size: 18px;*/
+    font-size: 16px;
     padding-top: 11px!important;
 }
   

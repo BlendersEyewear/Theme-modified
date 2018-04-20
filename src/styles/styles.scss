@@ -9620,6 +9620,32 @@ $headerDesktopLargeUp: 1280px;
   }
 }
 
+//  Gradient Blue to Every button
+// ==============================================================
+a.button, .button, button,
+input[type="submit"], input[type="reset"], input[type="button"],
+.action_button, a.action_button,
+input.action_button[type="submit"], input.action_button[type="button"]{
+  /* background: */
+  background: linear-gradient(-180deg, hsla(199, 98%, 48%, 1) 0%, hsla(218, 98%, 48%, 1) 100%);
+  //border: 1px solid hsla(199, 98%, 48%, 1);
+  border: none;
+  font-weight: 600;
+  transition: opacity .15s ease-in-out;
+  opaicty: 1.0;
+}
+
+a.button:hover, button:hover,
+input[type="submit"]:hover, input[type="reset"]:hover,input[type="button"]:hover,
+.action_button:hover, input.action_button[type="submit"]:hover, input.action_button[type="button"]:hover {
+  background-image: linear-gradient(-180deg, hsla(199, 85%, 57%, 1) 0%, hsla(218, 98%, 51%, 1) 100%);
+  // opacity: 0.95;
+  //  border: 1px solid #00a3f0;
+  border: none;
+}
+
+
+
 // Cart Page - 4/19
 // ==============================================================
 .cart{
@@ -9668,7 +9694,7 @@ $headerDesktopLargeUp: 1280px;
   span.bogo-message-add-pair {
     display: block;
     text-align: center;
-    color: #656565;
+    color: #e87015;
     line-height: 1;
     margin: 1rem 0 0;
   }
@@ -9679,13 +9705,6 @@ $headerDesktopLargeUp: 1280px;
     line-height: 1.25;
     margin: 1rem 0;
   }
-}
-
-.bogo-message-add-pair-mobile{
-  text-align: center;
-  background: #f1f1f1;
-  margin: 1rem 0 2rem;
-  display: none;
 }
 
 @include respond-to('small'){
@@ -9705,6 +9724,31 @@ $headerDesktopLargeUp: 1280px;
   .cart p.checkout-button-container {
     padding: 0;
     margin: 0;
+  }
+
+  // Mobile Pouch Upsell
+  // Static Add to Cart Buttons on Mobile Pouch Upsells
+  .cart .thumbnail .quick_shops{
+    opacity: 1;
+    height: auto;
+    min-height: unset;
+  }
+  .cart .thumbnail{
+    margin-bottom: .5rem;
+  }
+
+  // Add to cart button
+  .cart .quick_shops .action_button.add_to_cart {
+    font-size: 14px;
+    line-height: 1;
+    padding: 10px 5px;
+    height: auto;
+    min-height: unset;
+  }
+
+  .cart .mobile-upsell-container .product-details{
+    font-size: 1rem;
+    line-height: 1.25;
   }
 
 }
